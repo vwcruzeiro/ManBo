@@ -62,6 +62,65 @@ MODULE manbo_subroutines
 
     RETURN
   END FUNCTION sig
+
+  FUNCTION valid_pair(m1,m2) RESULT(valid)
+  ! This function returns true if a pair of two molecules (m1,m2) is within the cutoff
+    IMPLICIT NONE
+    INTEGER, INTENT(in) :: m1, m2
+    INTEGER :: i, j, n1, n2, num
+    LOGICAL :: valid
+    
+    valid = .FALSE.
+    IF (group_monomers==1) THEN
+      IF (m1<=n_mols .AND. m2<=n_mols) THEN
+        IF (vector_module(mc(m1)%r - mc(m2)%r)<cutoff) valid = .TRUE.
+      ELSE IF (m1<=n_mols .AND. m2>n_mols) THEN
+        IF (vector_module(mc(m1)%r - mc_out(m2-n_mols)%r)<cutoff) valid = .TRUE.
+      ELSE IF (m1>n_mols .AND. m2>n_mols) THEN
+        IF (vector_module(mc_out(m1-n_mols)%r - mc_out(m2-n_mols)%r)<cutoff) valid = .TRUE.
+      END IF
+    ELSE
+      num = 0
+      DO i=1,3
+        IF (m1<=n_mols) THEN
+          n1 = orig_mols(m1)%m(i)
+        ELSE
+          n1 = orig_mols_out(m1-n_mols)%m(i)        
+        END IF
+        IF (n1==0) EXIT
+        DO j=1,3
+          IF (m2<=n_mols) THEN
+            n2 = orig_mols(m2)%m(j)
+          ELSE
+            n2 = orig_mols_out(m2-n_mols)%m(j)        
+          END IF
+          IF (n2==0) EXIT
+          IF (n1<=n_mols_orig .AND. n2<=n_mols_orig) THEN
+            IF (vector_module(mc_orig(n1)%r - mc_orig(n2)%r)<cutoff) THEN
+              num = num+1
+              IF (num==2) EXIT
+            END IF
+          ELSE IF (n1<=n_mols_orig .AND. n2>n_mols_orig) THEN
+            IF (vector_module(mc_orig(n1)%r - mc_out_orig(n2-n_mols_orig)%r)<cutoff) THEN
+              num = num+1
+              IF (num==2) EXIT
+            END IF
+          ELSE IF (n1>n_mols_orig .AND. n2>n_mols_orig) THEN
+            IF (vector_module(mc_out_orig(n1-n_mols_orig)%r - mc_out_orig(n2-n_mols_orig)%r)<cutoff) THEN
+              num = num+1
+              IF (num==2) EXIT
+            END IF
+          END IF
+        END DO
+        IF (num==2) THEN
+          valid = .TRUE.
+          EXIT
+        END IF
+      END DO
+    END IF
+
+    RETURN
+  END FUNCTION valid_pair
   
   SUBROUTINE delsubstr(str,substr)
   ! Deletes all occurrences of substring 'substr' from string 'str' and
@@ -86,7 +145,8 @@ MODULE manbo_subroutines
   SUBROUTINE calculate_mass_center(x)
   ! This subroutine calculates the mass center's of the molecules inside or outside the box
     INTEGER, INTENT(in) :: x
-    ! x == 1 for molecules inside the box, and x != 1 for molecules outside the box
+    ! x == 1 for molecules inside the box, x == 2 for molecules outside the box, 
+    ! x == 3 for original molecules inside the box, and x == 4 for original molecules outside the box
     INTEGER :: i, j
 
     IF(x==1) THEN
@@ -101,19 +161,7 @@ MODULE manbo_subroutines
       DO i=1,n_mols
         mc(i)%r = mc(i)%r/mc(i)%mass
       END DO
-    ELSE IF(x==2) THEN
-      DO i=1,n_mols_orig
-        mc(i)%r = 0.0
-        mc(i)%mass = 0.0
-      END DO
-      DO i=1,n_atoms
-        mc(data_manbo(i)%mol_orig)%r = mc(data_manbo(i)%mol_orig)%r + (data_manbo(i)%mass)*(data_manbo(i)%r)
-        mc(data_manbo(i)%mol_orig)%mass = mc(data_manbo(i)%mol_orig)%mass + data_manbo(i)%mass
-      END DO
-      DO i=1,n_mols_orig
-        mc(i)%r = mc(i)%r/mc(i)%mass
-      END DO
-    ELSE
+    ELSE IF (x==2) THEN
       DO i=1,(n_mols_out - n_mols)
         mc_out(i)%r = 0.0
         mc_out(i)%mass = 0.0
@@ -125,6 +173,31 @@ MODULE manbo_subroutines
       END DO
       DO i=1,(n_mols_out - n_mols)
         mc_out(i)%r = mc_out(i)%r/mc_out(i)%mass
+      END DO
+    ELSE IF(x==3) THEN
+      DO i=1,n_mols_orig
+        mc_orig(i)%r = 0.0
+        mc_orig(i)%mass = 0.0
+      END DO
+      DO i=1,n_atoms
+        mc_orig(data_manbo(i)%mol_orig)%r = mc_orig(data_manbo(i)%mol_orig)%r + (data_manbo(i)%mass)*(data_manbo(i)%r)
+        mc_orig(data_manbo(i)%mol_orig)%mass = mc_orig(data_manbo(i)%mol_orig)%mass + data_manbo(i)%mass
+      END DO
+      DO i=1,n_mols_orig
+        mc_orig(i)%r = mc_orig(i)%r/mc_orig(i)%mass
+      END DO
+    ELSE IF(x==4) THEN
+      DO i=1,(n_mols_out_orig - n_mols_orig)
+        mc_out_orig(i)%r = 0.0
+        mc_out_orig(i)%mass = 0.0
+      END DO
+      DO i=1,n_atoms_out
+        j = data_manbo_out(i)%mol_orig - n_mols_orig
+        mc_out_orig(j)%r = mc_out_orig(j)%r + (data_manbo_out(i)%mass)*(data_manbo_out(i)%r)
+        mc_out_orig(j)%mass = mc_out_orig(j)%mass + data_manbo_out(i)%mass
+      END DO
+      DO i=1,(n_mols_out_orig - n_mols_orig)
+        mc_out_orig(i)%r = mc_out_orig(i)%r/mc_out_orig(i)%mass
       END DO
     END IF
   END SUBROUTINE calculate_mass_center
@@ -586,14 +659,13 @@ MODULE manbo_subroutines
     
     complete = 1
     ! Here 1 means no molecules has been added to a new group
-    
+
     ! Reallocating important variables
-    DEALLOCATE(mc)
-    ALLOCATE(mc(n_mols_orig))
+    IF (.not. ALLOCATED(mc_orig)) ALLOCATE(mc_orig(n_mols_orig))
     
     ! Computing distances
     n_mols = n_mols_orig
-    CALL calculate_mass_center(2)
+    CALL calculate_mass_center(3) ! Centers of mass of the original molecules inside the box
     IF (group_monomers == 2 .AND. n_mols_orig > 1) THEN
       IF (mod(n_mols_orig,2) == 0) THEN
         n_mols = n_mols_orig/2
@@ -605,7 +677,7 @@ MODULE manbo_subroutines
       maxn = 1
       DO i=1,n_mols_orig-1
          DO j=i+1,n_mols_orig
-           distp(i,j) = vector_module(mc(i)%r - mc(j)%r)
+           distp(i,j) = vector_module(mc_orig(i)%r - mc_orig(j)%r)
            maxn = maxn + 1
          END DO
       END DO
@@ -615,7 +687,7 @@ MODULE manbo_subroutines
       IF (mod(n_mols_orig,3) == 0) THEN
         n_mols = n_mols_orig/3
       ELSE
-        n_mols = INT(n_mols_orig/3.0)+1
+        n_mols = INT(FLOAT(n_mols_orig)/3.0)+1
       END IF
 
       distt = 0.0
@@ -623,8 +695,8 @@ MODULE manbo_subroutines
       DO i=1,n_mols_orig-2
          DO j=i+1,n_mols_orig-1
            DO k=j+1,n_mols_orig
-             distt(i,j,k) = vector_module(mc(i)%r - mc(j)%r) + vector_module(mc(i)%r - mc(k)%r)
-             distt(i,j,k) = distt(i,j,k) + vector_module(mc(j)%r - mc(k)%r)
+             distt(i,j,k) = vector_module(mc_orig(i)%r - mc_orig(j)%r) + vector_module(mc_orig(i)%r - mc_orig(k)%r)
+             distt(i,j,k) = distt(i,j,k) + vector_module(mc_orig(j)%r - mc_orig(k)%r)
              maxn = maxn + 1
            END DO
          END DO
@@ -634,13 +706,21 @@ MODULE manbo_subroutines
     END IF
     
     ! Reallocating important variables
-    DEALLOCATE(mc, char_mul)
-    ALLOCATE(mc(n_mols), char_mul(n_mols))
-    IF (ALLOCATED(orig_repli_mol)) THEN
-      num = SIZE(orig_repli_mol)*NINT(FLOAT(n_mols)/FLOAT(n_mols_orig))
-      DEALLOCATE(orig_repli_mol)
-      ALLOCATE(orig_repli_mol(num))
+    IF (md_step == 0) THEN
+      IF (.not. ALLOCATED(orig_mols)) ALLOCATE(orig_mols(n_mols))
+      DEALLOCATE(mc, char_mul)
+      ALLOCATE(mc(n_mols), char_mul(n_mols))
+      IF (ALLOCATED(orig_repli_mol)) THEN
+        num = NINT(FLOAT(SIZE(orig_repli_mol)*n_mols)/FLOAT(n_mols_orig))
+        DEALLOCATE(orig_repli_mol)
+        ALLOCATE(orig_repli_mol(num))
+      END IF
     END IF
+    
+    ! Setting all values of orig_mols to zero. If a group has only one or two molecules, then the vacant positions will be identified by the zeros.
+    orig_mols%m(1) = 0
+    orig_mols%m(2) = 0
+    orig_mols%m(3) = 0
 
     ! Grouping molecules
     cnt = 1
@@ -658,6 +738,8 @@ MODULE manbo_subroutines
           char_mul(cnt)%mul = char_mul_orig(pair(1))%mul-1 + char_mul_orig(pair(2))%mul-1 + 1
           complete(pair(1)) = 0
           complete(pair(2)) = 0
+          orig_mols(cnt)%m(1) = pair(1)
+          orig_mols(cnt)%m(2) = pair(2)
           cnt = cnt+1
         ELSE IF (cnt == n_mols .AND. mod(n_mols_orig,2) > 0) THEN
           DO i=1,n_mols_orig
@@ -668,6 +750,7 @@ MODULE manbo_subroutines
                 END IF
               END DO
               char_mul(cnt) =  char_mul_orig(i)
+              orig_mols(cnt)%m(1) = i
               EXIT
             END IF
           END DO
@@ -700,10 +783,14 @@ MODULE manbo_subroutines
           complete(trimer(1)) = 0
           complete(trimer(2)) = 0
           complete(trimer(3)) = 0
+          orig_mols(cnt)%m(1) = trimer(1)
+          orig_mols(cnt)%m(2) = trimer(2)
+          orig_mols(cnt)%m(3) = trimer(3)
           cnt = cnt+1
         ELSE IF (cnt == n_mols .AND. mod(n_mols_orig,3) > 0) THEN
           char_mul(cnt)%q_mol = 0
           char_mul(cnt)%mul = 0
+          j = 1
           DO i=1,n_mols_orig
             IF (complete(i) == 1) THEN
               DO num=1,n_atoms
@@ -713,6 +800,8 @@ MODULE manbo_subroutines
               END DO
               char_mul(cnt)%q_mol = char_mul(cnt)%q_mol + char_mul_orig(i)%q_mol
               char_mul(cnt)%mul = char_mul(cnt)%mul + char_mul_orig(i)%mul-1
+              orig_mols(cnt)%m(j) = i
+              j = j + 1
             END IF
           END DO
           char_mul(cnt)%mul = char_mul(cnt)%mul + 1

@@ -53,7 +53,7 @@ PROGRAM manbo
     CALL log_write("")
     
     IF (group_monomers > 1) CALL group_mons
-        ! Grouping molecules single monomers
+    ! Grouping molecules single monomers
   END IF
   
   CALL calculate_forces(mpi_id)

@@ -29,7 +29,7 @@ MODULE manbo_forces
   
     IMPLICIT NONE
 
-    INTEGER :: i, j, k, num, x
+    INTEGER :: i, j, k, k2, num, x
     DOUBLE PRECISION :: lx2, ly2, lz2
     ! Variables to store the values of half of the box lenght in each dimension
     DOUBLE PRECISION :: mcx, mcy, mcz
@@ -38,7 +38,7 @@ MODULE manbo_forces
     INTEGER :: allocate_status
     CHARACTER(LEN=100) :: line
     TYPE(atom_out), DIMENSION(:), ALLOCATABLE, SAVE :: data_manbo_temp
-
+    
     CALL calculate_mass_center(1)
     ! Here we calculate the mass center's of the inside box's molecules
       
@@ -47,10 +47,11 @@ MODULE manbo_forces
     lz2 = box_dim(3)/2
   
     k = n_mols
+    IF (group_monomers>1) k2 = n_mols_orig
     num = 0
 
     L = MAXVAL(box_dim)
-    X = NINT((1.25*(8*((cutoff/L)**3) + 12*((cutoff/L)**2) + 6*(cutoff/L)) + 1.0/n_mols)*n_atoms)
+    x = NINT((1.25*(8*((cutoff/L)**3) + 12*((cutoff/L)**2) + 6*(cutoff/L)) + 1.0/n_mols)*n_atoms)
     ! This is an estimate for allocate data_manbo_out
 
     DEALLOCATE(data_manbo_out, stat=allocate_status)
@@ -60,7 +61,7 @@ MODULE manbo_forces
         CALL log_close(1)
         STOP
       END IF
-
+      
     ALLOCATE(data_manbo_out(x), stat=allocate_status)
       IF(allocate_status/=0) THEN
         PRINT *, "No memory enough to allocate. ManBo can not run."
@@ -69,6 +70,22 @@ MODULE manbo_forces
         STOP
       END IF
     ! Here we allocate data_manbo_out with no data
+
+    IF (group_monomers>1) THEN
+      IF (.not. ALLOCATED(orig_mols_out)) THEN
+        ALLOCATE(orig_mols_out(NINT(float(x*n_mols)/float(n_atoms))), stat=allocate_status)
+          IF(allocate_status/=0) THEN
+            PRINT *, "No memory enough to allocate. ManBo can not run."
+            CALL log_write("ERROR: Error on allocate orig_mols_out on manbo_forces.F90")
+            CALL log_close(1)
+            STOP
+          END IF
+      END IF
+      ! Here we allocate orig_mols_out with no data
+      orig_mols_out%m(1) = 0
+      orig_mols_out%m(2) = 0
+      orig_mols_out%m(3) = 0
+    END IF
 
     DO i=1,n_mols
       mcx = mc(i)%r(1)
@@ -94,10 +111,31 @@ MODULE manbo_forces
               data_manbo_out(num)%an   = data_manbo(j)%an
               data_manbo_out(num)%mass = data_manbo(j)%mass
               data_manbo_out(num)%mol  = k
+              IF (group_monomers>1) THEN
+                IF (data_manbo(j)%mol_orig==orig_mols(i)%m(1)) THEN
+                  data_manbo_out(num)%mol_orig = k2 + 1
+                ELSE IF (data_manbo(j)%mol_orig==orig_mols(i)%m(2)) THEN
+                  data_manbo_out(num)%mol_orig = k2 + 2
+                ELSE IF (data_manbo(j)%mol_orig==orig_mols(i)%m(3)) THEN
+                  data_manbo_out(num)%mol_orig = k2 + 3              
+                END IF
+              END IF
               data_manbo_out(num)%atom = j
               IF(j==(n_atoms+1)) EXIT
             END IF
           END DO
+        IF (group_monomers>1) THEN
+          k2 = k2 + 1
+          orig_mols_out(k - n_mols)%m(1) = k2
+          IF (.not. orig_mols(i)%m(2)==0) THEN
+            k2 = k2 + 1
+            orig_mols_out(k - n_mols)%m(2) = k2
+          END IF
+          IF (.not. orig_mols(i)%m(3)==0) THEN
+            k2 = k2 + 1
+            orig_mols_out(k - n_mols)%m(3) = k2
+          END IF
+        END IF
       END IF
     
       IF(dy < cutoff) THEN
@@ -112,10 +150,31 @@ MODULE manbo_forces
               data_manbo_out(num)%an   = data_manbo(j)%an
               data_manbo_out(num)%mass = data_manbo(j)%mass
               data_manbo_out(num)%mol  = k
+              IF (group_monomers>1) THEN
+                IF (data_manbo(j)%mol_orig==orig_mols(i)%m(1)) THEN
+                  data_manbo_out(num)%mol_orig  = k2 + 1
+                ELSE IF (data_manbo(j)%mol_orig==orig_mols(i)%m(2)) THEN
+                  data_manbo_out(num)%mol_orig  = k2 + 2
+                ELSE IF (data_manbo(j)%mol_orig==orig_mols(i)%m(3)) THEN
+                  data_manbo_out(num)%mol_orig  = k2 + 3              
+                END IF
+              END IF
               data_manbo_out(num)%atom = j
               IF(j==(n_atoms+1)) EXIT
             END IF
           END DO
+        IF (group_monomers>1) THEN
+          k2 = k2 + 1
+          orig_mols_out(k - n_mols)%m(1) = k2
+          IF (.not. orig_mols(i)%m(2)==0) THEN
+            k2 = k2 + 1
+            orig_mols_out(k - n_mols)%m(2) = k2
+          END IF
+          IF (.not. orig_mols(i)%m(3)==0) THEN
+            k2 = k2 + 1
+            orig_mols_out(k - n_mols)%m(3) = k2
+          END IF
+        END IF
       END IF
     
       IF(dz < cutoff) THEN
@@ -130,10 +189,31 @@ MODULE manbo_forces
               data_manbo_out(num)%an   = data_manbo(j)%an
               data_manbo_out(num)%mass = data_manbo(j)%mass
               data_manbo_out(num)%mol  = k
+              IF (group_monomers>1) THEN
+                IF (data_manbo(j)%mol_orig==orig_mols(i)%m(1)) THEN
+                  data_manbo_out(num)%mol_orig  = k2 + 1
+                ELSE IF (data_manbo(j)%mol_orig==orig_mols(i)%m(2)) THEN
+                  data_manbo_out(num)%mol_orig  = k2 + 2
+                ELSE IF (data_manbo(j)%mol_orig==orig_mols(i)%m(3)) THEN
+                  data_manbo_out(num)%mol_orig  = k2 + 3              
+                END IF
+              END IF
               data_manbo_out(num)%atom = j
               IF(j==(n_atoms+1)) EXIT
             END IF
           END DO
+        IF (group_monomers>1) THEN
+          k2 = k2 + 1
+          orig_mols_out(k - n_mols)%m(1) = k2
+          IF (.not. orig_mols(i)%m(2)==0) THEN
+            k2 = k2 + 1
+            orig_mols_out(k - n_mols)%m(2) = k2
+          END IF
+          IF (.not. orig_mols(i)%m(3)==0) THEN
+            k2 = k2 + 1
+            orig_mols_out(k - n_mols)%m(3) = k2
+          END IF
+        END IF
       END IF
     
       IF(dxy < cutoff) THEN
@@ -148,10 +228,31 @@ MODULE manbo_forces
               data_manbo_out(num)%an   = data_manbo(j)%an
               data_manbo_out(num)%mass = data_manbo(j)%mass
               data_manbo_out(num)%mol  = k
+              IF (group_monomers>1) THEN
+                IF (data_manbo(j)%mol_orig==orig_mols(i)%m(1)) THEN
+                  data_manbo_out(num)%mol_orig  = k2 + 1
+                ELSE IF (data_manbo(j)%mol_orig==orig_mols(i)%m(2)) THEN
+                  data_manbo_out(num)%mol_orig  = k2 + 2
+                ELSE IF (data_manbo(j)%mol_orig==orig_mols(i)%m(3)) THEN
+                  data_manbo_out(num)%mol_orig  = k2 + 3              
+                END IF
+              END IF
               data_manbo_out(num)%atom = j
               IF(j==(n_atoms+1)) EXIT
             END IF
           END DO
+        IF (group_monomers>1) THEN
+          k2 = k2 + 1
+          orig_mols_out(k - n_mols)%m(1) = k2
+          IF (.not. orig_mols(i)%m(2)==0) THEN
+            k2 = k2 + 1
+            orig_mols_out(k - n_mols)%m(2) = k2
+          END IF
+          IF (.not. orig_mols(i)%m(3)==0) THEN
+            k2 = k2 + 1
+            orig_mols_out(k - n_mols)%m(3) = k2
+          END IF
+        END IF
       END IF
     
       IF(dxz < cutoff) THEN
@@ -166,10 +267,31 @@ MODULE manbo_forces
               data_manbo_out(num)%an   = data_manbo(j)%an
               data_manbo_out(num)%mass = data_manbo(j)%mass
               data_manbo_out(num)%mol  = k
+              IF (group_monomers>1) THEN
+                IF (data_manbo(j)%mol_orig==orig_mols(i)%m(1)) THEN
+                  data_manbo_out(num)%mol_orig  = k2 + 1
+                ELSE IF (data_manbo(j)%mol_orig==orig_mols(i)%m(2)) THEN
+                  data_manbo_out(num)%mol_orig  = k2 + 2
+                ELSE IF (data_manbo(j)%mol_orig==orig_mols(i)%m(3)) THEN
+                  data_manbo_out(num)%mol_orig  = k2 + 3              
+                END IF
+              END IF
               data_manbo_out(num)%atom = j
               IF(j==(n_atoms+1)) EXIT
             END IF
           END DO
+        IF (group_monomers>1) THEN
+          k2 = k2 + 1
+          orig_mols_out(k - n_mols)%m(1) = k2
+          IF (.not. orig_mols(i)%m(2)==0) THEN
+            k2 = k2 + 1
+            orig_mols_out(k - n_mols)%m(2) = k2
+          END IF
+          IF (.not. orig_mols(i)%m(3)==0) THEN
+            k2 = k2 + 1
+            orig_mols_out(k - n_mols)%m(3) = k2
+          END IF
+        END IF
       END IF
     
       IF(dyz < cutoff) THEN
@@ -184,10 +306,31 @@ MODULE manbo_forces
               data_manbo_out(num)%an   = data_manbo(j)%an
               data_manbo_out(num)%mass = data_manbo(j)%mass
               data_manbo_out(num)%mol  = k
+              IF (group_monomers>1) THEN
+                IF (data_manbo(j)%mol_orig==orig_mols(i)%m(1)) THEN
+                  data_manbo_out(num)%mol_orig  = k2 + 1
+                ELSE IF (data_manbo(j)%mol_orig==orig_mols(i)%m(2)) THEN
+                  data_manbo_out(num)%mol_orig  = k2 + 2
+                ELSE IF (data_manbo(j)%mol_orig==orig_mols(i)%m(3)) THEN
+                  data_manbo_out(num)%mol_orig  = k2 + 3              
+                END IF
+              END IF
               data_manbo_out(num)%atom = j
               IF(j==(n_atoms+1)) EXIT
             END IF
           END DO
+        IF (group_monomers>1) THEN
+          k2 = k2 + 1
+          orig_mols_out(k - n_mols)%m(1) = k2
+          IF (.not. orig_mols(i)%m(2)==0) THEN
+            k2 = k2 + 1
+            orig_mols_out(k - n_mols)%m(2) = k2
+          END IF
+          IF (.not. orig_mols(i)%m(3)==0) THEN
+            k2 = k2 + 1
+            orig_mols_out(k - n_mols)%m(3) = k2
+          END IF
+        END IF
       END IF
     
       IF(dxyz < cutoff) THEN
@@ -202,10 +345,31 @@ MODULE manbo_forces
               data_manbo_out(num)%an   = data_manbo(j)%an
               data_manbo_out(num)%mass = data_manbo(j)%mass
               data_manbo_out(num)%mol  = k
+              IF (group_monomers>1) THEN
+                IF (data_manbo(j)%mol_orig==orig_mols(i)%m(1)) THEN
+                  data_manbo_out(num)%mol_orig  = k2 + 1
+                ELSE IF (data_manbo(j)%mol_orig==orig_mols(i)%m(2)) THEN
+                  data_manbo_out(num)%mol_orig  = k2 + 2
+                ELSE IF (data_manbo(j)%mol_orig==orig_mols(i)%m(3)) THEN
+                  data_manbo_out(num)%mol_orig  = k2 + 3              
+                END IF
+              END IF
               data_manbo_out(num)%atom = j
               IF(j==(n_atoms+1)) EXIT
             END IF
           END DO
+        IF (group_monomers>1) THEN
+          k2 = k2 + 1
+          orig_mols_out(k - n_mols)%m(1) = k2
+          IF (.not. orig_mols(i)%m(2)==0) THEN
+            k2 = k2 + 1
+            orig_mols_out(k - n_mols)%m(2) = k2
+          END IF
+          IF (.not. orig_mols(i)%m(3)==0) THEN
+            k2 = k2 + 1
+            orig_mols_out(k - n_mols)%m(3) = k2
+          END IF
+        END IF
       END IF
     END DO
 
@@ -227,6 +391,7 @@ MODULE manbo_forces
         data_manbo_temp(i)%mass = data_manbo_out(i)%mass
         data_manbo_temp(i)%an = data_manbo_out(i)%an
         data_manbo_temp(i)%mol = data_manbo_out(i)%mol
+        IF (group_monomers>1) data_manbo_temp(i)%mol_orig = data_manbo_out(i)%mol_orig
         data_manbo_temp(i)%atom = data_manbo_out(i)%atom
       END DO
 
@@ -252,6 +417,7 @@ MODULE manbo_forces
         data_manbo_out(i)%mass = data_manbo_temp(i)%mass
         data_manbo_out(i)%an = data_manbo_temp(i)%an
         data_manbo_out(i)%mol = data_manbo_temp(i)%mol
+        IF (group_monomers>1) data_manbo_out(i)%mol_orig = data_manbo_temp(i)%mol_orig
         data_manbo_out(i)%atom = data_manbo_temp(i)%atom
       END DO
     DEALLOCATE(data_manbo_temp, stat=allocate_status)
@@ -264,6 +430,7 @@ MODULE manbo_forces
     ! Here we reallocated data_manbo_out with the right size
   
     n_mols_out = MAXVAL(data_manbo_out%mol)
+    IF (group_monomers>1) n_mols_out_orig = MAXVAL(data_manbo_out%mol_orig)
     n_atoms_out = SIZE(data_manbo_out, DIM=1)
     k = n_mols_out - n_mols
       IF(ALLOCATED(mc_out)) THEN
@@ -274,25 +441,38 @@ MODULE manbo_forces
             CALL log_close(1)
             STOP
           END IF
-        ALLOCATE(mc_out(k), stat=allocate_status)
-          IF(allocate_status/=0) THEN
-            PRINT *, "No memory enough to allocate. ManBo can not run."
-            CALL log_write("ERROR: Error on allocate mc_out on manbo_forces.F90")
-            CALL log_close(1)
-            STOP
-          END IF
-      ELSE
-        ALLOCATE(mc_out(k), stat=allocate_status)
-          IF(allocate_status/=0) THEN
-            PRINT *, "No memory enough to allocate. ManBo can not run."
-            CALL log_write("ERROR: Error on allocate mc_out on manbo_forces.F90")
-            CALL log_close(1)
-            STOP
-          END IF
       END IF
+      ALLOCATE(mc_out(k), stat=allocate_status)
+        IF(allocate_status/=0) THEN
+          PRINT *, "No memory enough to allocate. ManBo can not run."
+          CALL log_write("ERROR: Error on allocate mc_out on manbo_forces.F90")
+          CALL log_close(1)
+          STOP
+        END IF
+    IF (group_monomers>1) THEN
+      k2 = n_mols_out_orig - n_mols_orig
+        IF(ALLOCATED(mc_out_orig)) THEN
+          DEALLOCATE(mc_out_orig, stat=allocate_status)
+            IF(allocate_status/=0) THEN
+              PRINT *, "No memory enough to deallocate. ManBo can not run."
+              CALL log_write("ERROR: Error on deallocate mc_out_orig on manbo_forces.F90")
+              CALL log_close(1)
+              STOP
+            END IF
+        END IF
+        ALLOCATE(mc_out_orig(k2), stat=allocate_status)
+          IF(allocate_status/=0) THEN
+            PRINT *, "No memory enough to allocate. ManBo can not run."
+            CALL log_write("ERROR: Error on allocate mc_out_orig on manbo_forces.F90")
+            CALL log_close(1)
+            STOP
+          END IF
+    END IF
     
-    CALL calculate_mass_center(3)
+    CALL calculate_mass_center(2)
     ! Here we calculate the mass center's of the outside box's molecules
+    IF (group_monomers>1) CALL calculate_mass_center(4)
+    ! Here we calculate the mass center's of the outside box's molecules using the original numbering
   END SUBROUTINE box_replication
 
   SUBROUTINE calculate_forces(mpi_id)
@@ -765,7 +945,11 @@ MODULE manbo_forces
       STOP
     END IF
     
-    IF (mpi_id == 0) THEN      
+    pairs_list = 0
+    trimers_list = 0
+    ! Setting all values to zero
+    
+    IF (mpi_id == 0) THEN
       IF (p==0) CALL log_write("  Number of monomers, dimers and trimers used in the calculation of forces:")
       
       WRITE(line,'(3x,i8," monomer(s)")') n_mols
@@ -777,16 +961,8 @@ MODULE manbo_forces
         num = 0
         DO i=1,n_mols
           k = 0
-          DO j=i+1,n_mols
-            IF (vector_module(mc(i)%r - mc(j)%r)<cutoff) THEN
-              k = k + 1
-              num = num + 1
-              pairs_list(num,1) = i
-              pairs_list(num,2) = j
-            END IF
-          END DO
-          DO j=n_mols+1,n_mols_out
-            IF (vector_module(mc(i)%r - mc_out(j - n_mols)%r)<cutoff) THEN
+          DO j=i+1,n_mols_out
+            IF (valid_pair(i,j)) THEN
               k = k + 1
               num = num + 1
               pairs_list(num,1) = i
@@ -798,7 +974,7 @@ MODULE manbo_forces
         DO i=n_mols+1,n_mols_out
           k = 0
           DO j=i+1,n_mols_out
-            IF (vector_module(mc_out(i - n_mols)%r - mc_out(j - n_mols)%r)<cutoff) THEN
+            IF (valid_pair(i,j)) THEN
               k = k + 1
               num = num + 1
               pairs_list(num,1) = i
@@ -839,7 +1015,7 @@ MODULE manbo_forces
       IF (p==0) CALL log_write(TRIM(line))
     END IF
     
-#ifdef USE_PARALLEL    
+#ifdef USE_PARALLEL
     CALL MPI_BCAST(npairs, 1, MPI_INTEGER, 0, MPI_COMM_WORLD, ierr)
     CALL MPI_BCAST(ntrimers, 1, MPI_INTEGER, 0, MPI_COMM_WORLD, ierr)
     IF (npairs > 0) THEN
