@@ -1,5 +1,5 @@
-ParmEd
-======
+ManBo
+=====
 
 ab Initio Molecular Dynamics Program that uses Many Body Expansion
 
