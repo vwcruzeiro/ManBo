@@ -1,7 +1,7 @@
 ManBo
 =====
 
-ab Initio Molecular Dynamics Program that uses Many Body Expansion
+ab initio Molecular Dynamics Program that uses Many Body Expansion
 
 Description
 ===========
@@ -39,3 +39,9 @@ The following people have contributed to ManBo's coding development:
 
 * Vinicius Wilian D. Cruzeiro (principal developer) | vwcruzeiro@ufl.edu
 * Herbert C. Georg
+
+
+Some history
+============
+
+ManBo started as an undergraduate project at the University of Goiás, Brazil.
