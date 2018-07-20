@@ -1,10 +1,3 @@
-!
-!
-!
-!
-!
-!
-
 MODULE manbo_variables
 
   USE manbo_periodic_table
@@ -40,12 +33,12 @@ MODULE manbo_variables
     ! mol_orig is the original molecule numbering to which the atom belongs
     ! atom is the number of the atom inside the box in which a given atom outside the box has been replicated from
   END TYPE atom_out
-  TYPE mass_center
+  TYPE center_of_mass
     DOUBLE PRECISION, DIMENSION(3) :: r
     ! r is the vector that contains the position coordinates of the mass center of a given molecule, given in angstroms (1E-10 m)
     DOUBLE PRECISION :: mass
     ! mass is the mass of the atoms of a given molecule, and is given in atomic mass unit (1.66053886E-27 kg)
-  END TYPE mass_center
+  END TYPE center_of_mass
   TYPE charge_multiplicity
     INTEGER :: q_mol, mul
     ! q_mol contains the charge of a given molecule, and is given in atomic units
@@ -64,7 +57,7 @@ MODULE manbo_variables
   ! data_manbo contains all information about the atoms that are inside the box
   TYPE(atom_out), DIMENSION(:), ALLOCATABLE, SAVE :: data_manbo_out
   ! data_manbo_out contains all information about the replicated atoms that are outside the box
-  TYPE(mass_center), DIMENSION(:), ALLOCATABLE, SAVE :: mc, mc_out, mc_orig, mc_out_orig
+  TYPE(center_of_mass), DIMENSION(:), ALLOCATABLE, SAVE :: mc, mc_out, mc_orig, mc_out_orig
   ! mc contains the mass centers of the molecules that are inside the box
   ! mc_out contains the mass centers of the molecules that are outside the box
   ! mc_orig and mc_out_orig are the equivalent of mc and mc_out of original molecules when the molecules were grouped

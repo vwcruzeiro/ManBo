@@ -1,5 +1,5 @@
 ! ==============================================================================
-!                             ManBo - Version 1.00                              
+!                                    ManBo                              
 !       Ab Initio Molecular Dynamics Program that uses Many Body Expansion      
 ! ==============================================================================
 !      Created by Vinícius Wilian Dias Cruzeiro and Herbert de Castro Georg

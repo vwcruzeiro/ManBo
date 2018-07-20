@@ -1,8 +1,6 @@
-
 !
 ! This module sets some parameters used in the ManBo program.
 ! 
-!
 
 MODULE manbo_parameters
 

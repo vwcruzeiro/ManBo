@@ -1,8 +1,3 @@
-!
-!
-!
-!
-
 MODULE manbo_input_reading
 
 #ifdef USE_PARALLEL
@@ -191,7 +186,7 @@ MODULE manbo_input_reading
         ELSE
           CALL log_write("Apply the Many-Body Expansion on the correlation energy only: No")
         END IF
-      WRITE(line,*) cutoff
+      WRITE(line,'(f8.4)') cutoff
       CALL log_write("Cutoff Radius to be applied on the Many Body Expansion (MBE) calculations: " // TRIM(ADJUSTL(line)) // " A")
       WRITE(line,*) n_mols
       CALL log_write("Number of molecules of the system: " // TRIM(ADJUSTL(line)))
@@ -265,7 +260,7 @@ MODULE manbo_input_reading
       CALL log_write("Number of atoms of the system: " // TRIM(ADJUSTL(line)))
       WRITE(line,*) n_steps
       CALL log_write("Number of steps to be executed: " // TRIM(ADJUSTL(line)))
-      WRITE(line,*) delta_t
+      WRITE(line,'(f8.4)') delta_t
       CALL log_write("Time interval between the steps: " // TRIM(ADJUSTL(line)) // " femtoseconds")
         IF (use_rand_vel) THEN
           CALL log_write("Generate random initial velocities: Yes")
@@ -423,11 +418,11 @@ MODULE manbo_input_reading
         END IF
       END IF
       CALL log_write("Dimensions of the box:")
-      WRITE(line,*) box_dim(1)
+      WRITE(line,'(f10.6)') box_dim(1)
       CALL log_write("  x: " // TRIM(ADJUSTL(line)) // " A")
-      WRITE(line,*) box_dim(2)
+      WRITE(line,'(f10.6)') box_dim(2)
       CALL log_write("  y: " // TRIM(ADJUSTL(line)) // " A")
-      WRITE(line,*) box_dim(3)
+      WRITE(line,'(f10.6)') box_dim(3)
       CALL log_write("  z: " // TRIM(ADJUSTL(line)) // " A")
       IF(cutoff>(MINVAL(box_dim)/2) .AND. apply_pbc) THEN
         CALL log_write("")

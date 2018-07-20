@@ -1,9 +1,3 @@
-!
-!
-!
-!
-!
-
 MODULE manbo_forces
 
 #ifdef USE_PARALLEL
@@ -39,7 +33,7 @@ MODULE manbo_forces
     CHARACTER(LEN=100) :: line
     TYPE(atom_out), DIMENSION(:), ALLOCATABLE, SAVE :: data_manbo_temp
     
-    CALL calculate_mass_center(1)
+    CALL calculate_center_of_mass(1)
     ! Here we calculate the mass center's of the inside box's molecules
       
     lx2 = box_dim(1)/2
@@ -469,9 +463,9 @@ MODULE manbo_forces
           END IF
     END IF
     
-    CALL calculate_mass_center(2)
+    CALL calculate_center_of_mass(2)
     ! Here we calculate the mass center's of the outside box's molecules
-    IF (group_monomers>1) CALL calculate_mass_center(4)
+    IF (group_monomers>1) CALL calculate_center_of_mass(4)
     ! Here we calculate the mass center's of the outside box's molecules using the original numbering
   END SUBROUTINE box_replication
 
@@ -501,7 +495,7 @@ MODULE manbo_forces
       IF(ALLOCATED(data_manbo_out)) THEN
         CALL box_replication
       ELSE
-        CALL calculate_mass_center(1)
+        CALL calculate_center_of_mass(1)
         CALL log_write("  None of the atoms were replicated.")
         CALL log_write("")
         n_mols_out = n_mols

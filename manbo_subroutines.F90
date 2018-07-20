@@ -1,10 +1,3 @@
-!
-!
-!
-!
-!
-!
-
 MODULE manbo_subroutines
 
 #ifdef USE_INTEL
@@ -142,11 +135,13 @@ MODULE manbo_subroutines
    RETURN
   END SUBROUTINE delsubstr
 
-  SUBROUTINE calculate_mass_center(x)
-  ! This subroutine calculates the mass center's of the molecules inside or outside the box
+  SUBROUTINE calculate_center_of_mass(x)
+  ! This subroutine calculates the center of mass of the molecules inside or outside the box
     INTEGER, INTENT(in) :: x
-    ! x == 1 for molecules inside the box, x == 2 for molecules outside the box, 
-    ! x == 3 for original molecules inside the box, and x == 4 for original molecules outside the box
+    ! x == 1 for molecules inside the box,
+    ! x == 2 for molecules outside the box, 
+    ! x == 3 for original molecules inside the box, and
+    ! x == 4 for original molecules outside the box
     INTEGER :: i, j
 
     IF(x==1) THEN
@@ -200,10 +195,10 @@ MODULE manbo_subroutines
         mc_out_orig(i)%r = mc_out_orig(i)%r/mc_out_orig(i)%mass
       END DO
     END IF
-  END SUBROUTINE calculate_mass_center
+  END SUBROUTINE calculate_center_of_mass
 
   SUBROUTINE find_pair(pairs_list,val,m1o,m2o,m1,m2)
-  ! This subroutine finds a valid pair (m1,m2) equivalent to (m1o,m2o) which are outside the box
+  ! This subroutine finds a valid pair (m1,m2) inside the box equivalent to (m1o,m2o) outside the box
     INTEGER, INTENT(out) :: m1,m2
     INTEGER, INTENT(in) :: val,m1o,m2o
     INTEGER, DIMENSION(val,2), INTENT(in) :: pairs_list
@@ -261,12 +256,12 @@ MODULE manbo_subroutines
   END SUBROUTINE pair_num
 
   SUBROUTINE apply_boundary_conditions
-  ! This subroutine applies the periodics boundary conditions
+  ! This subroutine applies periodics boundary conditions
     IMPLICIT NONE
     INTEGER :: i, j
     DOUBLE PRECISION :: lx2, ly2, lz2
-    ! Variables to store the values of half of the box lenght in each dimension
-
+    
+    ! Variables to store the values of half of the box lengths in each dimension
     lx2 = box_dim(1)/2
     ly2 = box_dim(2)/2
     lz2 = box_dim(3)/2
@@ -300,7 +295,7 @@ MODULE manbo_subroutines
   END SUBROUTINE apply_boundary_conditions
 
   SUBROUTINE reorient_box
-  ! This subroutine reorients the positions of the atoms inside the box and gets the box dimensions
+  ! This subroutine reorients the positions of the atoms inside the box and gets the box dimensions.
   ! The system is translated in such a way the origin of the axis is at the center of mass of the system
   ! and then rotations are performed to place the farthest atom on the edge of the box
     IMPLICIT NONE
@@ -317,7 +312,7 @@ MODULE manbo_subroutines
     END DO
     vec = vec/tmass
     
-    ! Translating the atoms  so that the oring of the axis stays at the center of mass
+    ! Translating the atoms so that the origin of the axis stays at the center of mass
     DO i=1,n_atoms
       data_manbo(i)%r = data_manbo(i)%r - vec
     END DO
@@ -390,7 +385,7 @@ MODULE manbo_subroutines
                           0.5*delta_t*delta_t*aua_to_manbo*data_manbo(i)%f/data_manbo(i)%mass        
       END DO
       
-      CALL calculate_mass_center(1)
+      CALL calculate_center_of_mass(1)
       
       IF(apply_pbc) THEN
         CALL apply_boundary_conditions
@@ -515,8 +510,8 @@ MODULE manbo_subroutines
     CHARACTER(LEN=50) :: arq
     DOUBLE PRECISION :: E_kin
     DOUBLE PRECISION, DIMENSION(3) :: p_sys, L_sys
-  ! p_sys is the total linear momentum of the system, given in atomic unit (1.99285175E-24 kg.m/s)
-  ! L_sys is the total angular momentum of the system, given in atomic unit (1.054571726E−34 J·s)
+    ! p_sys is the total linear momentum of the system, given in atomic unit (1.99285175E-24 kg.m/s)
+    ! L_sys is the total angular momentum of the system, given in atomic unit (1.054571726E−34 J·s)
 
     arq = TRIM(ADJUSTL(name_out)) // "_properties.dat"
     IF (x==1) THEN
@@ -581,6 +576,7 @@ MODULE manbo_subroutines
     INTEGER :: i
     CHARACTER(LEN=60) :: line
 
+    ! Calculating the system's temperature
     temperature = 0.0
       DO i=1,n_atoms
         temperature = temperature + (data_manbo(i)%mass)*((data_manbo(i)%v(1))**2 + (data_manbo(i)%v(2))**2)
@@ -588,7 +584,6 @@ MODULE manbo_subroutines
       END DO
     temperature = convert_energy*temperature/n_atoms
     temperature = temperature/(3*const_boltzmann)
-    ! Here we calculated system's temperature
 
     CALL log_write("")
     WRITE(line,*) temperature
@@ -665,7 +660,7 @@ MODULE manbo_subroutines
     
     ! Computing distances
     n_mols = n_mols_orig
-    CALL calculate_mass_center(3) ! Centers of mass of the original molecules inside the box
+    CALL calculate_center_of_mass(3) ! Centers of mass of the original molecules inside the box
     IF (group_monomers == 2 .AND. n_mols_orig > 1) THEN
       IF (mod(n_mols_orig,2) == 0) THEN
         n_mols = n_mols_orig/2

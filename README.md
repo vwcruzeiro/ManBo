@@ -38,5 +38,4 @@ Authors and Contributors
 The following people have contributed to ManBo's coding development:
 
 * Vinicius Wilian D. Cruzeiro (principal developer) | vwcruzeiro@ufl.edu
-
 * Herbert C. Georg

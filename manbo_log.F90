@@ -1,10 +1,3 @@
-!
-!
-!
-!
-!
-!
-
 MODULE manbo_log
 
   USE manbo_variables
@@ -23,7 +16,7 @@ MODULE manbo_log
 
     OPEN(UNIT=100, FILE=arq)
     WRITE(100,*) "=============================================================================="
-    WRITE(100,*) "                            ManBo - Version 1.00                              "
+    WRITE(100,*) "                                   ManBo                                      "
     WRITE(100,*) "      Ab Initio Molecular Dynamics Program that uses Many Body Expansion      "
     WRITE(100,*) "=============================================================================="
     WRITE(100,*) "     Created by Vinicius Wilian Dias Cruzeiro and Herbert de Castro Georg     "
