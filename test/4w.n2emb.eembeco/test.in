@@ -1,0 +1,100 @@
+Input variables:
+# cutoff is the cutoff radius used on the Many-Body Expansion, given in Angstroms
+    cutoff=            18.0001
+# n_mols is the number of molecules of the system
+    n_mols=            4
+# delta_t is the time step of the Molecular Dynamics, given in femtoseconds
+    delta_t=           0.1
+# n_steps is the number of steps to be executed in the Molecular Dynamics
+    n_steps=           1
+# i_print_prop is the interval of steps in which the system's properties will be writen on the properties.dat file. Set it equals 1 means that it will be printed in every step
+    i_print_prop=      1
+# i_save is the interval of steps in which the positions, velocities and forces will be writen on the output files. Set it equals 1 means that it will be printed in every step
+    i_save=            1
+# i_rst is the interval of steps in which the restart input file will be writen. Set it equals 1 means that it will be printed in every step. 0 means the restart file will not be written
+    i_rst=             1
+# n_qm_procs is the number of processors to be used by each quantum chemistry calculations
+    n_qm_procs=        1
+# use_rand_vel determines if we are going to use initial random velocities. It can be set as TRUE or FALSE
+    use_rand_vel=      FALSE
+# rand_vel_temp is the temperature of the initial random velocities, given in Kelvin. This variable must be set in case of use_rand_vel be TRUE
+    rand_vel_temp=     298.0
+# rand_vel_seed is a integer number used as a seed for the random numbers in the initial random velocities generation
+    rand_vel_seed=     28
+# apply_pbc determines if we are going to use periodic boundary conditions. It can be set as TRUE or FALSE
+    apply_pbc=         FALSE
+# expan_order is the order in which we are going to truncate the Many-Body Expansion. It can not be higher than 3
+    expan_order=       2
+# group_monomers is the number of molecules to be grouped as a single monomer
+    group_monomers=    1
+# use_embedding determines if we are going to use Eletroctatic Embedding. It can be set as TRUE or FALSE. In case of TRUE, the embedding charges must be set on the input file
+    use_embedding=     TRUE
+# use_emb_radius determines if we are going to consider in the calculation of a monomer, dimer, or trimer all point charges within a radius starting from its mass center. It can be set as TRUE only if apply_pbc and use_embedding are both TRUE
+    use_emb_radius=    FALSE
+# emb_radius is the radius of use_emb_radius, given in Angstroms. It can be higher than the box sizes
+    emb_radius=        10.0000
+# qm_prog is the command to call the program who will do the quantum chemistry calculations. At the moment, only g09 and g03 are avaliable
+    qm_prog=           g09
+# qm_prog_memory is the memory, in MB, given to the program who will do the quantum chemistry calculations in the calculation of each monomer, dimer or trimer
+    qm_prog_memory=    600
+# Apply the Many-Body Expansion on the correlation energy only
+    mbe_corr_only=     TRUE
+# qm_prog_method is the quantum chemistry method to be used
+    qm_prog_method=    MP2
+# qm_prog_basis is the basis set to be used on the quantum chemistry calculations
+    qm_prog_basis=     STO-3G
+# bs_extrapolation determines if we are going to extrapolate the results to infinty basis set (this means cc-pVDZ and cc-pVTZ will be performed). This option can only be used with MP2
+    bs_extrapolation=  FALSE
+# apply_therm determines if we are going to use the Berendsen thermostat. It can be set as TRUE or FALSE
+    apply_therm=       FALSE
+# target_therm_temp is the target temperature of the Berendsen thermostart, given in Kelvin
+    target_therm_temp= 298.0
+# t_therm is the parameter of the Berendsen thermostat who determines how close we will bring the system's temperature to the target_therm_temp in each step, given in femtoseconds. If t_therm is set equal to delta_t, then the thermostat will bring the system's temperature exactly to target_temp at the end of each step
+    t_therm=           5.0
+END_OF_INPUT_VARIABLES
+Atomic coordinates of the molecules: (First line: number of atoms; Other lines: atomic Symbol, X, Y, and Z coordinates (given in angstroms), molecule number)
+      12
+  O          0.03698       -0.01281       -0.05141  1  
+  H         -0.83276       -0.45891        0.15980  1  
+  H          0.24575        0.66230        0.65619  1  
+  O          2.76501       -0.14594        0.67373  2  
+  H          2.15073        0.01848       -0.09807  2  
+  H          2.32501       -0.76558        1.32374  2  
+  O          0.82640       -1.57091        2.47903  3  
+  H          0.71939       -2.02573        1.59487  3  
+  H          1.15662       -2.22980        3.15494  3  
+  O          2.87063        1.68394        2.58462  4  
+  H          3.10929        1.46766        1.63788  4  
+  H          2.75963        0.83565        3.10246  4  
+Molecules charge and multiplicity: (Molecule number, molecule charge, molecule multiplicity)
+  1    0    1
+  2    0    1
+  3    0    1
+  4    0    1
+Embedding charges: (atomic charge, in atomic units. They must be in the same order of the atomic coordinates)
+   -0.834
+    0.417
+    0.417
+   -0.834
+    0.417
+    0.417
+   -0.834
+    0.417
+    0.417
+   -0.834
+    0.417
+    0.417
+Atomic velocities: (X, Y and Z velocities, given in angstrom/femtosecond. They must be in the same order of the atomic coordinates)
+   0.0000000       0.0000000       0.0000000    
+   0.0000000       0.0000000       0.0000000    
+   0.0000000       0.0000000       0.0000000    
+   0.0000000       0.0000000       0.0000000    
+   0.0000000       0.0000000       0.0000000    
+   0.0000000       0.0000000       0.0000000    
+   0.0000000       0.0000000       0.0000000    
+   0.0000000       0.0000000       0.0000000    
+   0.0000000       0.0000000       0.0000000    
+   0.0000000       0.0000000       0.0000000    
+   0.0000000       0.0000000       0.0000000    
+   0.0000000       0.0000000       0.0000000    
+   
