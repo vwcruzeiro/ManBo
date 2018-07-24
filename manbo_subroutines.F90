@@ -526,10 +526,10 @@ MODULE manbo_subroutines
     WRITE(15,'(a,f12.6,2x,a)') " System's total angular momentum modulus:  ", vector_module(L_sys),&
                                ' a.u. ("reduced Plank constant"/bohr)'
     WRITE(15,*) " "
-    WRITE(15,'(a,f16.6,2x,a)') " One-Body Term Energy (E1):  ", E1, " hartrees"
-    WRITE(15,'(a,f16.6,2x,a)') " Two-Body Term Energy (E2):  ", E2, " hartrees"
-    WRITE(15,'(a,f16.6,2x,a)') " Tree-Body Term Energy (E3): ", E3, " hartrees"
-    WRITE(15,'(a,f16.6,2x,a)') " Total energy: ", (E1+E2+E3), " hartrees"
+    WRITE(15,'(a,f16.8,2x,a)') " One-Body Term Energy (E1):  ", E1, " hartrees"
+    WRITE(15,'(a,f16.8,2x,a)') " Two-Body Term Energy (E2):  ", E2, " hartrees"
+    WRITE(15,'(a,f16.8,2x,a)') " Tree-Body Term Energy (E3): ", E3, " hartrees"
+    WRITE(15,'(a,f16.8,2x,a)') " Total energy: ", (E1+E2+E3), " hartrees"
     E_kin = 0.0
       DO i=1,n_atoms
         E_kin = E_kin + 0.5*(data_manbo(i)%mass)*((data_manbo(i)%v(1))**2)
@@ -537,8 +537,8 @@ MODULE manbo_subroutines
         E_kin = E_kin + 0.5*(data_manbo(i)%mass)*((data_manbo(i)%v(3))**2)
       END DO
     E_kin = convert_energy*E_kin*convert_jou_har
-    WRITE(15,'(a,f16.6,2x,a)') " Nuclei kinetic energy (E_kin): ", E_kin, " hartrees"
-    WRITE(15,'(a,f16.6,2x,a)') " Total + kinetic energy (E1 + E2 + E3 + E_kin): ", (E1 + E2 + E3 + E_kin), " hartrees"
+    WRITE(15,'(a,f16.8,2x,a)') " Nuclei kinetic energy (E_kin): ", E_kin, " hartrees"
+    WRITE(15,'(a,f16.8,2x,a)') " Total + kinetic energy (E1 + E2 + E3 + E_kin): ", (E1 + E2 + E3 + E_kin), " hartrees"
     WRITE(15,'(a,f16.6,2x,a)') " Total energy per molecule: ", convert_mol_energy*(E1 + E2 + E3 + E_kin)/n_mols, " kcal/mol"
     WRITE(15,'(a,f16.6,2x,a)') " E2 + E3 per molecule: ", convert_mol_energy*(E2 + E3)/n_mols, " kcal/mol"
     CLOSE(15)
