@@ -520,7 +520,8 @@ MODULE manbo_forces
         
         CALL forces_eval(mpi_id,0)
         IF (mpi_id == 0) THEN
-          WRITE(line,'(3x,"Full EE-MBE Energy done with the qm_prog_method:           ",f16.8," Hartrees")') (E1+E2+E3)
+          WRITE(line,'(3x,"Full EE-MBE Energy done with",a12,":                      ",f16.8," Hartrees")')&
+                TRIM(ADJUSTL(qm_prog_method)), (E1+E2+E3)
           CALL log_write(TRIM(line))
           E1_mbe2 = E1
           E2_mbe2 = E2
@@ -570,7 +571,8 @@ MODULE manbo_forces
           E1 = E1 + E1_mbe2 - E1_hfmbe2
           E2 = E2 + E2_mbe2 - E2_hfmbe2
           E3 = E3 + E3_mbe2 - E3_hfmbe2
-          WRITE(line,'(3x,"qm_prog_method Energy with EE-MBE on the correlation only: ",f16.8," Hartrees")') (E1+E2+E3)
+          WRITE(line,'(3x,a," Energy with EE-MBE on the correlation only: ",f16.8," Hartrees")')&
+                TRIM(ADJUSTL(method_old)), (E1+E2+E3)
           CALL log_write(TRIM(line))
           
           ! Restoring the original values for the next md_step
