@@ -520,7 +520,7 @@ MODULE manbo_forces
         
         CALL forces_eval(mpi_id,0)
         IF (mpi_id == 0) THEN
-          WRITE(line,'(3x,"Full EE-MBE Energy done with",a12,":                      ",f16.8," Hartrees")')&
+          WRITE(line,'(3x,"Full EE-MBE Energy done with",a12,":                  ",f16.8," Hartrees")')&
                 TRIM(ADJUSTL(qm_prog_method)), (E1+E2+E3)
           CALL log_write(TRIM(line))
           E1_mbe2 = E1

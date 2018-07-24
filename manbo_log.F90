@@ -22,7 +22,7 @@ MODULE manbo_log
     WRITE(100,*) "     Created by Vinicius Wilian Dias Cruzeiro and Herbert de Castro Georg     "
     WRITE(100,*) ""
     CALL SYSTEM_CLOCK(init_dt)
-    CALL log_time("ManBo has started at")
+    CALL log_time("| ManBo has started at")
     WRITE(100,*) ""
   END SUBROUTINE log_start
 
@@ -63,7 +63,7 @@ MODULE manbo_log
 
     WRITE(line, '(i2,":",i2,":",i2," of ",a," ",i2,", ",i4)') time(5), time(6), time(7),&
                          TRIM(ADJUSTL(month)), time(3), time(1)
-    WRITE(100,*) text, " ", line
+    WRITE(100,'(a," ",a)') text, line
   END SUBROUTINE log_time
 
   SUBROUTINE log_write(text)
@@ -71,7 +71,7 @@ MODULE manbo_log
     IMPLICIT NONE
     CHARACTER(LEN=*), INTENT(in) :: text
 
-    WRITE(100,*) text
+    WRITE(100,'(a)') text
   END SUBROUTINE log_write
 
   SUBROUTINE log_close(stat)
@@ -83,15 +83,15 @@ MODULE manbo_log
 
     WRITE(100,*) ""
     
-    CALL log_time("The execution ended at")
+    CALL log_time("| The execution ended at")
     CALL SYSTEM_CLOCK(final_dt)
     CALL dt_diference(init_dt,final_dt,dif_dt)
-    WRITE(100,'(" The execution lasted ",i4," days, ",i2," hours, ",i2," minutes, and ",f6.3," seconds.")') dif_dt(1),&
+    WRITE(100,'("| The execution lasted ",i4," days, ",i2," hours, ",i2," minutes, and ",f6.3," seconds.")') dif_dt(1),&
                  dif_dt(2), dif_dt(3), (REAL(dif_dt(4)) + REAL(dif_dt(5))/1000)
       IF(stat==0) THEN
-        WRITE(100,*) "ManBo was successfully executed."
+        WRITE(100,'(a)') "| ManBo was successfully executed."
       ELSE
-        WRITE(100,*) "Manbo had an error and stopped running."
+        WRITE(100,'(a)') "| Manbo had an error and stopped running."
       END IF
     WRITE(100,*) ""
     CLOSE(100)

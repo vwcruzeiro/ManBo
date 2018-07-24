@@ -332,24 +332,24 @@ MODULE manbo_input_reading
         END IF
       CALL log_write("")
 #ifdef USE_PARALLEL
-      CALL log_write("*** Running the Hybrid MPI-OpenMP version of ManBo ***")
+      CALL log_write("|*** Running the Hybrid MPI-OpenMP version of ManBo ***")
       WRITE(line,*) mpi_size
-      CALL log_write("  Number of MPI threads available:       " // TRIM(ADJUSTL(line)))
+      CALL log_write("|  Number of MPI threads available:       " // TRIM(ADJUSTL(line)))
       WRITE(line,*) omp_get_num_procs()
-      CALL log_write("  Number of OpenMP processors available: " // TRIM(ADJUSTL(line)))
+      CALL log_write("|  Number of OpenMP processors available: " // TRIM(ADJUSTL(line)))
       WRITE(line,*) omp_get_max_threads()
-      CALL log_write("  Number of OpenMP threads available:    " // TRIM(ADJUSTL(line)))
+      CALL log_write("|  Number of OpenMP threads available:    " // TRIM(ADJUSTL(line)))
 #elif USE_OPENMPONLY
-      CALL log_write("*** Running the OpenMP version of ManBo ***")
+      CALL log_write("|*** Running the OpenMP version of ManBo ***")
       WRITE(line,*) omp_get_num_procs()
-      CALL log_write("  Number of OpenMP processors available: " // TRIM(ADJUSTL(line)))
+      CALL log_write("|  Number of OpenMP processors available: " // TRIM(ADJUSTL(line)))
       WRITE(line,*) omp_get_max_threads()
-      CALL log_write("  Number of OpenMP threads available:    " // TRIM(ADJUSTL(line)))
+      CALL log_write("|  Number of OpenMP threads available:    " // TRIM(ADJUSTL(line)))
 #else
-      CALL log_write("*** Running the Serial version of ManBo ***")
+      CALL log_write("|*** Running the Serial version of ManBo ***")
 #endif /* USE_PARALLEL */
       WRITE(line,*) n_qm_procs
-      CALL log_write("  Number of processors to be used by the QM program on each calculation: " // TRIM(ADJUSTL(line)))
+      CALL log_write("|  Number of processors to be used by the QM program on each calculation: " // TRIM(ADJUSTL(line)))
       CALL log_write("")
       
       IF (.NOT. use_rand_vel) THEN

@@ -65,16 +65,16 @@ PROGRAM manbo
     ! Saving data of step 0
     
     CALL log_write("")
-    CALL log_time("  This step ended at")
+    CALL log_time("|  This step ended at")
     IF(n_steps/=0) THEN
       CALL SYSTEM_CLOCK(temp_dt)
       temp_dt=NINT(REAL(temp_dt - init_dt)/(md_step + 1))
       CALL dt_diference(0,temp_dt,dif_temp_dt)
-      WRITE(100,'("   Average time per step: ",i4," days, ",i2," hours, ",i2," minutes, and ",f6.3," seconds.")')&
+      WRITE(100,'("|  Average time per step: ",i4," days, ",i2," hours, ",i2," minutes, and ",f6.3," seconds.")')&
                    dif_temp_dt(1), dif_temp_dt(2), dif_temp_dt(3), (REAL(dif_temp_dt(4)) + REAL(dif_temp_dt(5))/1000)
       temp_dt=temp_dt*(n_steps - md_step)
       CALL dt_diference(0,temp_dt,dif_temp_dt)
-      WRITE(100,'("   The execution is estimated to end in: ",i4," days, ",i2," hours, ",i2," minutes, and ",f6.3," seconds.")')&
+    WRITE(100,'("|  The execution is estimated to end in: ",i4," days, ",i2," hours, ",i2," minutes, and ",f6.3," seconds.")')&
                    dif_temp_dt(1), dif_temp_dt(2), dif_temp_dt(3), (REAL(dif_temp_dt(4)) + REAL(dif_temp_dt(5))/1000)
     END IF
     CALL log_write("--------------------------------------------------------------------")
@@ -128,16 +128,16 @@ PROGRAM manbo
         END IF
         
         CALL log_write("")
-        CALL log_time("  This step ended at")
+        CALL log_time("|  This step ended at")
         IF(n_steps/=md_step) THEN
           CALL SYSTEM_CLOCK(temp_dt)
           temp_dt=NINT(REAL(temp_dt - init_dt)/(md_step + 1))
           CALL dt_diference(0,temp_dt,dif_temp_dt)
-          WRITE(100,'("   Average time per step: ",i4," days, ",i2," hours, ",i2," minutes, and ",f6.3," seconds.")')&
+          WRITE(100,'("|  Average time per step: ",i4," days, ",i2," hours, ",i2," minutes, and ",f6.3," seconds.")')&
                        dif_temp_dt(1), dif_temp_dt(2), dif_temp_dt(3), (REAL(dif_temp_dt(4)) + REAL(dif_temp_dt(5))/1000)
           temp_dt=temp_dt*(n_steps - md_step)
           CALL dt_diference(0,temp_dt,dif_temp_dt)
-          WRITE(100,'("   The execution is estimated to end in ",i5," days, ",i2," hours, ",i2," minutes, and ",f6.3," seconds.")')&
+        WRITE(100,'("|  The execution is estimated to end in ",i5," days, ",i2," hours, ",i2," minutes, and ",f6.3," seconds.")')&
                        dif_temp_dt(1), dif_temp_dt(2), dif_temp_dt(3), (REAL(dif_temp_dt(4)) + REAL(dif_temp_dt(5))/1000)
         END IF
         CALL log_write("--------------------------------------------------------------------")
