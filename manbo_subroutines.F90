@@ -89,17 +89,17 @@ MODULE manbo_subroutines
           END IF
           IF (n2==0) EXIT
           IF (n1<=n_mols_orig .AND. n2<=n_mols_orig) THEN
-            IF (vector_module(mc_orig(n1)%r - mc_orig(n2)%r)<cutoff) THEN
+            IF (vector_module(mc(n1)%r - mc(n2)%r)<cutoff) THEN
               num = num+1
               IF (num==2) EXIT
             END IF
           ELSE IF (n1<=n_mols_orig .AND. n2>n_mols_orig) THEN
-            IF (vector_module(mc_orig(n1)%r - mc_out_orig(n2-n_mols_orig)%r)<cutoff) THEN
+            IF (vector_module(mc(n1)%r - mc_out(n2-n_mols_orig)%r)<cutoff) THEN
               num = num+1
               IF (num==2) EXIT
             END IF
           ELSE IF (n1>n_mols_orig .AND. n2>n_mols_orig) THEN
-            IF (vector_module(mc_out_orig(n1-n_mols_orig)%r - mc_out_orig(n2-n_mols_orig)%r)<cutoff) THEN
+            IF (vector_module(mc_out(n1-n_mols_orig)%r - mc_out(n2-n_mols_orig)%r)<cutoff) THEN
               num = num+1
               IF (num==2) EXIT
             END IF
@@ -139,60 +139,33 @@ MODULE manbo_subroutines
   ! This subroutine calculates the center of mass of the molecules inside or outside the box
     INTEGER, INTENT(in) :: x
     ! x == 1 for molecules inside the box,
-    ! x == 2 for molecules outside the box, 
-    ! x == 3 for original molecules inside the box, and
-    ! x == 4 for original molecules outside the box
+    ! x == 2 for molecules outside the box
     INTEGER :: i, j
 
     IF(x==1) THEN
-      DO i=1,n_mols
+      DO i=1,n_mols_orig
         mc(i)%r = 0.0
         mc(i)%mass = 0.0
       END DO
       DO i=1,n_atoms
-        mc(data_manbo(i)%mol)%r = mc(data_manbo(i)%mol)%r + (data_manbo(i)%mass)*(data_manbo(i)%r)
-        mc(data_manbo(i)%mol)%mass = mc(data_manbo(i)%mol)%mass + data_manbo(i)%mass
+        mc(data_manbo(i)%mol_orig)%r = mc(data_manbo(i)%mol_orig)%r + (data_manbo(i)%mass)*(data_manbo(i)%r)
+        mc(data_manbo(i)%mol_orig)%mass = mc(data_manbo(i)%mol_orig)%mass + data_manbo(i)%mass
       END DO
-      DO i=1,n_mols
+      DO i=1,n_mols_orig
         mc(i)%r = mc(i)%r/mc(i)%mass
       END DO
-    ELSE IF (x==2) THEN
-      DO i=1,(n_mols_out - n_mols)
+    ELSE IF(x==2) THEN
+      DO i=1,(n_mols_out_orig - n_mols_orig)
         mc_out(i)%r = 0.0
         mc_out(i)%mass = 0.0
       END DO
       DO i=1,n_atoms_out
-        j = data_manbo_out(i)%mol - n_mols
+        j = data_manbo_out(i)%mol_orig - n_mols_orig
         mc_out(j)%r = mc_out(j)%r + (data_manbo_out(i)%mass)*(data_manbo_out(i)%r)
         mc_out(j)%mass = mc_out(j)%mass + data_manbo_out(i)%mass
       END DO
-      DO i=1,(n_mols_out - n_mols)
+      DO i=1,(n_mols_out_orig - n_mols_orig)
         mc_out(i)%r = mc_out(i)%r/mc_out(i)%mass
-      END DO
-    ELSE IF(x==3) THEN
-      DO i=1,n_mols_orig
-        mc_orig(i)%r = 0.0
-        mc_orig(i)%mass = 0.0
-      END DO
-      DO i=1,n_atoms
-        mc_orig(data_manbo(i)%mol_orig)%r = mc_orig(data_manbo(i)%mol_orig)%r + (data_manbo(i)%mass)*(data_manbo(i)%r)
-        mc_orig(data_manbo(i)%mol_orig)%mass = mc_orig(data_manbo(i)%mol_orig)%mass + data_manbo(i)%mass
-      END DO
-      DO i=1,n_mols_orig
-        mc_orig(i)%r = mc_orig(i)%r/mc_orig(i)%mass
-      END DO
-    ELSE IF(x==4) THEN
-      DO i=1,(n_mols_out_orig - n_mols_orig)
-        mc_out_orig(i)%r = 0.0
-        mc_out_orig(i)%mass = 0.0
-      END DO
-      DO i=1,n_atoms_out
-        j = data_manbo_out(i)%mol_orig - n_mols_orig
-        mc_out_orig(j)%r = mc_out_orig(j)%r + (data_manbo_out(i)%mass)*(data_manbo_out(i)%r)
-        mc_out_orig(j)%mass = mc_out_orig(j)%mass + data_manbo_out(i)%mass
-      END DO
-      DO i=1,(n_mols_out_orig - n_mols_orig)
-        mc_out_orig(i)%r = mc_out_orig(i)%r/mc_out_orig(i)%mass
       END DO
     END IF
   END SUBROUTINE calculate_center_of_mass
@@ -654,13 +627,9 @@ MODULE manbo_subroutines
     
     complete = 1
     ! Here 1 means no molecules has been added to a new group
-
-    ! Reallocating important variables
-    IF (.not. ALLOCATED(mc_orig)) ALLOCATE(mc_orig(n_mols_orig))
     
     ! Computing distances
     n_mols = n_mols_orig
-    CALL calculate_center_of_mass(3) ! Centers of mass of the original molecules inside the box
     IF (group_monomers == 2 .AND. n_mols_orig > 1) THEN
       IF (mod(n_mols_orig,2) == 0) THEN
         n_mols = n_mols_orig/2
@@ -672,7 +641,7 @@ MODULE manbo_subroutines
       maxn = 1
       DO i=1,n_mols_orig-1
          DO j=i+1,n_mols_orig
-           distp(i,j) = vector_module(mc_orig(i)%r - mc_orig(j)%r)
+           distp(i,j) = vector_module(mc(i)%r - mc(j)%r)
            maxn = maxn + 1
          END DO
       END DO
@@ -690,8 +659,8 @@ MODULE manbo_subroutines
       DO i=1,n_mols_orig-2
          DO j=i+1,n_mols_orig-1
            DO k=j+1,n_mols_orig
-             distt(i,j,k) = vector_module(mc_orig(i)%r - mc_orig(j)%r) + vector_module(mc_orig(i)%r - mc_orig(k)%r)
-             distt(i,j,k) = distt(i,j,k) + vector_module(mc_orig(j)%r - mc_orig(k)%r)
+             distt(i,j,k) = vector_module(mc(i)%r - mc(j)%r) + vector_module(mc(i)%r - mc(k)%r)
+             distt(i,j,k) = distt(i,j,k) + vector_module(mc(j)%r - mc(k)%r)
              maxn = maxn + 1
            END DO
          END DO

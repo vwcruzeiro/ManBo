@@ -443,30 +443,9 @@ MODULE manbo_forces
           CALL log_close(1)
           STOP
         END IF
-    IF (group_monomers>1) THEN
-      k2 = n_mols_out_orig - n_mols_orig
-        IF(ALLOCATED(mc_out_orig)) THEN
-          DEALLOCATE(mc_out_orig, stat=allocate_status)
-            IF(allocate_status/=0) THEN
-              PRINT *, "No memory enough to deallocate. ManBo can not run."
-              CALL log_write("ERROR: Error on deallocate mc_out_orig on manbo_forces.F90")
-              CALL log_close(1)
-              STOP
-            END IF
-        END IF
-        ALLOCATE(mc_out_orig(k2), stat=allocate_status)
-          IF(allocate_status/=0) THEN
-            PRINT *, "No memory enough to allocate. ManBo can not run."
-            CALL log_write("ERROR: Error on allocate mc_out_orig on manbo_forces.F90")
-            CALL log_close(1)
-            STOP
-          END IF
-    END IF
     
     CALL calculate_center_of_mass(2)
     ! Here we calculate the mass center's of the outside box's molecules
-    IF (group_monomers>1) CALL calculate_center_of_mass(4)
-    ! Here we calculate the mass center's of the outside box's molecules using the original numbering
   END SUBROUTINE box_replication
 
   SUBROUTINE calculate_forces(mpi_id)
