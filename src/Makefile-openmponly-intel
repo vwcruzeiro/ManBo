@@ -1,4 +1,4 @@
-PROG =	manbo.openmp
+PROG =	../bin/manbo.openmp
 
 SRCS =	manbo.F90 manbo_forces.F90 manbo_input_reading.F90 manbo_log.F90 \
 	manbo_parameters.F90 manbo_periodic_table.F90 manbo_subroutines.F90 \
@@ -15,12 +15,13 @@ F90FLAGS = -fopenmp -DUSE_OPENMPONLY -DUSE_INTEL
 LDFLAGS = -fopenmp
 
 all: $(PROG)
+	rm -f $(OBJS) *.mod
 
 $(PROG): $(OBJS)
 	$(F90) $(LDFLAGS) -o $@ $(OBJS) $(LIBS)
 
 clean:
-	rm -f $(PROG) $(OBJS) *.mod
+	rm -f $(OBJS) *.mod
 
 .SUFFIXES: $(SUFFIXES) .F90
 
