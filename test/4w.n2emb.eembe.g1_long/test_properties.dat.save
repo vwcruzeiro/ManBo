@@ -1,209 +1,220 @@
  -------------------------------------------------------------------------------------
  Step        0 of       10
  -------------------------------------------------------------------------------------
- System Temperature:       0.0000 K
+ System Temperature:     298.0000 K
+ Temperature/Target Temperature:     1.000000
   
- System's total linear momentum:      0.000000      0.000000      0.000000   a.u. ("reduced Plank constant"/bohr)
+ System's total linear momentum:      0.000000     -0.000000      0.000000   a.u. ("reduced Plank constant"/bohr)
  System's total linear momentum modulus:      0.000000   a.u. ("reduced Plank constant"/bohr)
   
- System's total angular momentum:      0.000000      0.000000      0.000000   a.u. ("reduced Plank constant"/bohr)
- System's total angular momentum modulus:      0.000000   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum:      4.244693    -10.529331     -1.509743   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum modulus:     11.452666   a.u. ("reduced Plank constant"/bohr)
   
  One-Body Term Energy (E1):     -299.88536790   hartrees
  Two-Body Term Energy (E2):        0.02602924   hartrees
  Tree-Body Term Energy (E3):       0.00000000   hartrees
  Total energy:    -299.85933866   hartrees
- Nuclei kinetic energy (E_kin):       0.00000000   hartrees
- Total + kinetic energy (E1 + E2 + E3 + E_kin):    -299.85933866   hartrees
- Total energy per molecule:    -47040.012808   kcal/mol
+ Nuclei kinetic energy (E_kin):       0.01698680   hartrees
+ Total + kinetic energy (E1 + E2 + E3 + E_kin):    -299.84235187   hartrees
+ Total energy per molecule:    -47037.348028   kcal/mol
  E2 + E3 per molecule:         4.083300   kcal/mol
  -------------------------------------------------------------------------------------
  Step        1 of       10
  -------------------------------------------------------------------------------------
- System Temperature:       0.6864 K
+ System Temperature:     302.6890 K
+ Temperature/Target Temperature:     1.015735
   
- System's total linear momentum:      0.000452     -0.000977      0.000719   a.u. ("reduced Plank constant"/bohr)
- System's total linear momentum modulus:      0.001295   a.u. ("reduced Plank constant"/bohr)
+ System's total linear momentum:      0.000454     -0.000985      0.000725   a.u. ("reduced Plank constant"/bohr)
+ System's total linear momentum modulus:      0.001304   a.u. ("reduced Plank constant"/bohr)
   
- System's total angular momentum:     -0.000121     -0.001237     -0.003045   a.u. ("reduced Plank constant"/bohr)
- System's total angular momentum modulus:      0.003289   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum:      4.244567    -10.530574     -1.512789   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum modulus:     11.454164   a.u. ("reduced Plank constant"/bohr)
   
- One-Body Term Energy (E1):     -299.88540689   hartrees
- Two-Body Term Energy (E2):        0.02602905   hartrees
+ One-Body Term Energy (E1):     -299.88578124   hartrees
+ Two-Body Term Energy (E2):        0.02617377   hartrees
  Tree-Body Term Energy (E3):       0.00000000   hartrees
- Total energy:    -299.85937784   hartrees
- Nuclei kinetic energy (E_kin):       0.00003913   hartrees
- Total + kinetic energy (E1 + E2 + E3 + E_kin):    -299.85933872   hartrees
- Total energy per molecule:    -47040.012816   kcal/mol
- E2 + E3 per molecule:         4.083271   kcal/mol
+ Total energy:    -299.85960747   hartrees
+ Nuclei kinetic energy (E_kin):       0.01725408   hartrees
+ Total + kinetic energy (E1 + E2 + E3 + E_kin):    -299.84235339   hartrees
+ Total energy per molecule:    -47037.348267   kcal/mol
+ E2 + E3 per molecule:         4.105974   kcal/mol
  -------------------------------------------------------------------------------------
  Step        2 of       10
  -------------------------------------------------------------------------------------
- System Temperature:       2.7375 K
+ System Temperature:     307.1448 K
+ Temperature/Target Temperature:     1.030687
   
- System's total linear momentum:      0.000905     -0.001955      0.001438   a.u. ("reduced Plank constant"/bohr)
- System's total linear momentum modulus:      0.002590   a.u. ("reduced Plank constant"/bohr)
+ System's total linear momentum:      0.000910     -0.001985      0.001462   a.u. ("reduced Plank constant"/bohr)
+ System's total linear momentum modulus:      0.002628   a.u. ("reduced Plank constant"/bohr)
   
- System's total angular momentum:     -0.000242     -0.002474     -0.006088   a.u. ("reduced Plank constant"/bohr)
- System's total angular momentum modulus:      0.006576   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum:      4.243776    -10.530197     -1.515602   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum modulus:     11.453896   a.u. ("reduced Plank constant"/bohr)
   
- One-Body Term Energy (E1):     -299.88552342   hartrees
- Two-Body Term Energy (E2):        0.02602850   hartrees
+ One-Body Term Energy (E1):     -299.88618679   hartrees
+ Two-Body Term Energy (E2):        0.02631843   hartrees
  Tree-Body Term Energy (E3):       0.00000000   hartrees
- Total energy:    -299.85949492   hartrees
- Nuclei kinetic energy (E_kin):       0.00015605   hartrees
- Total + kinetic energy (E1 + E2 + E3 + E_kin):    -299.85933887   hartrees
- Total energy per molecule:    -47040.012841   kcal/mol
- E2 + E3 per molecule:         4.083185   kcal/mol
+ Total energy:    -299.85986836   hartrees
+ Nuclei kinetic energy (E_kin):       0.01750807   hartrees
+ Total + kinetic energy (E1 + E2 + E3 + E_kin):    -299.84236028   hartrees
+ Total energy per molecule:    -47037.349348   kcal/mol
+ E2 + E3 per molecule:         4.128667   kcal/mol
  -------------------------------------------------------------------------------------
  Step        3 of       10
  -------------------------------------------------------------------------------------
- System Temperature:       6.1294 K
+ System Temperature:     311.4240 K
+ Temperature/Target Temperature:     1.045047
   
- System's total linear momentum:      0.001356     -0.002933      0.002157   a.u. ("reduced Plank constant"/bohr)
- System's total linear momentum modulus:      0.003885   a.u. ("reduced Plank constant"/bohr)
+ System's total linear momentum:      0.001369     -0.002999      0.002211   a.u. ("reduced Plank constant"/bohr)
+ System's total linear momentum modulus:      0.003970   a.u. ("reduced Plank constant"/bohr)
   
- System's total angular momentum:     -0.000363     -0.003712     -0.009129   a.u. ("reduced Plank constant"/bohr)
- System's total angular momentum modulus:      0.009861   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum:      4.242370    -10.528327     -1.518196   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum modulus:     11.451999   a.u. ("reduced Plank constant"/bohr)
   
- One-Body Term Energy (E1):     -299.88571617   hartrees
- Two-Body Term Energy (E2):        0.02602764   hartrees
+ One-Body Term Energy (E1):     -299.88658709   hartrees
+ Two-Body Term Energy (E2):        0.02646281   hartrees
  Tree-Body Term Energy (E3):       0.00000000   hartrees
- Total energy:    -299.85968853   hartrees
- Nuclei kinetic energy (E_kin):       0.00034939   hartrees
- Total + kinetic energy (E1 + E2 + E3 + E_kin):    -299.85933914   hartrees
- Total energy per molecule:    -47040.012882   kcal/mol
- E2 + E3 per molecule:         4.083049   kcal/mol
+ Total energy:    -299.86012428   hartrees
+ Nuclei kinetic energy (E_kin):       0.01775200   hartrees
+ Total + kinetic energy (E1 + E2 + E3 + E_kin):    -299.84237228   hartrees
+ Total energy per molecule:    -47037.351231   kcal/mol
+ E2 + E3 per molecule:         4.151315   kcal/mol
  -------------------------------------------------------------------------------------
  Step        4 of       10
  -------------------------------------------------------------------------------------
- System Temperature:      10.8225 K
+ System Temperature:     315.5912 K
+ Temperature/Target Temperature:     1.059031
   
- System's total linear momentum:      0.001807     -0.003911      0.002876   a.u. ("reduced Plank constant"/bohr)
- System's total linear momentum modulus:      0.005180   a.u. ("reduced Plank constant"/bohr)
+ System's total linear momentum:      0.001830     -0.004030      0.002972   a.u. ("reduced Plank constant"/bohr)
+ System's total linear momentum modulus:      0.005331   a.u. ("reduced Plank constant"/bohr)
   
- System's total angular momentum:     -0.000483     -0.004949     -0.012165   a.u. ("reduced Plank constant"/bohr)
- System's total angular momentum modulus:      0.013142   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum:      4.240390    -10.525065     -1.520586   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum modulus:     11.448584   a.u. ("reduced Plank constant"/bohr)
   
- One-Body Term Energy (E1):     -299.88598295   hartrees
- Two-Body Term Energy (E2):        0.02602653   hartrees
+ One-Body Term Energy (E1):     -299.88698528   hartrees
+ Two-Body Term Energy (E2):        0.02660654   hartrees
  Tree-Body Term Energy (E3):       0.00000000   hartrees
- Total energy:    -299.85995641   hartrees
- Nuclei kinetic energy (E_kin):       0.00061691   hartrees
- Total + kinetic energy (E1 + E2 + E3 + E_kin):    -299.85933950   hartrees
- Total energy per molecule:    -47040.012939   kcal/mol
- E2 + E3 per molecule:         4.082876   kcal/mol
+ Total energy:    -299.86037874   hartrees
+ Nuclei kinetic energy (E_kin):       0.01798954   hartrees
+ Total + kinetic energy (E1 + E2 + E3 + E_kin):    -299.84238920   hartrees
+ Total energy per molecule:    -47037.353884   kcal/mol
+ E2 + E3 per molecule:         4.173863   kcal/mol
  -------------------------------------------------------------------------------------
  Step        5 of       10
  -------------------------------------------------------------------------------------
- System Temperature:      16.7623 K
+ System Temperature:     319.7179 K
+ Temperature/Target Temperature:     1.072879
   
- System's total linear momentum:      0.002257     -0.004890      0.003595   a.u. ("reduced Plank constant"/bohr)
- System's total linear momentum modulus:      0.006476   a.u. ("reduced Plank constant"/bohr)
+ System's total linear momentum:      0.002292     -0.005075      0.003744   a.u. ("reduced Plank constant"/bohr)
+ System's total linear momentum modulus:      0.006710   a.u. ("reduced Plank constant"/bohr)
   
- System's total angular momentum:     -0.000602     -0.006186     -0.015196   a.u. ("reduced Plank constant"/bohr)
- System's total angular momentum modulus:      0.016418   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum:      4.237868    -10.520486     -1.522778   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum modulus:     11.443732   a.u. ("reduced Plank constant"/bohr)
   
- One-Body Term Energy (E1):     -299.88632076   hartrees
- Two-Body Term Energy (E2):        0.02602529   hartrees
+ One-Body Term Energy (E1):     -299.88738498   hartrees
+ Two-Body Term Energy (E2):        0.02674929   hartrees
  Tree-Body Term Energy (E3):       0.00000000   hartrees
- Total energy:    -299.86029546   hartrees
- Nuclei kinetic energy (E_kin):       0.00095550   hartrees
- Total + kinetic energy (E1 + E2 + E3 + E_kin):    -299.85933996   hartrees
- Total energy per molecule:    -47040.013012   kcal/mol
- E2 + E3 per molecule:         4.082682   kcal/mol
+ Total energy:    -299.86063568   hartrees
+ Nuclei kinetic energy (E_kin):       0.01822478   hartrees
+ Total + kinetic energy (E1 + E2 + E3 + E_kin):    -299.84241091   hartrees
+ Total energy per molecule:    -47037.357290   kcal/mol
+ E2 + E3 per molecule:         4.196258   kcal/mol
  -------------------------------------------------------------------------------------
  Step        6 of       10
  -------------------------------------------------------------------------------------
- System Temperature:      23.8801 K
+ System Temperature:     323.8801 K
+ Temperature/Target Temperature:     1.086846
   
- System's total linear momentum:      0.002706     -0.005870      0.004314   a.u. ("reduced Plank constant"/bohr)
- System's total linear momentum modulus:      0.007771   a.u. ("reduced Plank constant"/bohr)
+ System's total linear momentum:      0.002756     -0.006136      0.004529   a.u. ("reduced Plank constant"/bohr)
+ System's total linear momentum modulus:      0.008109   a.u. ("reduced Plank constant"/bohr)
   
- System's total angular momentum:     -0.000720     -0.007423     -0.018220   a.u. ("reduced Plank constant"/bohr)
- System's total angular momentum modulus:      0.019687   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum:      4.234822    -10.514639     -1.524779   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum modulus:     11.437495   a.u. ("reduced Plank constant"/bohr)
   
- One-Body Term Energy (E1):     -299.88672581   hartrees
- Two-Body Term Energy (E2):        0.02602405   hartrees
+ One-Body Term Energy (E1):     -299.88779019   hartrees
+ Two-Body Term Energy (E2):        0.02689079   hartrees
  Tree-Body Term Energy (E3):       0.00000000   hartrees
- Total energy:    -299.86070176   hartrees
- Nuclei kinetic energy (E_kin):       0.00136123   hartrees
- Total + kinetic energy (E1 + E2 + E3 + E_kin):    -299.85934053   hartrees
- Total energy per molecule:    -47040.013100   kcal/mol
- E2 + E3 per molecule:         4.082487   kcal/mol
+ Total energy:    -299.86089940   hartrees
+ Nuclei kinetic energy (E_kin):       0.01846203   hartrees
+ Total + kinetic energy (E1 + E2 + E3 + E_kin):    -299.84243737   hartrees
+ Total energy per molecule:    -47037.361441   kcal/mol
+ E2 + E3 per molecule:         4.218455   kcal/mol
  -------------------------------------------------------------------------------------
  Step        7 of       10
  -------------------------------------------------------------------------------------
- System Temperature:      32.0940 K
+ System Temperature:     328.1567 K
+ Temperature/Target Temperature:     1.101197
   
- System's total linear momentum:      0.003153     -0.006852      0.005033   a.u. ("reduced Plank constant"/bohr)
- System's total linear momentum modulus:      0.009067   a.u. ("reduced Plank constant"/bohr)
+ System's total linear momentum:      0.003220     -0.007212      0.005324   a.u. ("reduced Plank constant"/bohr)
+ System's total linear momentum modulus:      0.009525   a.u. ("reduced Plank constant"/bohr)
   
- System's total angular momentum:     -0.000836     -0.008661     -0.021236   a.u. ("reduced Plank constant"/bohr)
- System's total angular momentum modulus:      0.022949   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum:      4.231264    -10.507548     -1.526588   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum modulus:     11.429900   a.u. ("reduced Plank constant"/bohr)
   
- One-Body Term Energy (E1):     -299.88719361   hartrees
- Two-Body Term Energy (E2):        0.02602298   hartrees
+ One-Body Term Energy (E1):     -299.88820521   hartrees
+ Two-Body Term Energy (E2):        0.02703077   hartrees
  Tree-Body Term Energy (E3):       0.00000000   hartrees
- Total energy:    -299.86117063   hartrees
- Nuclei kinetic energy (E_kin):       0.00182944   hartrees
- Total + kinetic energy (E1 + E2 + E3 + E_kin):    -299.85934119   hartrees
- Total energy per molecule:    -47040.013204   kcal/mol
- E2 + E3 per molecule:         4.082318   kcal/mol
+ Total energy:    -299.86117444   hartrees
+ Nuclei kinetic energy (E_kin):       0.01870581   hartrees
+ Total + kinetic energy (E1 + E2 + E3 + E_kin):    -299.84246864   hartrees
+ Total energy per molecule:    -47037.366346   kcal/mol
+ E2 + E3 per molecule:         4.240414   kcal/mol
  -------------------------------------------------------------------------------------
  Step        8 of       10
  -------------------------------------------------------------------------------------
- System Temperature:      41.3106 K
+ System Temperature:     332.6273 K
+ Temperature/Target Temperature:     1.116199
   
- System's total linear momentum:      0.003599     -0.007834      0.005751   a.u. ("reduced Plank constant"/bohr)
- System's total linear momentum modulus:      0.010364   a.u. ("reduced Plank constant"/bohr)
+ System's total linear momentum:      0.003686     -0.008304      0.006131   a.u. ("reduced Plank constant"/bohr)
+ System's total linear momentum modulus:      0.010960   a.u. ("reduced Plank constant"/bohr)
   
- System's total angular momentum:     -0.000951     -0.009899     -0.024243   a.u. ("reduced Plank constant"/bohr)
- System's total angular momentum modulus:      0.026203   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum:      4.227194    -10.499214     -1.528205   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum modulus:     11.420949   a.u. ("reduced Plank constant"/bohr)
   
- One-Body Term Energy (E1):     -299.88771901   hartrees
- Two-Body Term Energy (E2):        0.02602225   hartrees
+ One-Body Term Energy (E1):     -299.88863449   hartrees
+ Two-Body Term Energy (E2):        0.02716900   hartrees
  Tree-Body Term Energy (E3):       0.00000000   hartrees
- Total energy:    -299.86169676   hartrees
- Nuclei kinetic energy (E_kin):       0.00235481   hartrees
- Total + kinetic energy (E1 + E2 + E3 + E_kin):    -299.85934195   hartrees
- Total energy per molecule:    -47040.013323   kcal/mol
- E2 + E3 per molecule:         4.082204   kcal/mol
+ Total energy:    -299.86146549   hartrees
+ Nuclei kinetic energy (E_kin):       0.01896064   hartrees
+ Total + kinetic energy (E1 + E2 + E3 + E_kin):    -299.84250485   hartrees
+ Total energy per molecule:    -47037.372026   kcal/mol
+ E2 + E3 per molecule:         4.262098   kcal/mol
  -------------------------------------------------------------------------------------
  Step        9 of       10
  -------------------------------------------------------------------------------------
- System Temperature:      51.4258 K
+ System Temperature:     337.3703 K
+ Temperature/Target Temperature:     1.132115
   
- System's total linear momentum:      0.004043     -0.008818      0.006470   a.u. ("reduced Plank constant"/bohr)
- System's total linear momentum modulus:      0.011661   a.u. ("reduced Plank constant"/bohr)
+ System's total linear momentum:      0.004151     -0.009410      0.006949   a.u. ("reduced Plank constant"/bohr)
+ System's total linear momentum modulus:      0.012413   a.u. ("reduced Plank constant"/bohr)
   
- System's total angular momentum:     -0.001065     -0.011137     -0.027240   a.u. ("reduced Plank constant"/bohr)
- System's total angular momentum modulus:      0.029447   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum:      4.222604    -10.489618     -1.529624   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum modulus:     11.410618   a.u. ("reduced Plank constant"/bohr)
   
- One-Body Term Energy (E1):     -299.88829630   hartrees
- Two-Body Term Energy (E2):        0.02602210   hartrees
+ One-Body Term Energy (E1):     -299.88908253   hartrees
+ Two-Body Term Energy (E2):        0.02730529   hartrees
  Tree-Body Term Energy (E3):       0.00000000   hartrees
- Total energy:    -299.86227420   hartrees
- Nuclei kinetic energy (E_kin):       0.00293141   hartrees
- Total + kinetic energy (E1 + E2 + E3 + E_kin):    -299.85934279   hartrees
- Total energy per molecule:    -47040.013455   kcal/mol
- E2 + E3 per molecule:         4.082181   kcal/mol
+ Total energy:    -299.86177724   hartrees
+ Nuclei kinetic energy (E_kin):       0.01923101   hartrees
+ Total + kinetic energy (E1 + E2 + E3 + E_kin):    -299.84254623   hartrees
+ Total energy per molecule:    -47037.378519   kcal/mol
+ E2 + E3 per molecule:         4.283479   kcal/mol
  -------------------------------------------------------------------------------------
  Step       10 of       10
  -------------------------------------------------------------------------------------
- System Temperature:      62.3270 K
+ System Temperature:     342.4603 K
+ Temperature/Target Temperature:     1.149196
   
- System's total linear momentum:      0.004485     -0.009804      0.007189   a.u. ("reduced Plank constant"/bohr)
- System's total linear momentum modulus:      0.012958   a.u. ("reduced Plank constant"/bohr)
+ System's total linear momentum:      0.004616     -0.010532      0.007778   a.u. ("reduced Plank constant"/bohr)
+ System's total linear momentum modulus:      0.013883   a.u. ("reduced Plank constant"/bohr)
   
- System's total angular momentum:     -0.001176     -0.012375     -0.030225   a.u. ("reduced Plank constant"/bohr)
- System's total angular momentum modulus:      0.032681   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum:      4.217480    -10.478722     -1.530838   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum modulus:     11.398869   a.u. ("reduced Plank constant"/bohr)
   
- One-Body Term Energy (E1):     -299.88891930   hartrees
- Two-Body Term Energy (E2):        0.02602277   hartrees
+ One-Body Term Energy (E1):     -299.88955375   hartrees
+ Two-Body Term Energy (E2):        0.02743948   hartrees
  Tree-Body Term Energy (E3):       0.00000000   hartrees
- Total energy:    -299.86289653   hartrees
- Nuclei kinetic energy (E_kin):       0.00355281   hartrees
- Total + kinetic energy (E1 + E2 + E3 + E_kin):    -299.85934372   hartrees
- Total energy per molecule:    -47040.013601   kcal/mol
- E2 + E3 per molecule:         4.082286   kcal/mol
+ Total energy:    -299.86211427   hartrees
+ Nuclei kinetic energy (E_kin):       0.01952115   hartrees
+ Total + kinetic energy (E1 + E2 + E3 + E_kin):    -299.84259312   hartrees
+ Total energy per molecule:    -47037.385873   kcal/mol
+ E2 + E3 per molecule:         4.304530   kcal/mol

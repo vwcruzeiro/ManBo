@@ -16,7 +16,7 @@ Input variables:
 # n_qm_procs is the number of processors to be used by each quantum chemistry calculations
     n_qm_procs=        1
 # use_rand_vel determines if we are going to use initial random velocities. It can be set as TRUE or FALSE
-    use_rand_vel=      FALSE
+    use_rand_vel=      TRUE
 # rand_vel_temp is the temperature of the initial random velocities, given in Kelvin. This variable must be set in case of use_rand_vel be TRUE
     rand_vel_temp=     298.0
 # rand_vel_seed is a integer number used as a seed for the random numbers in the initial random velocities generation
@@ -46,7 +46,7 @@ Input variables:
 # bs_extrapolation determines if we are going to extrapolate the results to infinty basis set (this means cc-pVDZ and cc-pVTZ will be performed). This option can only be used with MP2
     bs_extrapolation=  FALSE
 # apply_therm determines if we are going to use the Berendsen thermostat. It can be set as TRUE or FALSE
-    apply_therm=       FALSE
+    apply_therm=       TRUE
 # target_therm_temp is the target temperature of the Berendsen thermostart, given in Kelvin
     target_therm_temp= 298.0
 # t_therm is the parameter of the Berendsen thermostat who determines how close we will bring the system's temperature to the target_therm_temp in each step, given in femtoseconds. If t_therm is set equal to delta_t, then the thermostat will bring the system's temperature exactly to target_temp at the end of each step
