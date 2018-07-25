@@ -14,7 +14,7 @@ F90 = ifort
 F90FLAGS = -DUSE_INTEL
 LDFLAGS = -static
 
-all: $(PROG)
+all, install: $(PROG)
 	rm -f $(OBJS) *.mod
 
 $(PROG): $(OBJS)

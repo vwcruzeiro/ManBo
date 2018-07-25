@@ -14,7 +14,7 @@ F90 = ifort
 F90FLAGS = -fopenmp -DUSE_OPENMPONLY -DUSE_INTEL
 LDFLAGS = -fopenmp
 
-all: $(PROG)
+all, install: $(PROG)
 	rm -f $(OBJS) *.mod
 
 $(PROG): $(OBJS)

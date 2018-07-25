@@ -14,7 +14,7 @@ F90 = gfortran
 F90FLAGS =
 LDFLAGS = -static
 
-all: $(PROG)
+all, install: $(PROG)
 	rm -f $(OBJS) *.mod
 
 $(PROG): $(OBJS)

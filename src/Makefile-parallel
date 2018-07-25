@@ -14,7 +14,7 @@ F90 = mpif90
 F90FLAGS = -fopenmp -DUSE_PARALLEL
 LDFLAGS = -fopenmp
 
-all: $(PROG)
+all, install: $(PROG)
 	rm -f $(OBJS) *.mod
 
 $(PROG): $(OBJS)
