@@ -4,7 +4,7 @@
  ==============================================================================
       Created by Vinicius Wilian Dias Cruzeiro and Herbert de Castro Georg     
  
-| ManBo has started at 18: 4:20 of July 24, 2018     
+| ManBo has started at 15: 3:40 of July 25, 2018     
  
 
 Quantum Chemistry Program (QCP) to be used: g09
@@ -72,6 +72,9 @@ Dimensions of the box:
   x: 4.326275 A
   y: 3.214250 A
   z: 3.046833 A
+Volume: 42.368436 A^3
+Total mass: 72.0592 a.u.
+Density: 2.8242 g/cm^3
 
 Charge and Multiplicity of the Molecules:
 ====================================
@@ -116,9 +119,9 @@ Initial velocities of Atoms, obtained from the input file (given in Angstroms/pi
    Full HF Energy (no EE-MBE):                                   -299.85932883 Hartrees
    MP2 Energy with EE-MBE on the correlation only:    -300.01481444 Hartrees
 
-|  This step ended at 18: 4:46 of July 24, 2018     
-|  Average time per step:    0 days,  0 hours,  0 minutes, and 25.243 seconds.
-|  The execution is estimated to end in:    0 days,  0 hours,  0 minutes, and 25.243 seconds.
+|  This step ended at 15: 5:51 of July 25, 2018     
+|  Average time per step:    0 days,  0 hours,  2 minutes, and 10.499 seconds.
+|  The execution is estimated to end in:    0 days,  0 hours,  2 minutes, and 10.499 seconds.
 --------------------------------------------------------------------
 
 ====================================================================
@@ -136,11 +139,11 @@ Initial velocities of Atoms, obtained from the input file (given in Angstroms/pi
    Full HF Energy (no EE-MBE):                                   -299.85935526 Hartrees
    MP2 Energy with EE-MBE on the correlation only:    -300.01485140 Hartrees
 
-|  This step ended at 18: 5:11 of July 24, 2018     
+|  This step ended at 15: 8: 0 of July 25, 2018     
 --------------------------------------------------------------------
 
  
-| The execution ended at 18: 5:11 of July 24, 2018     
-| The execution lasted    0 days,  0 hours,  0 minutes, and 50.517 seconds.
+| The execution ended at 15: 8: 0 of July 25, 2018     
+| The execution lasted    0 days,  0 hours,  4 minutes, and 19.955 seconds.
 | ManBo was successfully executed.
  

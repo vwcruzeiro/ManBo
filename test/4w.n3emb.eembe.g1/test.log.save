@@ -4,7 +4,7 @@
  ==============================================================================
       Created by Vinicius Wilian Dias Cruzeiro and Herbert de Castro Georg     
  
-| ManBo has started at  9:52:27 of July 25, 2018     
+| ManBo has started at 15:19:51 of July 25, 2018     
  
 
 Quantum Chemistry Program (QCP) to be used: g09
@@ -72,6 +72,9 @@ Dimensions of the box:
   x: 4.326275 A
   y: 3.214250 A
   z: 3.046833 A
+Volume: 42.368436 A^3
+Total mass: 72.0592 a.u.
+Density: 2.8242 g/cm^3
 
 Charge and Multiplicity of the Molecules:
 ====================================
@@ -112,9 +115,9 @@ Initial velocities of Atoms, obtained from the input file (given in Angstroms/pi
           6 dimer(s)
           4 trimer(s)
 
-|  This step ended at  9:52:44 of July 25, 2018     
-|  Average time per step:    0 days,  0 hours,  0 minutes, and 16.695 seconds.
-|  The execution is estimated to end in:    0 days,  0 hours,  0 minutes, and 16.695 seconds.
+|  This step ended at 15:20:36 of July 25, 2018     
+|  Average time per step:    0 days,  0 hours,  0 minutes, and 44.237 seconds.
+|  The execution is estimated to end in:    0 days,  0 hours,  0 minutes, and 44.237 seconds.
 --------------------------------------------------------------------
 
 ====================================================================
@@ -128,11 +131,11 @@ Initial velocities of Atoms, obtained from the input file (given in Angstroms/pi
           6 dimer(s)
           4 trimer(s)
 
-|  This step ended at  9:52:57 of July 25, 2018     
+|  This step ended at 15:21:21 of July 25, 2018     
 --------------------------------------------------------------------
 
  
-| The execution ended at  9:52:57 of July 25, 2018     
-| The execution lasted    0 days,  0 hours,  0 minutes, and 30.085 seconds.
+| The execution ended at 15:21:21 of July 25, 2018     
+| The execution lasted    0 days,  0 hours,  1 minutes, and 29.702 seconds.
 | ManBo was successfully executed.
  

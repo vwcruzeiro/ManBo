@@ -4,7 +4,7 @@
  ==============================================================================
       Created by Vinicius Wilian Dias Cruzeiro and Herbert de Castro Georg     
  
-| ManBo has started at  9:47:49 of July 25, 2018     
+| ManBo has started at 15:10:47 of July 25, 2018     
  
 
 Quantum Chemistry Program (QCP) to be used: g09
@@ -72,6 +72,9 @@ Dimensions of the box:
   x: 4.326275 A
   y: 3.214250 A
   z: 3.046833 A
+Volume: 42.368436 A^3
+Total mass: 72.0592 a.u.
+Density: 2.8242 g/cm^3
 
 Charge and Multiplicity of the Molecules:
 ====================================
@@ -112,9 +115,9 @@ Initial velocities of Atoms, obtained from the input file (given in Angstroms/pi
           6 dimer(s)
           0 trimer(s)
 
-|  This step ended at  9:47:58 of July 25, 2018     
-|  Average time per step:    0 days,  0 hours,  0 minutes, and  9.252 seconds.
-|  The execution is estimated to end in:    0 days,  0 hours,  1 minutes, and 32.520 seconds.
+|  This step ended at 15:11:29 of July 25, 2018     
+|  Average time per step:    0 days,  0 hours,  0 minutes, and 42.489 seconds.
+|  The execution is estimated to end in:    0 days,  0 hours,  7 minutes, and  4.890 seconds.
 --------------------------------------------------------------------
 
 ====================================================================
@@ -128,9 +131,9 @@ Initial velocities of Atoms, obtained from the input file (given in Angstroms/pi
           6 dimer(s)
           0 trimer(s)
 
-|  This step ended at  9:48: 7 of July 25, 2018     
-|  Average time per step:    0 days,  0 hours,  0 minutes, and  9.301 seconds.
-|  The execution is estimated to end in     0 days,  0 hours,  1 minutes, and 23.709 seconds.
+|  This step ended at 15:12:12 of July 25, 2018     
+|  Average time per step:    0 days,  0 hours,  0 minutes, and 42.650 seconds.
+|  The execution is estimated to end in     0 days,  0 hours,  6 minutes, and 23.850 seconds.
 --------------------------------------------------------------------
 
 ====================================================================
@@ -144,9 +147,9 @@ Initial velocities of Atoms, obtained from the input file (given in Angstroms/pi
           6 dimer(s)
           0 trimer(s)
 
-|  This step ended at  9:48:16 of July 25, 2018     
-|  Average time per step:    0 days,  0 hours,  0 minutes, and  9.258 seconds.
-|  The execution is estimated to end in     0 days,  0 hours,  1 minutes, and 14.064 seconds.
+|  This step ended at 15:12:59 of July 25, 2018     
+|  Average time per step:    0 days,  0 hours,  0 minutes, and 43.973 seconds.
+|  The execution is estimated to end in     0 days,  0 hours,  5 minutes, and 51.784 seconds.
 --------------------------------------------------------------------
 
 ====================================================================
@@ -160,9 +163,9 @@ Initial velocities of Atoms, obtained from the input file (given in Angstroms/pi
           6 dimer(s)
           0 trimer(s)
 
-|  This step ended at  9:48:25 of July 25, 2018     
-|  Average time per step:    0 days,  0 hours,  0 minutes, and  9.210 seconds.
-|  The execution is estimated to end in     0 days,  0 hours,  1 minutes, and  4.470 seconds.
+|  This step ended at 15:13:45 of July 25, 2018     
+|  Average time per step:    0 days,  0 hours,  0 minutes, and 44.658 seconds.
+|  The execution is estimated to end in     0 days,  0 hours,  5 minutes, and 12.606 seconds.
 --------------------------------------------------------------------
 
 ====================================================================
@@ -176,9 +179,9 @@ Initial velocities of Atoms, obtained from the input file (given in Angstroms/pi
           6 dimer(s)
           0 trimer(s)
 
-|  This step ended at  9:48:35 of July 25, 2018     
-|  Average time per step:    0 days,  0 hours,  0 minutes, and  9.232 seconds.
-|  The execution is estimated to end in     0 days,  0 hours,  0 minutes, and 55.392 seconds.
+|  This step ended at 15:14:29 of July 25, 2018     
+|  Average time per step:    0 days,  0 hours,  0 minutes, and 44.408 seconds.
+|  The execution is estimated to end in     0 days,  0 hours,  4 minutes, and 26.448 seconds.
 --------------------------------------------------------------------
 
 ====================================================================
@@ -192,9 +195,9 @@ Initial velocities of Atoms, obtained from the input file (given in Angstroms/pi
           6 dimer(s)
           0 trimer(s)
 
-|  This step ended at  9:48:44 of July 25, 2018     
-|  Average time per step:    0 days,  0 hours,  0 minutes, and  9.234 seconds.
-|  The execution is estimated to end in     0 days,  0 hours,  0 minutes, and 46.170 seconds.
+|  This step ended at 15:15:12 of July 25, 2018     
+|  Average time per step:    0 days,  0 hours,  0 minutes, and 44.301 seconds.
+|  The execution is estimated to end in     0 days,  0 hours,  3 minutes, and 41.505 seconds.
 --------------------------------------------------------------------
 
 ====================================================================
@@ -208,9 +211,9 @@ Initial velocities of Atoms, obtained from the input file (given in Angstroms/pi
           6 dimer(s)
           0 trimer(s)
 
-|  This step ended at  9:48:53 of July 25, 2018     
-|  Average time per step:    0 days,  0 hours,  0 minutes, and  9.244 seconds.
-|  The execution is estimated to end in     0 days,  0 hours,  0 minutes, and 36.976 seconds.
+|  This step ended at 15:16: 4 of July 25, 2018     
+|  Average time per step:    0 days,  0 hours,  0 minutes, and 45.307 seconds.
+|  The execution is estimated to end in     0 days,  0 hours,  3 minutes, and  1.228 seconds.
 --------------------------------------------------------------------
 
 ====================================================================
@@ -224,9 +227,9 @@ Initial velocities of Atoms, obtained from the input file (given in Angstroms/pi
           6 dimer(s)
           0 trimer(s)
 
-|  This step ended at  9:49: 3 of July 25, 2018     
-|  Average time per step:    0 days,  0 hours,  0 minutes, and  9.237 seconds.
-|  The execution is estimated to end in     0 days,  0 hours,  0 minutes, and 27.711 seconds.
+|  This step ended at 15:16:52 of July 25, 2018     
+|  Average time per step:    0 days,  0 hours,  0 minutes, and 45.671 seconds.
+|  The execution is estimated to end in     0 days,  0 hours,  2 minutes, and 17.013 seconds.
 --------------------------------------------------------------------
 
 ====================================================================
@@ -240,9 +243,9 @@ Initial velocities of Atoms, obtained from the input file (given in Angstroms/pi
           6 dimer(s)
           0 trimer(s)
 
-|  This step ended at  9:49:12 of July 25, 2018     
-|  Average time per step:    0 days,  0 hours,  0 minutes, and  9.228 seconds.
-|  The execution is estimated to end in     0 days,  0 hours,  0 minutes, and 18.456 seconds.
+|  This step ended at 15:17:32 of July 25, 2018     
+|  Average time per step:    0 days,  0 hours,  0 minutes, and 45.027 seconds.
+|  The execution is estimated to end in     0 days,  0 hours,  1 minutes, and 30.054 seconds.
 --------------------------------------------------------------------
 
 ====================================================================
@@ -256,9 +259,9 @@ Initial velocities of Atoms, obtained from the input file (given in Angstroms/pi
           6 dimer(s)
           0 trimer(s)
 
-|  This step ended at  9:49:21 of July 25, 2018     
-|  Average time per step:    0 days,  0 hours,  0 minutes, and  9.204 seconds.
-|  The execution is estimated to end in     0 days,  0 hours,  0 minutes, and  9.204 seconds.
+|  This step ended at 15:18:23 of July 25, 2018     
+|  Average time per step:    0 days,  0 hours,  0 minutes, and 45.633 seconds.
+|  The execution is estimated to end in     0 days,  0 hours,  0 minutes, and 45.633 seconds.
 --------------------------------------------------------------------
 
 ====================================================================
@@ -272,11 +275,11 @@ Initial velocities of Atoms, obtained from the input file (given in Angstroms/pi
           6 dimer(s)
           0 trimer(s)
 
-|  This step ended at  9:49:30 of July 25, 2018     
+|  This step ended at 15:19: 6 of July 25, 2018     
 --------------------------------------------------------------------
 
  
-| The execution ended at  9:49:30 of July 25, 2018     
-| The execution lasted    0 days,  0 hours,  1 minutes, and 41.827 seconds.
+| The execution ended at 15:19: 6 of July 25, 2018     
+| The execution lasted    0 days,  0 hours,  8 minutes, and 19.694 seconds.
 | ManBo was successfully executed.
  
