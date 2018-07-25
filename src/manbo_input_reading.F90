@@ -27,7 +27,7 @@ MODULE manbo_input_reading
     CHARACTER(LEN=200) :: line, text
     INTEGER :: i, j, k, n
     INTEGER :: ierr
-    DOUBLE PRECISION :: L, kr
+    DOUBLE PRECISION :: L, kr, val
     INTEGER :: allocate_status, error
     
     IF (mpi_id == 0) THEN
@@ -424,6 +424,16 @@ MODULE manbo_input_reading
       CALL log_write("  y: " // TRIM(ADJUSTL(line)) // " A")
       WRITE(line,'(f10.6)') box_dim(3)
       CALL log_write("  z: " // TRIM(ADJUSTL(line)) // " A")
+      WRITE(line,'(f10.6)') box_dim(1)*box_dim(2)*box_dim(3)
+      CALL log_write("Volume: " // TRIM(ADJUSTL(line)) // " A^3")
+      val = 0.0
+        DO i=1,n_atoms
+          val = val + data_manbo(i)%mass
+        END DO
+      WRITE(line,'(f8.4)') val
+      CALL log_write("Total mass: " // TRIM(ADJUSTL(line)) // " a.u.")
+      WRITE(line,'(f8.4)') val*1.66053886/(box_dim(1)*box_dim(2)*box_dim(3))
+      CALL log_write("Density: " // TRIM(ADJUSTL(line)) // " g/cm^3")
       IF(cutoff>(MINVAL(box_dim)/2) .AND. apply_pbc) THEN
         CALL log_write("")
         CALL log_write("  WARNING: Entered value for the Cutoff Radius is bigger than half of the smaller side of the box.")
