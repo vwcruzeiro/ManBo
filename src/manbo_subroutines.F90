@@ -559,9 +559,9 @@ MODULE manbo_subroutines
     temperature = temperature/(3*const_boltzmann)
 
     CALL log_write("")
-    WRITE(line,*) temperature
+    WRITE(line,'(f8.4)') temperature
     CALL log_write("  System's Temperature: " // TRIM(ADJUSTL(line)) // " K")
-    WRITE(line,*) (temperature/target_therm_temp)
+    WRITE(line,'(f8.4)') (temperature/target_therm_temp)
     CALL log_write("  Temperature/Target Temperature: " // TRIM(ADJUSTL(line)))
     ! Here we wrote some informations in ManBo log
 
