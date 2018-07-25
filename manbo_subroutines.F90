@@ -723,7 +723,7 @@ MODULE manbo_subroutines
         distp(pair(1),pair(2)) = dist_max + 1.0
         n = n + 1
         IF(n == maxn+1) THEN
-          PRINT *, "Error on grouping monomers. ManBo can not run."
+          PRINT *, "Error on grouping monomers. ManBo cannot run."
           CALL log_write("ERROR: Error on grouping monomers on manbo_subroutines.F90")
           CALL log_close(1)
           STOP
@@ -774,7 +774,7 @@ MODULE manbo_subroutines
         distt(trimer(1),trimer(2),trimer(3)) = dist_max + 1.0
         n = n + 1
         IF(n == maxn+1) THEN
-          PRINT *, "Error on grouping monomers. ManBo can not run."
+          PRINT *, "Error on grouping monomers. ManBo cannot run."
           CALL log_write("ERROR: Error on grouping monomers on manbo_subroutines.F90")
           CALL log_close(1)
           STOP

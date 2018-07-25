@@ -156,7 +156,7 @@ MODULE manbo_input_reading
       ! Here we create the log file of ManBo
       
       IF(n_mols==0 .OR. ABS(cutoff)<1E-5 .OR. (apply_therm .AND. ABS(target_therm_temp)<1E-5)) THEN
-        PRINT *, "Compulsory parameters are missing or are equal to zero in the input file. ManBo can not run."
+        PRINT *, "Compulsory parameters are missing or are equal to zero in the input file. ManBo cannot run."
         CALL log_write("ERROR: Compulsory parameters are missing or are equal to zero in the input file.")
         CALL log_close(1)
         STOP
@@ -221,7 +221,7 @@ MODULE manbo_input_reading
     END IF
     ! Here we allocate some variables
     IF(allocate_status/=0) THEN
-      PRINT *, "No memory enough to allocate. ManBo can not run."
+      PRINT *, "No memory enough to allocate. ManBo cannot run."
       CALL log_write("ERROR: Error on allocate data_manbo, data_manbo_out or mc")
       CALL log_write("       on manbo_input_reading.F90")
       CALL log_close(1)
@@ -280,7 +280,7 @@ MODULE manbo_input_reading
       WRITE(line,*) expan_order
       CALL log_write("Order in which the MBE is going to be truncated: " // TRIM(ADJUSTL(line)))
         IF (expan_order>3) THEN
-          PRINT *, "The expan_order value can not be higher than 3. ManBo can not run."
+          PRINT *, "The expan_order value cannot be higher than 3. ManBo cannot run."
           CALL log_write("ERROR: expan_order is higher than 3")
           CALL log_close(1)
           STOP
@@ -289,7 +289,7 @@ MODULE manbo_input_reading
         WRITE(line,*) group_monomers
         CALL log_write("Number of molecules to be grouped as a single monomer: " // TRIM(ADJUSTL(line)))
           IF (group_monomers>3) THEN
-            PRINT *, "The group_monomers value can not be higher than 3. ManBo can not run."
+            PRINT *, "The group_monomers value cannot be higher than 3. ManBo cannot run."
             CALL log_write("ERROR: group_monomers is higher than 3")
             CALL log_close(1)
             STOP

@@ -50,7 +50,7 @@ MODULE manbo_forces
 
     DEALLOCATE(data_manbo_out, stat=allocate_status)
       IF(allocate_status/=0) THEN
-        PRINT *, "No memory enough to deallocate. ManBo can not run."
+        PRINT *, "No memory enough to deallocate. ManBo cannot run."
         CALL log_write("ERROR: Error on deallocate data_manbo_out on manbo_forces.F90")
         CALL log_close(1)
         STOP
@@ -58,7 +58,7 @@ MODULE manbo_forces
       
     ALLOCATE(data_manbo_out(x), stat=allocate_status)
       IF(allocate_status/=0) THEN
-        PRINT *, "No memory enough to allocate. ManBo can not run."
+        PRINT *, "No memory enough to allocate. ManBo cannot run."
         CALL log_write("ERROR: Error on allocate data_manbo_out on manbo_forces.F90")
         CALL log_close(1)
         STOP
@@ -69,7 +69,7 @@ MODULE manbo_forces
       IF (.not. ALLOCATED(orig_mols_out)) THEN
         ALLOCATE(orig_mols_out(NINT(float(x*n_mols)/float(n_atoms))), stat=allocate_status)
           IF(allocate_status/=0) THEN
-            PRINT *, "No memory enough to allocate. ManBo can not run."
+            PRINT *, "No memory enough to allocate. ManBo cannot run."
             CALL log_write("ERROR: Error on allocate orig_mols_out on manbo_forces.F90")
             CALL log_close(1)
             STOP
@@ -373,7 +373,7 @@ MODULE manbo_forces
 
     ALLOCATE(data_manbo_temp(num), stat=allocate_status)
       IF(allocate_status/=0) THEN
-        PRINT *, "No memory enough to allocate. ManBo can not run."
+        PRINT *, "No memory enough to allocate. ManBo cannot run."
         CALL log_write("ERROR: Error on allocate data_manbo_temp on manbo_forces.F90")
         CALL log_close(1)
         STOP
@@ -391,7 +391,7 @@ MODULE manbo_forces
 
     DEALLOCATE(data_manbo_out, stat=allocate_status)
       IF(allocate_status/=0) THEN
-        PRINT *, "No memory enough to deallocate. ManBo can not run."
+        PRINT *, "No memory enough to deallocate. ManBo cannot run."
         CALL log_write("ERROR: Error on deallocate data_manbo_out on manbo_forces.F90")
         CALL log_close(1)
         STOP
@@ -399,7 +399,7 @@ MODULE manbo_forces
 
     ALLOCATE(data_manbo_out(num), stat=allocate_status)
       IF(allocate_status/=0) THEN
-        PRINT *, "No memory enough to allocate. ManBo can not run."
+        PRINT *, "No memory enough to allocate. ManBo cannot run."
         CALL log_write("ERROR: Error on allocate data_manbo_out on manbo_forces.F90")
         CALL log_close(1)
         STOP
@@ -416,7 +416,7 @@ MODULE manbo_forces
       END DO
     DEALLOCATE(data_manbo_temp, stat=allocate_status)
       IF(allocate_status/=0) THEN
-        PRINT *, "No memory enough to deallocate. ManBo can not run."
+        PRINT *, "No memory enough to deallocate. ManBo cannot run."
         CALL log_write("ERROR: Error on deallocate data_manbo_temp on manbo_forces.F90")
         CALL log_close(1)
         STOP
@@ -430,7 +430,7 @@ MODULE manbo_forces
       IF(ALLOCATED(mc_out)) THEN
         DEALLOCATE(mc_out, stat=allocate_status)
           IF(allocate_status/=0) THEN
-            PRINT *, "No memory enough to deallocate. ManBo can not run."
+            PRINT *, "No memory enough to deallocate. ManBo cannot run."
             CALL log_write("ERROR: Error on deallocate mc_out on manbo_forces.F90")
             CALL log_close(1)
             STOP
@@ -438,7 +438,7 @@ MODULE manbo_forces
       END IF
       ALLOCATE(mc_out(k), stat=allocate_status)
         IF(allocate_status/=0) THEN
-          PRINT *, "No memory enough to allocate. ManBo can not run."
+          PRINT *, "No memory enough to allocate. ManBo cannot run."
           CALL log_write("ERROR: Error on allocate mc_out on manbo_forces.F90")
           CALL log_close(1)
           STOP
@@ -486,7 +486,7 @@ MODULE manbo_forces
     IF (mpi_id == 0) THEN
       i = system("mkdir -p tempgaufiles_" // TRIM(ADJUSTL(name_out)))
       IF(i/=0) THEN
-        PRINT *, "ManBo can not run. Error to create a temporary folder using the following command:"
+        PRINT *, "ManBo cannot run. Error to create a temporary folder using the following command:"
         PRINT *, "  mkdir -p tempgaufiles_" // TRIM(ADJUSTL(name_out))
         CALL log_write("ERROR: Error to create a temporary folder using the following command:")
         CALL log_write("       mkdir -p tempgaufiles_" // TRIM(ADJUSTL(name_out)))
@@ -869,7 +869,7 @@ MODULE manbo_forces
     IF (mpi_id == 0) THEN
       num = system("rm -R tempgaufiles_" // TRIM(ADJUSTL(name_out)))
       IF(num/=0) THEN
-        PRINT *, "ManBo can not run. Error to delete a temporary folder using the following command:"
+        PRINT *, "ManBo cannot run. Error to delete a temporary folder using the following command:"
         PRINT *, "  rm -R tempgaufiles_" // TRIM(ADJUSTL(name_out))
         CALL log_write("ERROR: Error to delete a temporary folder using the following command:")
         CALL log_write("       rm -R tempgaufiles_" // TRIM(ADJUSTL(name_out)))
@@ -880,7 +880,7 @@ MODULE manbo_forces
 #else
     num = system("rm -R tempgaufiles_" // TRIM(ADJUSTL(name_out)))
     IF(num/=0) THEN
-      PRINT *, "ManBo can not run. Error to delete a temporary folder using the following command:"
+      PRINT *, "ManBo cannot run. Error to delete a temporary folder using the following command:"
       PRINT *, "  rm -R tempgaufiles_" // TRIM(ADJUSTL(name_out))
       CALL log_write("ERROR: Error to delete a temporary folder using the following command:")
       CALL log_write("       rm -R tempgaufiles_" // TRIM(ADJUSTL(name_out)))
@@ -923,7 +923,7 @@ MODULE manbo_forces
     ALLOCATE(pairs_list(n_mols*vp_dim,2), trimers_list(NINT(FLOAT(n_mols*vp_dim*(n_mols-2))/3.),3),&
              stat=allocate_status)
     IF(allocate_status/=0) THEN
-      PRINT *, "No memory enough to allocate. ManBo can not run."
+      PRINT *, "No memory enough to allocate. ManBo cannot run."
       CALL log_write("")
       CALL log_write(" ERROR: Error on allocate pairs_list and trimers_list on manbo_forces.F90")
       CALL log_close(1)
@@ -1072,7 +1072,7 @@ MODULE manbo_forces
     ALLOCATE(forcep(n_atoms,1+npairs+ntrimers),Up(n_mols+npairs+ntrimers),&
              stat=allocate_status)
     IF(allocate_status/=0) THEN
-      PRINT *, "No memory enough to allocate. ManBo can not run."
+      PRINT *, "No memory enough to allocate. ManBo cannot run."
       CALL log_write("")
       CALL log_write(" ERROR: Error on allocate forcep and Up on manbo_forces.F90")
       CALL log_close(1)
@@ -1124,7 +1124,7 @@ MODULE manbo_forces
       ALLOCATE(force(n_atoms,1+npairs+ntrimers),U(n_mols+npairs+ntrimers),&
                stat=allocate_status)
       IF(allocate_status/=0) THEN
-        PRINT *, "No memory enough to allocate. ManBo can not run."
+        PRINT *, "No memory enough to allocate. ManBo cannot run."
         CALL log_write("")
         CALL log_write(" ERROR: Error on allocate force and U on manbo_forces.F90")
         CALL log_close(1)
@@ -1297,8 +1297,8 @@ MODULE manbo_forces
     IF(qm_prog=="g03" .OR. qm_prog=="g09") THEN
       CALL qm_prog_gaussian(force,U,val,val2,local,list,y)
     ELSE
-      PRINT *, "Parameter qm_prog invalid. ManBo can not run."
-      CALL log_write("ERROR: Parameter qm_prog invalid. ManBo can not run.")
+      PRINT *, "Parameter qm_prog invalid. ManBo cannot run."
+      CALL log_write("ERROR: Parameter qm_prog invalid. ManBo cannot run.")
       CALL log_close(1)
       STOP
     END IF
@@ -1323,7 +1323,7 @@ MODULE manbo_forces
     WRITE(arq,*) local
     num = system("mkdir -p tempgaufiles_" // TRIM(ADJUSTL(name_out)) // "/job" // TRIM(ADJUSTL(arq)))
     IF(num/=0) THEN
-      PRINT *, "ManBo can not run. Error to create a temporary folder using the following command:"
+      PRINT *, "ManBo cannot run. Error to create a temporary folder using the following command:"
       PRINT *, "  mkdir -p tempgaufiles_" // TRIM(ADJUSTL(name_out)) // "/job" // TRIM(ADJUSTL(arq))
       CALL log_write("ERROR: Error to create a temporary folder using the following command:")
       CALL log_write("       mkdir -p tempgaufiles_" // TRIM(ADJUSTL(name_out)) // "/job" // TRIM(ADJUSTL(arq)))
