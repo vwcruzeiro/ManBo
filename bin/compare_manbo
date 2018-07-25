@@ -1,0 +1,114 @@
+#!/usr/bin/perl
+
+# This tool compares the energy, forces and  simulation time
+# of two different ManBo calculations
+
+use warnings;
+use strict;
+
+use Scalar::Util qw(looks_like_number);
+
+our (@f1_ref, @f1_comp, $T_ref, $T_comp, $E_ref, $E_comp);
+
+# Opening reference files
+my $file1 = $ARGV[0]."_forces.dat";
+my $file2 = $ARGV[0].".log";
+my $file3 = $ARGV[0]."_properties.dat";
+open_files($file1,$file2,$file3,  \@f1_ref,\$T_ref,\$E_ref);
+
+# Opening files to be compared
+$file1 = $ARGV[1]."_forces.dat";
+$file2 = $ARGV[1].".log";
+$file3 = $ARGV[1]."_properties.dat";
+open_files($file1,$file2,$file3,  \@f1_comp,\$T_comp,\$E_comp);
+
+# Computing RMSD of forces
+my $DF  = rmsd(\@f1_ref,\@f1_comp);
+
+# Printing output info
+printf "        DE        DF(10-3 hartree\\borh)     RT\n";
+printf "     %10.6f        %1.8f          %4.1f \n", ($E_comp-$E_ref)*627.509469, 1000*$DF, (($T_comp/$T_ref)*100);
+
+# Subroutine to compute RMSD
+sub rmsd {
+my ($v1,$v2) = ($_[0],$_[1]);
+my ($rmsd);
+$rmsd = 0;
+foreach my $i (1..${$v1}[0]) {
+    $rmsd += (${$v2}[$i]{cx}-${$v1}[$i]{cx})**2 + (${$v2}[$i]{cy}-${$v1}[$i]{cy})**2;
+    $rmsd += (${$v2}[$i]{cz}-${$v1}[$i]{cz})**2;
+}
+$rmsd = sqrt($rmsd/${$v1}[0]);
+}
+
+# Subroutine to open files
+sub open_files {
+
+open my $fh1, '<', $_[0];                       # File with forces
+open my $fh2, '<', $_[1];                       # Log file
+open my $fh3, '<', $_[2];                       # Properties files
+
+my ($f1,$t,$ener) = ($_[3],$_[4],$_[5]);
+
+my $line = <$fh1>;
+
+# Reads the first line (step 0) of force file
+my @lin = split " ", trim($line);
+
+# Captures the number of atoms and stores it in the 0th index of @f1
+${$f1}[0] = $lin[0];
+
+$line = <$fh1>;                                 # Comment line
+
+foreach my $i (1..${$f1}[0]) {
+
+        # Reads the force coordinates from force file
+        $line = <$fh1>;
+
+        # Stores this info in a hash matrix
+        (${$f1}[$i]{cx}, ${$f1}[$i]{cy}, ${$f1}[$i]{cz}) = split " ", trim($line);
+
+}
+
+close $fh1;                                     # Closes force file
+
+# Reads all lines from log file and stores each line in a index of the matrix @content
+my @content = <$fh2>;
+
+foreach my $i (1..$#content) {
+  @lin = split " ", trim($content[$i]);
+    if (@lin >= 11 && $lin[1] eq "The" && $lin[2] eq "execution" && $lin[3] eq "lasted") {
+       ${$t} = $lin[4]*24*3600+$lin[6]*3600+$lin[8]*60+$lin[11];
+    }
+}
+
+close $fh2;
+
+
+# Reads all lines from properties file and stores each line in a index of the matrix @content
+@content = <$fh3>;
+
+foreach my $i (1..$#content) {
+  @lin = split " ", trim($content[$i]);
+    if (@lin >= 3 && $lin[0] eq "Total" && $lin[1] eq "+" && $lin[2] eq "kinetic") {
+       if (looks_like_number($lin[4])) {
+           ${$ener} = $lin[4];
+       } else {
+           ${$ener} = $lin[11];
+       }
+    }
+}
+
+close $fh3;
+
+}
+
+sub trim {
+
+        my @out = @_;
+        foreach (@out) {
+                s/^\s+//;
+                s/\s+$//;
+        }
+        return @out == 1  ? $out[0]  : @out;
+}
