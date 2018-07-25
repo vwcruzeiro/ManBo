@@ -57,9 +57,10 @@ MODULE manbo_variables
   ! data_manbo contains all information about the atoms that are inside the box
   TYPE(atom_out), DIMENSION(:), ALLOCATABLE, SAVE :: data_manbo_out
   ! data_manbo_out contains all information about the replicated atoms that are outside the box
-  TYPE(center_of_mass), DIMENSION(:), ALLOCATABLE, SAVE :: mc, mc_out
+  TYPE(center_of_mass), DIMENSION(:), ALLOCATABLE, SAVE :: mc, mc_out, mc_orig, mc_out_orig
   ! mc contains the mass centers of the molecules that are inside the box
   ! mc_out contains the mass centers of the molecules that are outside the box
+  ! mc_orig and mc_out_orig are the equivalent of mc and mc_out of original molecules when the molecules were grouped
   TYPE(charge_multiplicity), DIMENSION(:), ALLOCATABLE, SAVE :: char_mul, char_mul_orig
   !  char_mul      contains the current  charge and the multiplicity of all monomers inside the box
   !  char_mul_orig contains the original charge and the multiplicity of all monomers inside the box
