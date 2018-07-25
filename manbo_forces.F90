@@ -877,6 +877,16 @@ MODULE manbo_forces
         STOP
       END IF
     END IF
+#else
+    num = system("rm -R tempgaufiles_" // TRIM(ADJUSTL(name_out)))
+    IF(num/=0) THEN
+      PRINT *, "ManBo can not run. Error to delete a temporary folder using the following command:"
+      PRINT *, "  rm -R tempgaufiles_" // TRIM(ADJUSTL(name_out))
+      CALL log_write("ERROR: Error to delete a temporary folder using the following command:")
+      CALL log_write("       rm -R tempgaufiles_" // TRIM(ADJUSTL(name_out)))
+      CALL log_close(1)
+      STOP
+    END IF
 #endif
   END SUBROUTINE calculate_forces
   
