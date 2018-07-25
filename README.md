@@ -15,7 +15,12 @@ Installing ManBo
 ================
 
 In order to install ManBo, clone this git repository and change to
-the directory that contain ManBo's source code.
+the directory you cloned to. Then, change to the directory that
+contains ManBo's source code:
+
+```
+cd src
+```
 
 There are different compilation options. Each option is present in
 a different make file. Choose the make file you want and copy to
@@ -29,8 +34,10 @@ cp Makefile-[COMPILATION OPTION] Makefile
 Then execute:
 
 ```
-make
+make install
 ```
+
+The executables will be placed at the ../bin/ directory.
 
 Authors and Contributors
 ========================
