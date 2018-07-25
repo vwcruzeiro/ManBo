@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ -z "$TESTmanbo" ]; then
-   TESTmanbo="../../manbo"
+   TESTmanbo="../../bin/manbo"
 fi
 
 # make sure to set OMP_NUM_THREADS properly
