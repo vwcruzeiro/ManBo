@@ -4,18 +4,18 @@
  ==============================================================================
       Created by Vinicius Wilian Dias Cruzeiro and Herbert de Castro Georg     
  
-| ManBo has started at 15: 3:40 of July 25, 2018     
+| ManBo has started at 16: 8:10 of July 25, 2018     
  
 
 Quantum Chemistry Program (QCP) to be used: g09
 Memory required by the QCP: 600MB
 Quantum Chemistry Method to be used: MP2
-Basis Set Functions to be used: STO-3G
+Extrapolation to infinity basis set will be performed (thus cc-pVDZ and cc-pVTZ calculations will be done)
 Apply the Many-Body Expansion on the correlation energy only: Yes
 Cutoff Radius to be applied on the Many Body Expansion (MBE) calculations: 18.0001 A
 Number of molecules of the system: 4
 Number of atoms of the system: 12
-Number of steps to be executed: 1
+Number of steps to be executed: 0
 Time interval between the steps: 0.1000 femtoseconds
 Generate random initial velocities: No
 Apply Periodic Boundary Conditions (PBC): No
@@ -114,36 +114,21 @@ Initial velocities of Atoms, obtained from the input file (given in Angstroms/pi
           4 monomer(s)
           6 dimer(s)
           0 trimer(s)
-   Full EE-MBE Energy done with         MP2:                     -300.01482426 Hartrees
-   Full EE-MBE Energy done with HF:                              -299.85933866 Hartrees
-   Full HF Energy (no EE-MBE):                                   -299.85932883 Hartrees
-   MP2 Energy with EE-MBE on the correlation only:    -300.01481444 Hartrees
+   Full EE-MBE Energy computed at MP2/cc-pVTZ:                     -305.28102011 Hartrees
+   Full EE-MBE Energy computed at MP2/cc-pVDZ:                     -304.93108581 Hartrees
+   Full EE-MBE Energy computed at HF/cc-pVTZ:                      -304.21139904 Hartrees
+   Full EE-MBE Energy computed at HF/cc-pVDZ:                      -304.10230788 Hartrees
+   Full Energy (no EE-MBE) computed at HF/cc-pVTZ:                 -304.21034505 Hartrees
+   Full Energy (no EE-MBE) computed at HF/cc-pVDZ:                 -304.10037335 Hartrees
+   HF Full EE-MBE Energy extrapolated to infinity basis set:       -304.24815728 Hartrees
+   HF Full Energy (no EE-MBE) extrapolated to infinity b.s.:       -304.24739983 Hartrees
+   MP2 extrapolated Energy with EE-MBE on the correlation only:    -305.48426600 Hartrees
 
-|  This step ended at 15: 5:51 of July 25, 2018     
-|  Average time per step:    0 days,  0 hours,  2 minutes, and 10.499 seconds.
-|  The execution is estimated to end in:    0 days,  0 hours,  2 minutes, and 10.499 seconds.
---------------------------------------------------------------------
-
-====================================================================
- Step        1 of        1
-====================================================================
-
-  None of the atoms were replicated.
-
-  Number of monomers, dimers and trimers used in the calculation of forces:
-          4 monomer(s)
-          6 dimer(s)
-          0 trimer(s)
-   Full EE-MBE Energy done with         MP2:                     -300.01486121 Hartrees
-   Full EE-MBE Energy done with HF:                              -299.85936507 Hartrees
-   Full HF Energy (no EE-MBE):                                   -299.85935526 Hartrees
-   MP2 Energy with EE-MBE on the correlation only:    -300.01485140 Hartrees
-
-|  This step ended at 15: 8: 0 of July 25, 2018     
+|  This step ended at 16:10:18 of July 25, 2018     
 --------------------------------------------------------------------
 
  
-| The execution ended at 15: 8: 0 of July 25, 2018     
-| The execution lasted    0 days,  0 hours,  4 minutes, and 19.955 seconds.
+| The execution ended at 16:10:18 of July 25, 2018     
+| The execution lasted    0 days,  0 hours,  2 minutes, and  7.899 seconds.
 | ManBo was successfully executed.
  
