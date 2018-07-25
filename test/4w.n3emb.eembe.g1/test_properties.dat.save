@@ -1,0 +1,38 @@
+ -------------------------------------------------------------------------------------
+ Step        0 of        1
+ -------------------------------------------------------------------------------------
+ System Temperature:       0.0000 K
+  
+ System's total linear momentum:      0.000000      0.000000      0.000000   a.u. ("reduced Plank constant"/bohr)
+ System's total linear momentum modulus:      0.000000   a.u. ("reduced Plank constant"/bohr)
+  
+ System's total angular momentum:      0.000000      0.000000      0.000000   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum modulus:      0.000000   a.u. ("reduced Plank constant"/bohr)
+  
+ One-Body Term Energy (E1):     -299.88536790   hartrees
+ Two-Body Term Energy (E2):        0.02602924   hartrees
+ Tree-Body Term Energy (E3):       0.00000897   hartrees
+ Total energy:    -299.85932969   hartrees
+ Nuclei kinetic energy (E_kin):       0.00000000   hartrees
+ Total + kinetic energy (E1 + E2 + E3 + E_kin):    -299.85932969   hartrees
+ Total energy per molecule:    -47040.011401   kcal/mol
+ E2 + E3 per molecule:         4.084707   kcal/mol
+ -------------------------------------------------------------------------------------
+ Step        1 of        1
+ -------------------------------------------------------------------------------------
+ System Temperature:       0.6869 K
+  
+ System's total linear momentum:     -0.000033      0.000005      0.000001   a.u. ("reduced Plank constant"/bohr)
+ System's total linear momentum modulus:      0.000034   a.u. ("reduced Plank constant"/bohr)
+  
+ System's total angular momentum:      0.000012      0.000017      0.000137   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum modulus:      0.000139   a.u. ("reduced Plank constant"/bohr)
+  
+ One-Body Term Energy (E1):     -299.88540695   hartrees
+ Two-Body Term Energy (E2):        0.02602909   hartrees
+ Tree-Body Term Energy (E3):       0.00000898   hartrees
+ Total energy:    -299.85936888   hartrees
+ Nuclei kinetic energy (E_kin):       0.00003916   hartrees
+ Total + kinetic energy (E1 + E2 + E3 + E_kin):    -299.85932972   hartrees
+ Total energy per molecule:    -47040.011405   kcal/mol
+ E2 + E3 per molecule:         4.084685   kcal/mol
