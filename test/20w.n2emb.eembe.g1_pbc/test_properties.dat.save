@@ -1,0 +1,19 @@
+ -------------------------------------------------------------------------------------
+ Step        0 of        0
+ -------------------------------------------------------------------------------------
+ System Temperature:       0.0000 K
+  
+ System's total linear momentum:      0.000000      0.000000      0.000000   a.u. ("reduced Plank constant"/bohr)
+ System's total linear momentum modulus:      0.000000   a.u. ("reduced Plank constant"/bohr)
+  
+ System's total angular momentum:      0.000000      0.000000      0.000000   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum modulus:      0.000000   a.u. ("reduced Plank constant"/bohr)
+  
+ One-Body Term Energy (E1):    -1499.83727070   hartrees
+ Two-Body Term Energy (E2):        0.86685747   hartrees
+ Tree-Body Term Energy (E3):       0.00000000   hartrees
+ Total energy:   -1498.97041323   hartrees
+ Nuclei kinetic energy (E_kin):       0.00000000   hartrees
+ Total + kinetic energy (E1 + E2 + E3 + E_kin):   -1498.97041323   hartrees
+ Total energy per molecule:    -47029.775862   kcal/mol
+ E2 + E3 per molecule:        27.197410   kcal/mol
