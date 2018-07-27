@@ -4,7 +4,7 @@
  ==============================================================================
       Created by Vinicius Wilian Dias Cruzeiro and Herbert de Castro Georg     
  
-| ManBo has started at 17:43: 0 of July 25, 2018     
+| ManBo has started at 11:40:35 of July 27, 2018     
  
 
 Quantum Chemistry Program (QCP) to be used: g09
@@ -22,7 +22,8 @@ Apply Periodic Boundary Conditions (PBC): Yes
 Order in which the MBE is going to be truncated: 2
 Number of molecules to be grouped as a single monomer: 2
 Use electrostatic embedding: Yes
-Use an Embedding Cutoff Radius: No
+Use an Embedding Cutoff Radius: Yes
+Embedding Cutoff Radius to be used: 10.000000000000000 A
 Apply Berendsen thermostat: No
 
 |*** Running the Hybrid MPI-OpenMP version of ManBo ***
@@ -209,11 +210,11 @@ Initial velocities of Atoms, obtained from the input file (given in Angstroms/pi
          41 dimer(s)
           0 trimer(s)
 
-|  This step ended at 17:44: 8 of July 25, 2018     
+|  This step ended at 11:40:50 of July 27, 2018     
 --------------------------------------------------------------------
 
  
-| The execution ended at 17:44: 8 of July 25, 2018     
-| The execution lasted    0 days,  0 hours,  1 minutes, and  7.733 seconds.
+| The execution ended at 11:40:50 of July 27, 2018     
+| The execution lasted    0 days,  0 hours,  0 minutes, and 15.138 seconds.
 | ManBo was successfully executed.
  
