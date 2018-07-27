@@ -30,7 +30,7 @@ Input variables:
 # use_embedding determines if we are going to use Eletroctatic Embedding. It can be set as TRUE or FALSE. In case of TRUE, the embedding charges must be set on the input file
     use_embedding=     TRUE
 # use_emb_radius determines if we are going to consider in the calculation of a monomer, dimer, or trimer all point charges within a radius starting from its mass center. It can be set as TRUE only if apply_pbc and use_embedding are both TRUE
-    use_emb_radius=    FALSE
+    use_emb_radius=    TRUE
 # emb_radius is the radius of use_emb_radius, given in Angstroms. It can be higher than the box sizes
     emb_radius=        10.0000
 # qm_prog is the command to call the program who will do the quantum chemistry calculations. At the moment, only g09 and g03 are avaliable
