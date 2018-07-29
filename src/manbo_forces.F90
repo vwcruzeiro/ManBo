@@ -23,14 +23,19 @@ MODULE manbo_forces
   
     IMPLICIT NONE
 
-    INTEGER :: i, j, k, k2, num, x
+    INTEGER :: i, j, k, k2, num, x, n1, n2, n3
     DOUBLE PRECISION :: lx2, ly2, lz2
     ! Variables to store the values of half of the box lenght in each dimension
     DOUBLE PRECISION :: mcx, mcy, mcz
+    DOUBLE PRECISION :: mcx2, mcy2, mcz2
+    DOUBLE PRECISION :: mcx3, mcy3, mcz3
     ! Coordinates of the center of mass of a molecule
     DOUBLE PRECISION :: dx, dy, dz, dxy, dxz, dyz, dxyz, L
+    DOUBLE PRECISION :: dx2, dy2, dz2, dxy2, dxz2, dyz2, dxyz2
+    DOUBLE PRECISION :: dx3, dy3, dz3, dxy3, dxz3, dyz3, dxyz3
     INTEGER :: allocate_status
     CHARACTER(LEN=100) :: line
+    LOGICAL, DIMENSION(3) :: conditions
     TYPE(atom_out), DIMENSION(:), ALLOCATABLE, SAVE :: data_manbo_temp
     
     CALL calculate_center_of_mass(1)
@@ -82,35 +87,101 @@ MODULE manbo_forces
     END IF
 
     DO i=1,n_mols
-      mcx = mc(i)%r(1)
-      mcy = mc(i)%r(2)
-      mcz = mc(i)%r(3)
-      dx = lx2 - ABS(mcx)
-      dy = ly2 - ABS(mcy)
-      dz = lz2 - ABS(mcz)
-      dxy = SQRT(dx*dx + dy*dy)
-      dxz = SQRT(dx*dx + dz*dz)
-      dyz = SQRT(dy*dy + dz*dz)
-      dxyz = SQRT(dx*dx + dy*dy + dz*dz)
+      IF (.not. group_monomers>1) THEN
+        mcx = mc(i)%r(1)
+        mcy = mc(i)%r(2)
+        mcz = mc(i)%r(3)
+        dx = lx2 - ABS(mcx)
+        dy = ly2 - ABS(mcy)
+        dz = lz2 - ABS(mcz)
+        dxy = SQRT(dx*dx + dy*dy)
+        dxz = SQRT(dx*dx + dz*dz)
+        dyz = SQRT(dy*dy + dz*dz)
+        dxyz = SQRT(dx*dx + dy*dy + dz*dz)
+      ELSE
+        n1 = orig_mols(i)%m(1)
+        n2 = orig_mols(i)%m(2)
+        n3 = orig_mols(i)%m(3)
+        
+        mcx = mc_orig(n1)%r(1)
+        mcy = mc_orig(n1)%r(2)
+        mcz = mc_orig(n1)%r(3)
+        dx = lx2 - ABS(mcx)
+        dy = ly2 - ABS(mcy)
+        dz = lz2 - ABS(mcz)
+        dxy = SQRT(dx*dx + dy*dy)
+        dxz = SQRT(dx*dx + dz*dz)
+        dyz = SQRT(dy*dy + dz*dz)
+        dxyz = SQRT(dx*dx + dy*dy + dz*dz)
+        
+        IF (n2 .ne. 0) THEN
+          mcx2 = mc_orig(n2)%r(1)
+          mcy2 = mc_orig(n2)%r(2)
+          mcz2 = mc_orig(n2)%r(3)
+          dx2 = lx2 - ABS(mcx2)
+          dy2 = ly2 - ABS(mcy2)
+          dz2 = lz2 - ABS(mcz2)
+          dxy2 = SQRT(dx2*dx2 + dy2*dy2)
+          dxz2 = SQRT(dx2*dx2 + dz2*dz2)
+          dyz2 = SQRT(dy2*dy2 + dz2*dz2)
+          dxyz2 = SQRT(dx2*dx2 + dy2*dy2 + dz2*dz2)
+        END IF
+        
+        IF (n3 .ne. 0) THEN
+          mcx3 = mc_orig(n3)%r(1)
+          mcy3 = mc_orig(n3)%r(2)
+          mcz3 = mc_orig(n3)%r(3)
+          dx3 = lx2 - ABS(mcx3)
+          dy3 = ly2 - ABS(mcy3)
+          dz3 = lz2 - ABS(mcz3)
+          dxy3 = SQRT(dx3*dx3 + dy3*dy3)
+          dxz3 = SQRT(dx3*dx3 + dz3*dz3)
+          dyz3 = SQRT(dy3*dy3 + dz3*dz3)
+          dxyz3 = SQRT(dx3*dx3 + dy3*dy3 + dz3*dz3)
+        END IF
+      END IF
   
-      IF(dx < cutoff) THEN
+      IF (.not. group_monomers>1) THEN
+        conditions(1) = dx < cutoff
+        conditions(2) = .FALSE.
+        conditions(3) = .FALSE.
+      ELSE
+        conditions(1) = dx < cutoff
+        IF (n2 .ne. 0) THEN
+          conditions(2) = dx2 < cutoff
+        ELSE
+          conditions(2) = .FALSE.
+        END IF
+        IF (n3 .ne. 0) THEN
+          conditions(3) = dx3 < cutoff
+        ELSE
+          conditions(3) = .FALSE.
+        END IF
+      END IF
+      IF(conditions(1) .or. conditions(2) .or. conditions(3)) THEN
         k = k + 1
         orig_repli_mol(k - n_mols) = i
           DO j=1,n_atoms
             IF(data_manbo(j)%mol==i) THEN
               num = num + 1
-              data_manbo_out(num)%r(1) = data_manbo(j)%r(1) - box_dim(1)*sig(mcx)
+              IF (conditions(1)) THEN
+                data_manbo_out(num)%r(1) = data_manbo(j)%r(1) - box_dim(1)*sig(mcx)
+              ELSE IF (conditions(2)) THEN
+                data_manbo_out(num)%r(1) = data_manbo(j)%r(1) - box_dim(1)*sig(mcx2)
+              ELSE
+                data_manbo_out(num)%r(1) = data_manbo(j)%r(1) - box_dim(1)*sig(mcx3)
+              END IF
               data_manbo_out(num)%r(2) = data_manbo(j)%r(2)
               data_manbo_out(num)%r(3) = data_manbo(j)%r(3)
               data_manbo_out(num)%an   = data_manbo(j)%an
               data_manbo_out(num)%mass = data_manbo(j)%mass
               data_manbo_out(num)%mol  = k
               IF (group_monomers>1) THEN
-                IF (data_manbo(j)%mol_orig==orig_mols(i)%m(1)) THEN
+                IF (data_manbo(j)%mol_orig==n1) THEN
                   data_manbo_out(num)%mol_orig = k2 + 1
-                ELSE IF (data_manbo(j)%mol_orig==orig_mols(i)%m(2)) THEN
+                ELSE IF (data_manbo(j)%mol_orig==n2) THEN
                   data_manbo_out(num)%mol_orig = k2 + 2
-                ELSE IF (data_manbo(j)%mol_orig==orig_mols(i)%m(3)) THEN
+                ELSE IF (data_manbo(j)%mol_orig==n3) THEN
                   data_manbo_out(num)%mol_orig = k2 + 3              
                 END IF
               END IF
@@ -121,35 +192,58 @@ MODULE manbo_forces
         IF (group_monomers>1) THEN
           k2 = k2 + 1
           orig_mols_out(k - n_mols)%m(1) = k2
-          IF (.not. orig_mols(i)%m(2)==0) THEN
+          IF (.not. n2==0) THEN
             k2 = k2 + 1
             orig_mols_out(k - n_mols)%m(2) = k2
           END IF
-          IF (.not. orig_mols(i)%m(3)==0) THEN
+          IF (.not. n3==0) THEN
             k2 = k2 + 1
             orig_mols_out(k - n_mols)%m(3) = k2
           END IF
         END IF
       END IF
-    
-      IF(dy < cutoff) THEN
+  
+      IF (.not. group_monomers>1) THEN
+        conditions(1) = dy < cutoff
+        conditions(2) = .FALSE.
+        conditions(3) = .FALSE.
+      ELSE
+        conditions(1) = dy < cutoff
+        IF (n2 .ne. 0) THEN
+          conditions(2) = dy2 < cutoff
+        ELSE
+          conditions(2) = .FALSE.
+        END IF
+        IF (n3 .ne. 0) THEN
+          conditions(3) = dy3 < cutoff
+        ELSE
+          conditions(3) = .FALSE.
+        END IF
+      END IF
+      IF(conditions(1) .or. conditions(2) .or. conditions(3)) THEN
         k = k + 1
         orig_repli_mol(k - n_mols) = i
           DO j=1,n_atoms
             IF(data_manbo(j)%mol==i) THEN
               num = num + 1
-              data_manbo_out(num)%r(1) = data_manbo(j)%r(1) 
-              data_manbo_out(num)%r(2) = data_manbo(j)%r(2) - box_dim(2)*sig(mcy)
+              data_manbo_out(num)%r(1) = data_manbo(j)%r(1)
+              IF (conditions(1)) THEN
+                data_manbo_out(num)%r(2) = data_manbo(j)%r(2) - box_dim(2)*sig(mcy)
+              ELSE IF (conditions(2)) THEN
+                data_manbo_out(num)%r(2) = data_manbo(j)%r(2) - box_dim(2)*sig(mcy2)
+              ELSE
+                data_manbo_out(num)%r(2) = data_manbo(j)%r(2) - box_dim(2)*sig(mcy3)
+              END IF
               data_manbo_out(num)%r(3) = data_manbo(j)%r(3)
               data_manbo_out(num)%an   = data_manbo(j)%an
               data_manbo_out(num)%mass = data_manbo(j)%mass
               data_manbo_out(num)%mol  = k
               IF (group_monomers>1) THEN
-                IF (data_manbo(j)%mol_orig==orig_mols(i)%m(1)) THEN
+                IF (data_manbo(j)%mol_orig==n1) THEN
                   data_manbo_out(num)%mol_orig  = k2 + 1
-                ELSE IF (data_manbo(j)%mol_orig==orig_mols(i)%m(2)) THEN
+                ELSE IF (data_manbo(j)%mol_orig==n2) THEN
                   data_manbo_out(num)%mol_orig  = k2 + 2
-                ELSE IF (data_manbo(j)%mol_orig==orig_mols(i)%m(3)) THEN
+                ELSE IF (data_manbo(j)%mol_orig==n3) THEN
                   data_manbo_out(num)%mol_orig  = k2 + 3              
                 END IF
               END IF
@@ -160,35 +254,58 @@ MODULE manbo_forces
         IF (group_monomers>1) THEN
           k2 = k2 + 1
           orig_mols_out(k - n_mols)%m(1) = k2
-          IF (.not. orig_mols(i)%m(2)==0) THEN
+          IF (.not. n2==0) THEN
             k2 = k2 + 1
             orig_mols_out(k - n_mols)%m(2) = k2
           END IF
-          IF (.not. orig_mols(i)%m(3)==0) THEN
+          IF (.not. n3==0) THEN
             k2 = k2 + 1
             orig_mols_out(k - n_mols)%m(3) = k2
           END IF
         END IF
       END IF
-    
-      IF(dz < cutoff) THEN
+  
+      IF (.not. group_monomers>1) THEN
+        conditions(1) = dz < cutoff
+        conditions(2) = .FALSE.
+        conditions(3) = .FALSE.
+      ELSE
+        conditions(1) = dz < cutoff
+        IF (n2 .ne. 0) THEN
+          conditions(2) = dz2 < cutoff
+        ELSE
+          conditions(2) = .FALSE.
+        END IF
+        IF (n3 .ne. 0) THEN
+          conditions(3) = dz3 < cutoff
+        ELSE
+          conditions(3) = .FALSE.
+        END IF
+      END IF
+      IF(conditions(1) .or. conditions(2) .or. conditions(3)) THEN
         k = k + 1
         orig_repli_mol(k - n_mols) = i
           DO j=1,n_atoms
             IF(data_manbo(j)%mol==i) THEN
               num = num + 1
-              data_manbo_out(num)%r(1) = data_manbo(j)%r(1) 
-              data_manbo_out(num)%r(2) = data_manbo(j)%r(2) 
-              data_manbo_out(num)%r(3) = data_manbo(j)%r(3) - box_dim(3)*sig(mcz)
+              data_manbo_out(num)%r(1) = data_manbo(j)%r(1)
+              data_manbo_out(num)%r(2) = data_manbo(j)%r(2)
+              IF (conditions(1)) THEN
+                data_manbo_out(num)%r(3) = data_manbo(j)%r(3) - box_dim(3)*sig(mcz)
+              ELSE IF (conditions(2)) THEN
+                data_manbo_out(num)%r(3) = data_manbo(j)%r(3) - box_dim(3)*sig(mcz2)
+              ELSE
+                data_manbo_out(num)%r(3) = data_manbo(j)%r(3) - box_dim(3)*sig(mcz3)
+              END IF
               data_manbo_out(num)%an   = data_manbo(j)%an
               data_manbo_out(num)%mass = data_manbo(j)%mass
               data_manbo_out(num)%mol  = k
               IF (group_monomers>1) THEN
-                IF (data_manbo(j)%mol_orig==orig_mols(i)%m(1)) THEN
+                IF (data_manbo(j)%mol_orig==n1) THEN
                   data_manbo_out(num)%mol_orig  = k2 + 1
-                ELSE IF (data_manbo(j)%mol_orig==orig_mols(i)%m(2)) THEN
+                ELSE IF (data_manbo(j)%mol_orig==n2) THEN
                   data_manbo_out(num)%mol_orig  = k2 + 2
-                ELSE IF (data_manbo(j)%mol_orig==orig_mols(i)%m(3)) THEN
+                ELSE IF (data_manbo(j)%mol_orig==n3) THEN
                   data_manbo_out(num)%mol_orig  = k2 + 3              
                 END IF
               END IF
@@ -199,35 +316,60 @@ MODULE manbo_forces
         IF (group_monomers>1) THEN
           k2 = k2 + 1
           orig_mols_out(k - n_mols)%m(1) = k2
-          IF (.not. orig_mols(i)%m(2)==0) THEN
+          IF (.not. n2==0) THEN
             k2 = k2 + 1
             orig_mols_out(k - n_mols)%m(2) = k2
           END IF
-          IF (.not. orig_mols(i)%m(3)==0) THEN
+          IF (.not. n3==0) THEN
             k2 = k2 + 1
             orig_mols_out(k - n_mols)%m(3) = k2
           END IF
         END IF
       END IF
-    
-      IF(dxy < cutoff) THEN
+  
+      IF (.not. group_monomers>1) THEN
+        conditions(1) = dxy < cutoff
+        conditions(2) = .FALSE.
+        conditions(3) = .FALSE.
+      ELSE
+        conditions(1) = dxy < cutoff
+        IF (n2 .ne. 0) THEN
+          conditions(2) = dxy2 < cutoff
+        ELSE
+          conditions(2) = .FALSE.
+        END IF
+        IF (n3 .ne. 0) THEN
+          conditions(3) = dxy3 < cutoff
+        ELSE
+          conditions(3) = .FALSE.
+        END IF
+      END IF
+      IF(conditions(1) .or. conditions(2) .or. conditions(3)) THEN
         k = k + 1
         orig_repli_mol(k - n_mols) = i
           DO j=1,n_atoms
             IF(data_manbo(j)%mol==i) THEN
               num = num + 1
-              data_manbo_out(num)%r(1) = data_manbo(j)%r(1) - box_dim(1)*sig(mcx)
-              data_manbo_out(num)%r(2) = data_manbo(j)%r(2) - box_dim(2)*sig(mcy)
+              IF (conditions(1)) THEN
+                data_manbo_out(num)%r(1) = data_manbo(j)%r(1) - box_dim(1)*sig(mcx)
+                data_manbo_out(num)%r(2) = data_manbo(j)%r(2) - box_dim(2)*sig(mcy)
+              ELSE IF (conditions(2)) THEN
+                data_manbo_out(num)%r(1) = data_manbo(j)%r(1) - box_dim(1)*sig(mcx2)
+                data_manbo_out(num)%r(2) = data_manbo(j)%r(2) - box_dim(2)*sig(mcy2)
+              ELSE
+                data_manbo_out(num)%r(1) = data_manbo(j)%r(1) - box_dim(1)*sig(mcx3)
+                data_manbo_out(num)%r(2) = data_manbo(j)%r(2) - box_dim(2)*sig(mcy3)
+              END IF
               data_manbo_out(num)%r(3) = data_manbo(j)%r(3) 
               data_manbo_out(num)%an   = data_manbo(j)%an
               data_manbo_out(num)%mass = data_manbo(j)%mass
               data_manbo_out(num)%mol  = k
               IF (group_monomers>1) THEN
-                IF (data_manbo(j)%mol_orig==orig_mols(i)%m(1)) THEN
+                IF (data_manbo(j)%mol_orig==n1) THEN
                   data_manbo_out(num)%mol_orig  = k2 + 1
-                ELSE IF (data_manbo(j)%mol_orig==orig_mols(i)%m(2)) THEN
+                ELSE IF (data_manbo(j)%mol_orig==n2) THEN
                   data_manbo_out(num)%mol_orig  = k2 + 2
-                ELSE IF (data_manbo(j)%mol_orig==orig_mols(i)%m(3)) THEN
+                ELSE IF (data_manbo(j)%mol_orig==n3) THEN
                   data_manbo_out(num)%mol_orig  = k2 + 3              
                 END IF
               END IF
@@ -238,35 +380,60 @@ MODULE manbo_forces
         IF (group_monomers>1) THEN
           k2 = k2 + 1
           orig_mols_out(k - n_mols)%m(1) = k2
-          IF (.not. orig_mols(i)%m(2)==0) THEN
+          IF (.not. n2==0) THEN
             k2 = k2 + 1
             orig_mols_out(k - n_mols)%m(2) = k2
           END IF
-          IF (.not. orig_mols(i)%m(3)==0) THEN
+          IF (.not. n3==0) THEN
             k2 = k2 + 1
             orig_mols_out(k - n_mols)%m(3) = k2
           END IF
         END IF
       END IF
-    
-      IF(dxz < cutoff) THEN
+  
+      IF (.not. group_monomers>1) THEN
+        conditions(1) = dxz < cutoff
+        conditions(2) = .FALSE.
+        conditions(3) = .FALSE.
+      ELSE
+        conditions(1) = dxz < cutoff
+        IF (n2 .ne. 0) THEN
+          conditions(2) = dxz2 < cutoff
+        ELSE
+          conditions(2) = .FALSE.
+        END IF
+        IF (n3 .ne. 0) THEN
+          conditions(3) = dxz3 < cutoff
+        ELSE
+          conditions(3) = .FALSE.
+        END IF
+      END IF
+      IF(conditions(1) .or. conditions(2) .or. conditions(3)) THEN
         k = k + 1
         orig_repli_mol(k - n_mols) = i
           DO j=1,n_atoms
             IF(data_manbo(j)%mol==i) THEN
               num = num + 1
-              data_manbo_out(num)%r(1) = data_manbo(j)%r(1) - box_dim(1)*sig(mcx)
-              data_manbo_out(num)%r(2) = data_manbo(j)%r(2) 
-              data_manbo_out(num)%r(3) = data_manbo(j)%r(3) - box_dim(3)*sig(mcz)
+              IF (conditions(1)) THEN
+                data_manbo_out(num)%r(1) = data_manbo(j)%r(1) - box_dim(1)*sig(mcx)
+                data_manbo_out(num)%r(3) = data_manbo(j)%r(3) - box_dim(3)*sig(mcz)
+              ELSE IF (conditions(2)) THEN
+                data_manbo_out(num)%r(1) = data_manbo(j)%r(1) - box_dim(1)*sig(mcx2)
+                data_manbo_out(num)%r(3) = data_manbo(j)%r(3) - box_dim(3)*sig(mcz2)
+              ELSE
+                data_manbo_out(num)%r(1) = data_manbo(j)%r(1) - box_dim(1)*sig(mcx3)
+                data_manbo_out(num)%r(3) = data_manbo(j)%r(3) - box_dim(3)*sig(mcz3)
+              END IF
+              data_manbo_out(num)%r(2) = data_manbo(j)%r(2)
               data_manbo_out(num)%an   = data_manbo(j)%an
               data_manbo_out(num)%mass = data_manbo(j)%mass
               data_manbo_out(num)%mol  = k
               IF (group_monomers>1) THEN
-                IF (data_manbo(j)%mol_orig==orig_mols(i)%m(1)) THEN
+                IF (data_manbo(j)%mol_orig==n1) THEN
                   data_manbo_out(num)%mol_orig  = k2 + 1
-                ELSE IF (data_manbo(j)%mol_orig==orig_mols(i)%m(2)) THEN
+                ELSE IF (data_manbo(j)%mol_orig==n2) THEN
                   data_manbo_out(num)%mol_orig  = k2 + 2
-                ELSE IF (data_manbo(j)%mol_orig==orig_mols(i)%m(3)) THEN
+                ELSE IF (data_manbo(j)%mol_orig==n3) THEN
                   data_manbo_out(num)%mol_orig  = k2 + 3              
                 END IF
               END IF
@@ -277,35 +444,60 @@ MODULE manbo_forces
         IF (group_monomers>1) THEN
           k2 = k2 + 1
           orig_mols_out(k - n_mols)%m(1) = k2
-          IF (.not. orig_mols(i)%m(2)==0) THEN
+          IF (.not. n2==0) THEN
             k2 = k2 + 1
             orig_mols_out(k - n_mols)%m(2) = k2
           END IF
-          IF (.not. orig_mols(i)%m(3)==0) THEN
+          IF (.not. n3==0) THEN
             k2 = k2 + 1
             orig_mols_out(k - n_mols)%m(3) = k2
           END IF
         END IF
       END IF
-    
-      IF(dyz < cutoff) THEN
+  
+      IF (.not. group_monomers>1) THEN
+        conditions(1) = dyz < cutoff
+        conditions(2) = .FALSE.
+        conditions(3) = .FALSE.
+      ELSE
+        conditions(1) = dyz < cutoff
+        IF (n2 .ne. 0) THEN
+          conditions(2) = dyz2 < cutoff
+        ELSE
+          conditions(2) = .FALSE.
+        END IF
+        IF (n3 .ne. 0) THEN
+          conditions(3) = dyz3 < cutoff
+        ELSE
+          conditions(3) = .FALSE.
+        END IF
+      END IF
+      IF(conditions(1) .or. conditions(2) .or. conditions(3)) THEN
         k = k + 1
         orig_repli_mol(k - n_mols) = i
           DO j=1,n_atoms
             IF(data_manbo(j)%mol==i) THEN
               num = num + 1
-              data_manbo_out(num)%r(1) = data_manbo(j)%r(1) 
-              data_manbo_out(num)%r(2) = data_manbo(j)%r(2) - box_dim(2)*sig(mcy)
-              data_manbo_out(num)%r(3) = data_manbo(j)%r(3) - box_dim(3)*sig(mcz)
+              data_manbo_out(num)%r(1) = data_manbo(j)%r(1)
+              IF (conditions(1)) THEN
+                data_manbo_out(num)%r(2) = data_manbo(j)%r(2) - box_dim(2)*sig(mcy)
+                data_manbo_out(num)%r(3) = data_manbo(j)%r(3) - box_dim(3)*sig(mcz)
+              ELSE IF (conditions(2)) THEN
+                data_manbo_out(num)%r(2) = data_manbo(j)%r(2) - box_dim(2)*sig(mcy2)
+                data_manbo_out(num)%r(3) = data_manbo(j)%r(3) - box_dim(3)*sig(mcz2)
+              ELSE
+                data_manbo_out(num)%r(2) = data_manbo(j)%r(2) - box_dim(2)*sig(mcy3)
+                data_manbo_out(num)%r(3) = data_manbo(j)%r(3) - box_dim(3)*sig(mcz3)
+              END IF
               data_manbo_out(num)%an   = data_manbo(j)%an
               data_manbo_out(num)%mass = data_manbo(j)%mass
               data_manbo_out(num)%mol  = k
               IF (group_monomers>1) THEN
-                IF (data_manbo(j)%mol_orig==orig_mols(i)%m(1)) THEN
+                IF (data_manbo(j)%mol_orig==n1) THEN
                   data_manbo_out(num)%mol_orig  = k2 + 1
-                ELSE IF (data_manbo(j)%mol_orig==orig_mols(i)%m(2)) THEN
+                ELSE IF (data_manbo(j)%mol_orig==n2) THEN
                   data_manbo_out(num)%mol_orig  = k2 + 2
-                ELSE IF (data_manbo(j)%mol_orig==orig_mols(i)%m(3)) THEN
+                ELSE IF (data_manbo(j)%mol_orig==n3) THEN
                   data_manbo_out(num)%mol_orig  = k2 + 3              
                 END IF
               END IF
@@ -316,35 +508,62 @@ MODULE manbo_forces
         IF (group_monomers>1) THEN
           k2 = k2 + 1
           orig_mols_out(k - n_mols)%m(1) = k2
-          IF (.not. orig_mols(i)%m(2)==0) THEN
+          IF (.not. n2==0) THEN
             k2 = k2 + 1
             orig_mols_out(k - n_mols)%m(2) = k2
           END IF
-          IF (.not. orig_mols(i)%m(3)==0) THEN
+          IF (.not. n3==0) THEN
             k2 = k2 + 1
             orig_mols_out(k - n_mols)%m(3) = k2
           END IF
         END IF
       END IF
-    
-      IF(dxyz < cutoff) THEN
+  
+      IF (.not. group_monomers>1) THEN
+        conditions(1) = dxyz < cutoff
+        conditions(2) = .FALSE.
+        conditions(3) = .FALSE.
+      ELSE
+        conditions(1) = dxyz < cutoff
+        IF (n2 .ne. 0) THEN
+          conditions(2) = dxyz2 < cutoff
+        ELSE
+          conditions(2) = .FALSE.
+        END IF
+        IF (n3 .ne. 0) THEN
+          conditions(3) = dxyz3 < cutoff
+        ELSE
+          conditions(3) = .FALSE.
+        END IF
+      END IF
+      IF(conditions(1) .or. conditions(2) .or. conditions(3)) THEN
         k = k + 1
         orig_repli_mol(k - n_mols) = i
           DO j=1,n_atoms
             IF(data_manbo(j)%mol==i) THEN
               num = num + 1
-              data_manbo_out(num)%r(1) = data_manbo(j)%r(1) - box_dim(1)*sig(mcx)
-              data_manbo_out(num)%r(2) = data_manbo(j)%r(2) - box_dim(2)*sig(mcy)
-              data_manbo_out(num)%r(3) = data_manbo(j)%r(3) - box_dim(3)*sig(mcz)
+              IF (conditions(1)) THEN
+                data_manbo_out(num)%r(1) = data_manbo(j)%r(1) - box_dim(1)*sig(mcx)
+                data_manbo_out(num)%r(2) = data_manbo(j)%r(2) - box_dim(2)*sig(mcy)
+                data_manbo_out(num)%r(3) = data_manbo(j)%r(3) - box_dim(3)*sig(mcz)
+              ELSE IF (conditions(2)) THEN
+                data_manbo_out(num)%r(1) = data_manbo(j)%r(1) - box_dim(1)*sig(mcx2)
+                data_manbo_out(num)%r(2) = data_manbo(j)%r(2) - box_dim(2)*sig(mcy2)
+                data_manbo_out(num)%r(3) = data_manbo(j)%r(3) - box_dim(3)*sig(mcz2)
+              ELSE
+                data_manbo_out(num)%r(1) = data_manbo(j)%r(1) - box_dim(1)*sig(mcx3)
+                data_manbo_out(num)%r(2) = data_manbo(j)%r(2) - box_dim(2)*sig(mcy3)
+                data_manbo_out(num)%r(3) = data_manbo(j)%r(3) - box_dim(3)*sig(mcz3)
+              END IF
               data_manbo_out(num)%an   = data_manbo(j)%an
               data_manbo_out(num)%mass = data_manbo(j)%mass
               data_manbo_out(num)%mol  = k
               IF (group_monomers>1) THEN
-                IF (data_manbo(j)%mol_orig==orig_mols(i)%m(1)) THEN
+                IF (data_manbo(j)%mol_orig==n1) THEN
                   data_manbo_out(num)%mol_orig  = k2 + 1
-                ELSE IF (data_manbo(j)%mol_orig==orig_mols(i)%m(2)) THEN
+                ELSE IF (data_manbo(j)%mol_orig==n2) THEN
                   data_manbo_out(num)%mol_orig  = k2 + 2
-                ELSE IF (data_manbo(j)%mol_orig==orig_mols(i)%m(3)) THEN
+                ELSE IF (data_manbo(j)%mol_orig==n3) THEN
                   data_manbo_out(num)%mol_orig  = k2 + 3              
                 END IF
               END IF
@@ -355,11 +574,11 @@ MODULE manbo_forces
         IF (group_monomers>1) THEN
           k2 = k2 + 1
           orig_mols_out(k - n_mols)%m(1) = k2
-          IF (.not. orig_mols(i)%m(2)==0) THEN
+          IF (.not. n2==0) THEN
             k2 = k2 + 1
             orig_mols_out(k - n_mols)%m(2) = k2
           END IF
-          IF (.not. orig_mols(i)%m(3)==0) THEN
+          IF (.not. n3==0) THEN
             k2 = k2 + 1
             orig_mols_out(k - n_mols)%m(3) = k2
           END IF
