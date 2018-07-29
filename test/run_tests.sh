@@ -26,10 +26,13 @@ fi
 echo ""
 
 # Listing tests
-tests_list="4w.n2emb.eembeco.g1_bse 4w.n2emb.eembe.g1_long 4w.n3emb.eembe.g1
-20w.n2emb.eembe.g1_pbc 20w.n2emb.eembe.g2_pbc 20w.n2emb.eembe.g3_pbc"
+#tests_list="4w.n2emb.eembeco.g1_bse 4w.n2emb.eembe.g1_long 4w.n3emb.eembe.g1
+#20w.n2emb.eembe.g1_pbc 20w.n2emb.eembe.g2_pbc 20w.n2emb.eembe.g3_pbc"
+tests_list="4w.n3emb.eembe.g1 20w.n2emb.eembe.g1_pbc 20w.n2emb.eembe.g2_pbc"
 
 # Executing tests
+npass=0
+nfail=0
 for test in $tests_list
 do
    echo "********************************************"
@@ -37,8 +40,22 @@ do
    echo "********************************************"
    echo "=============================================================="
    cd $test
-   ./run.sh
+   ./run.sh > ../test.output.dat
    cd ..
+   cat test.output.dat
+   num=$(grep "PASS" test.output.dat | wc -l)
+   npass=$((npass + num))
+   num=$(grep "FAIL" test.output.dat | wc -l)
+   nfail=$((nfail + num))
+   rm test.output.dat
 done
+
+echo ""
+echo "***********"
+echo "  Summary"
+echo "***********"
+ntests=$((npass + nfail))
+printf "  %3d out of %3d tests PASSED\n" $npass $ntests
+printf "  %3d out of %3d tests FAILED\n" $nfail $ntests
 
 exit 0
