@@ -430,9 +430,9 @@ MODULE manbo_input_reading
         DO i=1,n_atoms
           val = val + data_manbo(i)%mass
         END DO
-      WRITE(line,'(f8.4)') val
+      WRITE(line,'(f10.4)') val
       CALL log_write("Total mass: " // TRIM(ADJUSTL(line)) // " a.u.")
-      WRITE(line,'(f8.4)') val*1.66053886/(box_dim(1)*box_dim(2)*box_dim(3))
+      WRITE(line,'(f10.4)') val*1.66053886/(box_dim(1)*box_dim(2)*box_dim(3))
       CALL log_write("Density: " // TRIM(ADJUSTL(line)) // " g/cm^3")
       IF(cutoff>(MINVAL(box_dim)/2) .AND. apply_pbc) THEN
         CALL log_write("")
