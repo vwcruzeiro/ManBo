@@ -60,7 +60,7 @@ MODULE manbo_subroutines
   ! This function returns true if a pair of two molecules (m1,m2) is within the cutoff
     IMPLICIT NONE
     INTEGER, INTENT(in) :: m1, m2
-    INTEGER :: i, j, n1, n2, num
+    INTEGER :: i, j, n1, n2
     LOGICAL :: valid
     
     valid = .FALSE.
@@ -73,7 +73,6 @@ MODULE manbo_subroutines
         IF (vector_module(mc_out(m1-n_mols)%r - mc_out(m2-n_mols)%r)<cutoff) valid = .TRUE.
       END IF
     ELSE
-      num = 0
       DO i=1,3
         IF (m1<=n_mols) THEN
           n1 = orig_mols(m1)%m(i)
@@ -90,25 +89,22 @@ MODULE manbo_subroutines
           IF (n2==0) EXIT
           IF (n1<=n_mols_orig .AND. n2<=n_mols_orig) THEN
             IF (vector_module(mc_orig(n1)%r - mc_orig(n2)%r)<cutoff) THEN
-              num = num+1
-              IF (num==2) EXIT
+              valid = .TRUE.
+              EXIT
             END IF
           ELSE IF (n1<=n_mols_orig .AND. n2>n_mols_orig) THEN
             IF (vector_module(mc_orig(n1)%r - mc_out_orig(n2-n_mols_orig)%r)<cutoff) THEN
-              num = num+1
-              IF (num==2) EXIT
+              valid = .TRUE.
+              EXIT
             END IF
           ELSE IF (n1>n_mols_orig .AND. n2>n_mols_orig) THEN
             IF (vector_module(mc_out_orig(n1-n_mols_orig)%r - mc_out_orig(n2-n_mols_orig)%r)<cutoff) THEN
-              num = num+1
-              IF (num==2) EXIT
+              valid = .TRUE.
+              EXIT
             END IF
           END IF
         END DO
-        IF (num==2) THEN
-          valid = .TRUE.
-          EXIT
-        END IF
+        IF (valid) EXIT
       END DO
     END IF
 
