@@ -1,0 +1,248 @@
+ ==============================================================================
+                                    ManBo                                      
+       Ab Initio Molecular Dynamics Program that uses Many Body Expansion      
+ ==============================================================================
+      Created by Vinicius Wilian Dias Cruzeiro and Herbert de Castro Georg     
+ 
+| ManBo has started at 16:25:26 of July 30, 2018     
+ 
+
+Quantum Chemistry Program (QCP) to be used: g09
+Memory required by the QCP: 600MB
+Quantum Chemistry Method to be used: MP2
+Basis Set Functions to be used: STO-3G
+Apply the Many-Body Expansion on the correlation energy only: Yes
+Cutoff Radius to be applied on the Many Body Expansion (MBE) calculations: 18.0001 A
+Number of molecules of the system: 4
+Number of atoms of the system: 12
+Number of steps to be executed: 5
+Time interval between the steps: 0.1000 femtoseconds
+Generate random initial velocities: Yes
+Temperature to be used to generate random initial velocities: 298.00000000000000 K
+Seed to be used to generate the random numbers, for random initial velocities: 28
+Apply Periodic Boundary Conditions (PBC): No
+Order in which the MBE is going to be truncated: 2
+Use electrostatic embedding: Yes
+Use an Embedding Cutoff Radius: No
+Apply Berendsen thermostat: Yes
+Target temperature of the Berendsen thermostat: 298.00000000000000 K
+Factor T used in Berendsen thermostat: 5.0000000000000000 picoseconds
+
+|*** Running the Hybrid MPI-OpenMP version of ManBo ***
+|  Number of MPI threads available:       1
+|  Number of OpenMP processors available: 8
+|  Number of OpenMP threads available:    8
+|  Number of processors to be used by the QM program on each calculation: 1
+
+Input orientation values entered for the atoms (Coordinates are given in Angstroms and charges in A.U.):
+===============================================================================================
+  Atom   Symbol     Position X       Position Y       Position Z     Molecule    Emb. Charge   
+===============================================================================================
+    1      O       0.0369800000    -0.0128100000    -0.0514100000         1       -0.834000
+    2      H      -0.8327600000    -0.4589100000     0.1598000000         1        0.417000
+    3      H       0.2457500000     0.6623000000     0.6561900000         1        0.417000
+    4      O       2.7650100000    -0.1459400000     0.6737300000         2       -0.834000
+    5      H       2.1507300000     0.0184800000    -0.0980700000         2        0.417000
+    6      H       2.3250100000    -0.7655800000     1.3237400000         2        0.417000
+    7      O       0.8264000000    -1.5709100000     2.4790300000         3       -0.834000
+    8      H       0.7193900000    -2.0257300000     1.5948700000         3        0.417000
+    9      H       1.1566200000    -2.2298000000     3.1549400000         3        0.417000
+   10      O       2.8706300000     1.6839400000     2.5846200000         4       -0.834000
+   11      H       3.1092900000     1.4676600000     1.6378800000         4        0.417000
+   12      H       2.7596300000     0.8356500000     3.1024600000         4        0.417000
+-----------------------------------------------------------------------------------------------
+
+WARNING: As the box dimensions were not given in the input file, we reoriented the box (with rotations
+         and translations) and got the box dimensions
+
+Reoriented values entered for the atoms (Coordinates are given in Angstroms and charges in A.U.):
+===============================================================================================
+  Atom   Symbol     Position X       Position Y       Position Z     Molecule    Emb. Charge   
+===============================================================================================
+    1      O      -1.2560734003     1.4066813870     1.0399007187         1       -0.834000
+    2      H      -2.2228442489     1.1860139798     1.1692164698         1        0.417000
+    3      H      -0.6930270788     0.6712814361     1.4170239572         1        0.417000
+    4      O       0.8834071129     0.8005223415    -0.7039151094         2       -0.834000
+    5      H       0.4799913000     1.5365325862    -0.1602298177         2        0.417000
+    6      H       0.1647633568     0.1691354939    -0.9954087290         2        0.417000
+    7      O      -1.5224063735    -0.9985023780    -0.8569767007         3       -0.834000
+    8      H      -1.8743920536    -0.0952327982    -1.1024587274         3        0.417000
+    9      H      -1.6379674215    -1.6225303130    -1.6298094051         3        0.417000
+   10      O       2.0354974957    -1.2042567814     0.5863040227         4       -0.834000
+   11      H       2.1034307947    -0.2380346175     0.3376032820         4        0.417000
+   12      H       1.4509979495    -1.6777170714    -0.0726882565         4        0.417000
+-----------------------------------------------------------------------------------------------
+Dimensions of the box:
+  x: 4.326275 A
+  y: 3.214250 A
+  z: 3.046833 A
+Volume: 42.368436 A^3
+Total mass: 72.0592 a.u.
+Density: 2.8242 g/cm^3
+
+Charge and Multiplicity of the Molecules:
+====================================
+  Molecule   Charge   Multiplicity  
+====================================
+       1       0           1
+       2       0           1
+       3       0           1
+       4       0           1
+------------------------------------
+
+Initial velocities of Atoms, generated randomly (given in Angstroms/picosecond):
+===========================================================
+  Atom     Velocity X       Velocity Y       Velocity Z    
+===========================================================
+    1     0.0009128484    -0.0000374000     0.0026346552
+    2    -0.0185428348     0.0184793337    -0.0123829287
+    3    -0.0247358401     0.0193871391    -0.0151309379
+    4     0.0020211494    -0.0025107443     0.0021061500
+    5    -0.0213788366     0.0159464727    -0.0101164242
+    6    -0.0190713513     0.0179750369    -0.0130386854
+    7     0.0054940440    -0.0033550123     0.0006181049
+    8    -0.0233740554     0.0189825317    -0.0122791746
+    9    -0.0199464778     0.0156307196    -0.0128769125
+   10     0.0024092161    -0.0030212463     0.0010725234
+   11    -0.0225745069     0.0171895425    -0.0141742974
+   12    -0.0224023740     0.0180716096    -0.0120906292
+-----------------------------------------------------------
+
+====================================================================
+ Step        0 - Calculating the initial forces                     
+====================================================================
+
+  None of the atoms were replicated.
+
+  Number of monomers, dimers and trimers used in the calculation of forces:
+          4 monomer(s)
+          6 dimer(s)
+          0 trimer(s)
+   Full EE-MBE Energy done with         MP2:                     -300.01482426 Hartrees
+   Full EE-MBE Energy done with HF:                              -299.85933866 Hartrees
+   Full HF Energy (no EE-MBE):                                   -299.85932883 Hartrees
+   MP2 Energy with EE-MBE on the correlation only:    -300.01481444 Hartrees
+
+|  This step ended at 16:25:46 of July 30, 2018     
+|  Average time per step:    0 days,  0 hours,  0 minutes, and 20.585 seconds.
+|  The execution is estimated to end in:    0 days,  0 hours,  1 minutes, and 42.925 seconds.
+--------------------------------------------------------------------
+
+====================================================================
+ Step        1 of        5
+====================================================================
+
+  None of the atoms were replicated.
+
+  Number of monomers, dimers and trimers used in the calculation of forces:
+          4 monomer(s)
+          6 dimer(s)
+          0 trimer(s)
+   Full EE-MBE Energy done with         MP2:                     -300.01549752 Hartrees
+   Full EE-MBE Energy done with HF:                              -299.85959377 Hartrees
+   Full HF Energy (no EE-MBE):                                   -299.85958657 Hartrees
+   MP2 Energy with EE-MBE on the correlation only:    -300.01549032 Hartrees
+
+  System's Temperature: 309.8502 K
+  Temperature/Target Temperature: 1.0398
+
+|  This step ended at 16:26: 8 of July 30, 2018     
+|  Average time per step:    0 days,  0 hours,  0 minutes, and 21.008 seconds.
+|  The execution is estimated to end in     0 days,  0 hours,  1 minutes, and 24.032 seconds.
+--------------------------------------------------------------------
+
+====================================================================
+ Step        2 of        5
+====================================================================
+
+  None of the atoms were replicated.
+
+  Number of monomers, dimers and trimers used in the calculation of forces:
+          4 monomer(s)
+          6 dimer(s)
+          0 trimer(s)
+   Full EE-MBE Energy done with         MP2:                     -300.01615815 Hartrees
+   Full EE-MBE Energy done with HF:                              -299.85981013 Hartrees
+   Full HF Energy (no EE-MBE):                                   -299.85980565 Hartrees
+   MP2 Energy with EE-MBE on the correlation only:    -300.01615368 Hartrees
+
+  System's Temperature: 321.2448 K
+  Temperature/Target Temperature: 1.0780
+
+|  This step ended at 16:26:29 of July 30, 2018     
+|  Average time per step:    0 days,  0 hours,  0 minutes, and 21.029 seconds.
+|  The execution is estimated to end in     0 days,  0 hours,  1 minutes, and  3.087 seconds.
+--------------------------------------------------------------------
+
+====================================================================
+ Step        3 of        5
+====================================================================
+
+  None of the atoms were replicated.
+
+  Number of monomers, dimers and trimers used in the calculation of forces:
+          4 monomer(s)
+          6 dimer(s)
+          0 trimer(s)
+   Full EE-MBE Energy done with         MP2:                     -300.01680312 Hartrees
+   Full EE-MBE Energy done with HF:                              -299.85998622 Hartrees
+   Full HF Energy (no EE-MBE):                                   -299.85998454 Hartrees
+   MP2 Energy with EE-MBE on the correlation only:    -300.01680144 Hartrees
+
+  System's Temperature: 332.1391 K
+  Temperature/Target Temperature: 1.1146
+
+|  This step ended at 16:26:49 of July 30, 2018     
+|  Average time per step:    0 days,  0 hours,  0 minutes, and 20.895 seconds.
+|  The execution is estimated to end in     0 days,  0 hours,  0 minutes, and 41.790 seconds.
+--------------------------------------------------------------------
+
+====================================================================
+ Step        4 of        5
+====================================================================
+
+  None of the atoms were replicated.
+
+  Number of monomers, dimers and trimers used in the calculation of forces:
+          4 monomer(s)
+          6 dimer(s)
+          0 trimer(s)
+   Full EE-MBE Energy done with         MP2:                     -300.01743075 Hartrees
+   Full EE-MBE Energy done with HF:                              -299.86012197 Hartrees
+   Full HF Energy (no EE-MBE):                                   -299.86012315 Hartrees
+   MP2 Energy with EE-MBE on the correlation only:    -300.01743194 Hartrees
+
+  System's Temperature: 342.5135 K
+  Temperature/Target Temperature: 1.1494
+
+|  This step ended at 16:27: 7 of July 30, 2018     
+|  Average time per step:    0 days,  0 hours,  0 minutes, and 20.142 seconds.
+|  The execution is estimated to end in     0 days,  0 hours,  0 minutes, and 20.142 seconds.
+--------------------------------------------------------------------
+
+====================================================================
+ Step        5 of        5
+====================================================================
+
+  None of the atoms were replicated.
+
+  Number of monomers, dimers and trimers used in the calculation of forces:
+          4 monomer(s)
+          6 dimer(s)
+          0 trimer(s)
+   Full EE-MBE Energy done with         MP2:                     -300.01804070 Hartrees
+   Full EE-MBE Energy done with HF:                              -299.86021863 Hartrees
+   Full HF Energy (no EE-MBE):                                   -299.86022275 Hartrees
+   MP2 Energy with EE-MBE on the correlation only:    -300.01804481 Hartrees
+
+  System's Temperature: 352.3724 K
+  Temperature/Target Temperature: 1.1825
+
+|  This step ended at 16:27:23 of July 30, 2018     
+--------------------------------------------------------------------
+
+ 
+| The execution ended at 16:27:23 of July 30, 2018     
+| The execution lasted    0 days,  0 hours,  1 minutes, and 57.507 seconds.
+| ManBo was successfully executed.
+ 
