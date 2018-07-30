@@ -18,17 +18,24 @@ MODULE manbo_input_reading
 
   CONTAINS
 
+#ifdef USE_PARALLEL
   SUBROUTINE read_input(mpi_id,mpi_size)
+#else
+  SUBROUTINE read_input(mpi_id)
+#endif
   ! This subroutine reads ManBo input file and its variables
 
     IMPLICIT NONE
 
+#ifdef USE_PARALLEL
     INTEGER, INTENT(in) :: mpi_id,mpi_size
+#else
+    INTEGER, INTENT(in) :: mpi_id
+#endif
     CHARACTER(LEN=200) :: line, text
-    INTEGER :: i, j, k, n
-    INTEGER :: ierr
+    INTEGER :: i, j
     DOUBLE PRECISION :: L, kr, val
-    INTEGER :: allocate_status, error
+    INTEGER :: allocate_status
     
     IF (mpi_id == 0) THEN
       delta_t = 1.0

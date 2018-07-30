@@ -692,10 +692,9 @@ MODULE manbo_forces
   ! This subroutine calculates the energy and the forces acting in each atom of the system
     IMPLICIT NONE
     INTEGER, INTENT(in) :: mpi_id
-    INTEGER :: i, num, vp_dim, mpi_size, ierr
+    INTEGER :: i, num, mpi_size
     INTEGER :: n_qm_procs_old, qm_prog_memory_old
     INTEGER, DIMENSION(2) :: char_mul_old
-    INTEGER :: allocate_status
     DOUBLE PRECISION :: A,B,C,D,E1_mbe2,E2_mbe2,E3_mbe2,E1_hfmbe2,E2_hfmbe2,E3_hfmbe2,&
                  E1_mbe3,E2_mbe3,E3_mbe3,E1_hfmbe3,E2_hfmbe3,E3_hfmbe3,E1_hffull2,&
                  E1_hffull3
@@ -705,7 +704,7 @@ MODULE manbo_forces
       DOUBLE PRECISION, DIMENSION(3) :: f_mbe2,f_hfmbe2,f_mbe3,f_hfmbe3,f_hffull2,f_hffull3
     END TYPE temp
     TYPE(temp), DIMENSION(n_atoms) :: data_temp
-    LOGICAL :: use_embedding_old, exists
+    LOGICAL :: use_embedding_old
 #ifdef USE_PARALLEL
     INTEGER, DIMENSION(MPI_STATUS_SIZE) :: status
 #endif
@@ -1135,8 +1134,8 @@ MODULE manbo_forces
     IMPLICIT NONE
     INTEGER, INTENT(in) :: mpi_id, p
     INTEGER :: allocate_status
-    INTEGER :: t1, t2, mpi_size, cnt, system
-    INTEGER :: i, j, k, w, num, vp_dim, ierr, tnpairs, npairs, ntrimers, local
+    INTEGER :: t1, t2, mpi_size, cnt
+    INTEGER :: i, j, k, num, vp_dim, tnpairs, npairs, ntrimers, local
     INTEGER, DIMENSION(3) :: list
     INTEGER, DIMENSION(:,:), ALLOCATABLE, SAVE :: pairs_list, trimers_list
     CHARACTER(LEN=100) :: line
@@ -1496,7 +1495,6 @@ MODULE manbo_forces
   ! This subroutine evaluates the forces and energies for full calculations
     IMPLICIT NONE
     INTEGER, INTENT(in) :: num
-    INTEGER :: allocate_status
     INTEGER, DIMENSION(3) :: list
     DOUBLE PRECISION, DIMENSION(1) :: U
     TYPE(forces), DIMENSION(n_atoms,1) :: force
@@ -1532,7 +1530,6 @@ MODULE manbo_forces
     DOUBLE PRECISION, DIMENSION(val), INTENT(out) :: U
     TYPE(forces), DIMENSION(n_atoms,val2), INTENT(out) :: force
     INTEGER, INTENT(in) :: local, y
-    INTEGER :: i
 
     IF(qm_prog=="g03" .OR. qm_prog=="g09") THEN
       CALL qm_prog_gaussian(force,U,val,val2,local,list,y)
@@ -1551,7 +1548,7 @@ MODULE manbo_forces
     INTEGER, INTENT(in) :: local, y, val, val2
     DOUBLE PRECISION, DIMENSION(val), INTENT(out) :: U
     TYPE(forces), DIMENSION(n_atoms,val2), INTENT(out) :: force
-    INTEGER :: i, j, w, num, j1, j2, j3
+    INTEGER :: j, w, num, j1, j2, j3
     INTEGER :: k, system
     DOUBLE PRECISION, DIMENSION(3) :: pos, pos2, mc2, mc3
     DOUBLE PRECISION :: r12, sener

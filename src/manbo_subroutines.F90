@@ -601,7 +601,6 @@ MODULE manbo_subroutines
     INTEGER :: i
     DOUBLE PRECISION :: rv_temp
     DOUBLE PRECISION, DIMENSION(3) :: rv_p, rv_L
-    CHARACTER(LEN=60) :: line
 
     CALL SRAND(rand_vel_seed)
 
@@ -646,7 +645,6 @@ MODULE manbo_subroutines
     DOUBLE PRECISION, DIMENSION(n_mols_orig-1,n_mols_orig) :: distp
     DOUBLE PRECISION, DIMENSION(n_mols_orig-2,n_mols_orig-1,n_mols_orig) :: distt
     DOUBLE PRECISION :: dist_max
-    CHARACTER(LEN=60) :: line
     
     complete = 1
     ! Here 1 means no molecules has been added to a new group
@@ -702,7 +700,7 @@ MODULE manbo_subroutines
       DEALLOCATE(mc, char_mul)
       ALLOCATE(mc(n_mols), char_mul(n_mols))
       IF (ALLOCATED(orig_repli_mol)) THEN
-        num = 1.15*NINT(FLOAT(SIZE(orig_repli_mol)*n_mols)/FLOAT(n_mols_orig))
+        num = NINT(1.35*FLOAT(SIZE(orig_repli_mol)*n_mols)/FLOAT(n_mols_orig))
         DEALLOCATE(orig_repli_mol)
         ALLOCATE(orig_repli_mol(num))
       END IF

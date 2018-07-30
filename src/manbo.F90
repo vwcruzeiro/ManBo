@@ -23,7 +23,7 @@ PROGRAM manbo
 
   IMPLICIT NONE
   CHARACTER(LEN=50) :: line
-  INTEGER :: temp_dt, ierr, mpi_id, mpi_size
+  INTEGER :: temp_dt, mpi_id, mpi_size
   ! mpi_id is the id of a MPI thread
   ! mpi_size is the total number of MPI threads
   INTEGER, DIMENSION(5) :: dif_temp_dt
@@ -33,14 +33,18 @@ PROGRAM manbo
 
   call MPI_COMM_RANK (MPI_COMM_WORLD, mpi_id, ierr)
   call MPI_COMM_SIZE (MPI_COMM_WORLD, mpi_size, ierr)
-#else
-  mpi_id = 0
-  mpi_size = 1
-#endif /* USE_PARALLEL */
   
   CALL read_input(mpi_id,mpi_size)
   ! Here we read and initiate the main variables of the program.
   ! Initial positions (and possibly velocities) are read.
+#else
+  mpi_id = 0
+  mpi_size = 1
+  
+  CALL read_input(mpi_id)
+  ! Here we read and initiate the main variables of the program.
+  ! Initial positions (and possibly velocities) are read.
+#endif /* USE_PARALLEL */
 
   IF (mpi_id == 0) THEN
     
