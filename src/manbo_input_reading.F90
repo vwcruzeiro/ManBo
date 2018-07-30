@@ -198,7 +198,7 @@ MODULE manbo_input_reading
       ELSE
         L = ((FLOAT(n_mols)/20.0)**(1.0/3.0))*8.0
       END IF
-      kr = 1.25*(8*((cutoff/L)**3) + 12*((cutoff/L)**2) + 6*(cutoff/L)) + 1.0/n_mols
+      kr = 1.50*(8*((cutoff/L)**3) + 12*((cutoff/L)**2) + 6*(cutoff/L)) + 1.0/n_mols
       ! This is an estimate for allocate data_manbo_out
     END IF
     

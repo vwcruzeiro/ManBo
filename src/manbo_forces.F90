@@ -50,7 +50,7 @@ MODULE manbo_forces
     num = 0
 
     L = MAXVAL(box_dim)
-    x = 1.15*NINT((1.25*(8*((cutoff/L)**3) + 12*((cutoff/L)**2) + 6*(cutoff/L)) + 1.0/n_mols)*n_atoms)
+    x = 1.50*NINT((1.25*(8*((cutoff/L)**3) + 12*((cutoff/L)**2) + 6*(cutoff/L)) + 1.0/n_mols)*n_atoms)
     ! This is an estimate for allocate data_manbo_out
 
     DEALLOCATE(data_manbo_out, stat=allocate_status)
@@ -60,7 +60,7 @@ MODULE manbo_forces
         CALL log_close(1)
         STOP
       END IF
-      
+    
     ALLOCATE(data_manbo_out(x), stat=allocate_status)
       IF(allocate_status/=0) THEN
         PRINT *, "No memory enough to allocate. ManBo cannot run."
