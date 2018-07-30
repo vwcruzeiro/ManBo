@@ -702,7 +702,7 @@ MODULE manbo_subroutines
       DEALLOCATE(mc, char_mul)
       ALLOCATE(mc(n_mols), char_mul(n_mols))
       IF (ALLOCATED(orig_repli_mol)) THEN
-        num = NINT(FLOAT(SIZE(orig_repli_mol)*n_mols)/FLOAT(n_mols_orig))
+        num = 1.15*NINT(FLOAT(SIZE(orig_repli_mol)*n_mols)/FLOAT(n_mols_orig))
         DEALLOCATE(orig_repli_mol)
         ALLOCATE(orig_repli_mol(num))
       END IF
