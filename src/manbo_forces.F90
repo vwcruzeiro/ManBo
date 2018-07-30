@@ -50,7 +50,7 @@ MODULE manbo_forces
     num = 0
 
     L = MAXVAL(box_dim)
-    x = 1.50*NINT((1.25*(8*((cutoff/L)**3) + 12*((cutoff/L)**2) + 6*(cutoff/L)) + 1.0/n_mols)*n_atoms)
+    x = NINT(2.0*(1.25*(8*((cutoff/L)**3) + 12*((cutoff/L)**2) + 6*(cutoff/L)) + 1.0/n_mols)*n_atoms)
     ! This is an estimate for allocate data_manbo_out
 
     DEALLOCATE(data_manbo_out, stat=allocate_status)
@@ -1148,9 +1148,9 @@ MODULE manbo_forces
     
     IF (mpi_id == 0) THEN
       IF (n_atoms_out > 0) THEN
-        vp_dim = NINT(((1.0+2.0*cutoff/MINVAL(box_dim))**3)*n_mols*((2*cutoff/MINVAL(box_dim))**3))
+        vp_dim = NINT(2.0*((1.0+2.0*cutoff/MINVAL(box_dim))**3)*n_mols*((2*cutoff/MINVAL(box_dim))**3))
       ELSE
-        vp_dim = NINT(n_mols*((2*cutoff/MINVAL(box_dim))**3))
+        vp_dim = NINT(2.0*n_mols*((2*cutoff/MINVAL(box_dim))**3))
       END IF
       ! This is an estimate for allocate val_pairs
     END IF
