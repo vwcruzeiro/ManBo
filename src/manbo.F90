@@ -27,8 +27,9 @@ PROGRAM manbo
   ! mpi_id is the id of a MPI thread
   ! mpi_size is the total number of MPI threads
   INTEGER, DIMENSION(5) :: dif_temp_dt
+#ifdef USE_PARALLEL
+  INTEGER :: ierr
   
-#ifdef USE_PARALLEL  
   call MPI_INIT ( ierr )
 
   call MPI_COMM_RANK (MPI_COMM_WORLD, mpi_id, ierr)
@@ -38,6 +39,7 @@ PROGRAM manbo
   ! Here we read and initiate the main variables of the program.
   ! Initial positions (and possibly velocities) are read.
 #else
+
   mpi_id = 0
   mpi_size = 1
   

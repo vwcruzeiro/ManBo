@@ -707,6 +707,7 @@ MODULE manbo_forces
     LOGICAL :: use_embedding_old
 #ifdef USE_PARALLEL
     INTEGER, DIMENSION(MPI_STATUS_SIZE) :: status
+    INTEGER :: ierr
 #endif
     
     IF (mpi_id == 0) THEN
@@ -1144,6 +1145,9 @@ MODULE manbo_forces
     ! U contains the energy of a monomer, a dimer, or trimer given in  hartree (atomic unit)
     TYPE(forces), DIMENSION(:,:), ALLOCATABLE, SAVE :: force, forcep
     ! force contains the force of a monomer, a dimer, or trimer
+#ifdef USE_PARALLEL
+    INTEGER :: ierr
+#endif
     
     IF (mpi_id == 0) THEN
       IF (n_atoms_out > 0) THEN

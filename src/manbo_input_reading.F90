@@ -29,6 +29,7 @@ MODULE manbo_input_reading
 
 #ifdef USE_PARALLEL
     INTEGER, INTENT(in) :: mpi_id,mpi_size
+    INTEGER :: ierr
 #else
     INTEGER, INTENT(in) :: mpi_id
 #endif
