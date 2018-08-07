@@ -61,7 +61,7 @@ MODULE manbo_log
         month = "December"
       END IF
 
-    WRITE(line, '(i2,":",i2,":",i2," of ",a," ",i2,", ",i4)') time(5), time(6), time(7),&
+    WRITE(line, '(i2.2,":",i2.2,":",i2.2," of ",a," ",i2.2,", ",i4.4)') time(5), time(6), time(7),&
                          TRIM(ADJUSTL(month)), time(3), time(1)
     WRITE(100,'(a," ",a)') text, line
   END SUBROUTINE log_time
