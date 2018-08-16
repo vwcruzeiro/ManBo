@@ -53,6 +53,12 @@ PROGRAM manbo
     md_step = 0
     ! Initial step is setted
     
+    
+    IF(apply_pbc) THEN
+      CALL apply_boundary_conditions
+    END IF
+    ! Apply PBC in the initial configuration
+    
     CALL log_write("====================================================================")
     CALL log_write(" Step        0 - Calculating the initial forces                     ")
     CALL log_write("====================================================================")

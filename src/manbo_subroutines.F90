@@ -290,11 +290,12 @@ MODULE manbo_subroutines
       END DO
   END SUBROUTINE apply_boundary_conditions
 
-  SUBROUTINE reorient_box
+  SUBROUTINE reorient_box(opt)
   ! This subroutine reorients the positions of the atoms inside the box and gets the box dimensions.
   ! The system is translated in such a way the origin of the axis is at the center of mass of the system
   ! and then rotations are performed to place the farthest atom on the edge of the box
     IMPLICIT NONE
+    INTEGER, INTENT(in) :: opt
     INTEGER :: i
     DOUBLE PRECISION, DIMENSION(3) :: vec, r_old
     DOUBLE PRECISION :: tmass, theta, alp, num, val, val_old
@@ -312,6 +313,9 @@ MODULE manbo_subroutines
     DO i=1,n_atoms
       data_manbo(i)%r = data_manbo(i)%r - vec
     END DO
+    
+    ! If the mode of execution equals to 2, only do the box translation
+    IF (opt .eq. 2) RETURN
     
     ! Getting the coordinates of the farthest atom
     vec = 0.0

@@ -395,7 +395,7 @@ MODULE manbo_input_reading
         CALL log_write("-------------------------------------------------------------------------------")
       END IF
       IF (vector_module(box_dim)<1E-5) THEN
-        CALL reorient_box()
+        CALL reorient_box(1)
         CALL log_write("")
         CALL log_write("WARNING: As the box dimensions were not given in the input file, we reoriented the box (with rotations")
         CALL log_write("         and translations) and got the box dimensions")
@@ -424,6 +424,8 @@ MODULE manbo_input_reading
             END DO
           CALL log_write("-------------------------------------------------------------------------------")
         END IF
+      ELSE IF (apply_pbc) THEN
+        CALL reorient_box(2)
       END IF
       CALL log_write("Dimensions of the box:")
       WRITE(line,'(f10.6)') box_dim(1)
