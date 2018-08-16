@@ -220,12 +220,12 @@ MODULE manbo_input_reading
 #endif /* USE_PARALLEL */
     
     IF(kr<0.1 .OR. .NOT. apply_pbc) THEN
-      ALLOCATE(data_manbo(n_atoms), mc(n_mols), char_mul(n_mols), &
-               char_mul_orig(n_mols), stat=allocate_status)
+      ALLOCATE(data_manbo(n_atoms), mc(n_mols), mc_orig(n_mols_orig), &
+               char_mul(n_mols), char_mul_orig(n_mols_orig), stat=allocate_status)
     ELSE
       ALLOCATE(data_manbo(n_atoms), data_manbo_out(NINT(kr*n_atoms)),&
-               mc(n_mols), char_mul(n_mols), char_mul_orig(n_mols),&
-               orig_repli_mol(NINT(kr*n_mols)), stat=allocate_status)
+               mc(n_mols), mc_orig(n_mols_orig), char_mul(n_mols), &
+               char_mul_orig(n_mols_orig), orig_repli_mol(NINT(kr*n_mols)), stat=allocate_status)
     END IF
     ! Here we allocate some variables
     IF(allocate_status/=0) THEN

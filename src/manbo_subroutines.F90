@@ -652,9 +652,6 @@ MODULE manbo_subroutines
     
     complete = 1
     ! Here 1 means no molecules has been added to a new group
-
-    ! Reallocating important variables
-    IF (.not. ALLOCATED(mc_orig)) ALLOCATE(mc_orig(n_mols_orig))
     
     ! Computing distances
     n_mols = n_mols_orig
