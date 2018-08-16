@@ -27,7 +27,7 @@ echo ""
 
 # Listing tests
 tests_list="4w.n2emb.eembeco.g1_bse 4w.n2emb.eembe.g1_long 4w.n2emb.eembeco.g1_long 4w.n3emb.eembe.g1
-            20w.n2emb.eembe.g1_pbc 20w.n2emb.eembe.g2_pbc 20w.n2emb.eembe.g3_pbc
+            20w.n2emb.eembe.g1_pbc 20w.n2emb.eembe.g2_pbc 20w.n2emb.eembe.g3_pbc 32w.n2emb.eembeco.g1_pbc
             64w.n2emb.eembe.g1_pbc 64w.n2emb.eembe.g2_pbc 64w.n2emb.eembe.g3_pbc
             64w.n2emb.eembeco.g1_pbc"
 
