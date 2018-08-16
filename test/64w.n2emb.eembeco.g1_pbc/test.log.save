@@ -4,7 +4,7 @@
  ==============================================================================
       Created by Vinicius Wilian Dias Cruzeiro and Herbert de Castro Georg     
  
-| ManBo has started at 00:08:30 of August 16, 2018   
+| ManBo has started at 14:40:19 of August 16, 2018   
  
 
 Quantum Chemistry Program (QCP) to be used: g09
@@ -508,7 +508,7 @@ Initial velocities of Atoms, obtained from the input file (given in Angstroms/pi
  Step        0 - Calculating the initial forces                     
 ====================================================================
 
-   405 atom(s) of  135 molecule(s) were successfully replicated.
+   411 atom(s) of  137 molecule(s) were successfully replicated.
 
   Number of monomers, dimers and trimers used in the calculation of forces:
          64 monomer(s)
@@ -516,14 +516,14 @@ Initial velocities of Atoms, obtained from the input file (given in Angstroms/pi
           0 trimer(s)
    Full EE-MBE Energy done with         MP2:                    -4801.28707969 Hartrees
    Full EE-MBE Energy done with HF:                             -4798.70199475 Hartrees
-   Full HF Energy (no EE-MBE):                                 -14919.91738000 Hartrees
-   MP2 Energy with EE-MBE on the correlation only:  -14922.50246494 Hartrees
+   Full HF Energy (no EE-MBE):                                 -15069.88824530 Hartrees
+   MP2 Energy with EE-MBE on the correlation only:  -15072.47333024 Hartrees
 
-|  This step ended at 00:14:58 of August 16, 2018   
+|  This step ended at 14:46:33 of August 16, 2018   
 --------------------------------------------------------------------
 
  
-| The execution ended at 00:14:58 of August 16, 2018   
-| The execution lasted    0 days,  0 hours,  6 minutes, and 27.704 seconds.
+| The execution ended at 14:46:33 of August 16, 2018   
+| The execution lasted    0 days,  0 hours,  6 minutes, and 13.798 seconds.
 | ManBo was successfully executed.
  

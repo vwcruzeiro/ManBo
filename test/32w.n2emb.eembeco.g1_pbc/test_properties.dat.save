@@ -9,11 +9,11 @@
  System's total angular momentum:      0.000000      0.000000      0.000000   a.u. ("reduced Plank constant"/bohr)
  System's total angular momentum modulus:      0.000000   a.u. ("reduced Plank constant"/bohr)
   
- One-Body Term Energy (E1):    -1488.37466077   hartrees
- Two-Body Term Energy (E2):        1.53716162   hartrees
+ One-Body Term Energy (E1):    -6587.39824917   hartrees
+ Two-Body Term Energy (E2):       -0.12675710   hartrees
  Tree-Body Term Energy (E3):       0.00000000   hartrees
- Total energy:   -1486.83749915   hartrees
+ Total energy:   -6587.52500627   hartrees
  Nuclei kinetic energy (E_kin):       0.00000000   hartrees
- Total + kinetic energy (E1 + E2 + E3 + E_kin):   -1486.83749915   hartrees
- Total energy per molecule:    -93298.218178   kcal/mol
- E2 + E3 per molecule:        96.456028   kcal/mol
+ Total + kinetic energy (E1 + E2 + E3 + E_kin):   -6587.52500627   hartrees
+ Total energy per molecule:   -129176.092217   kcal/mol
+ E2 + E3 per molecule:        -2.485605   kcal/mol

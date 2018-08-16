@@ -4,7 +4,7 @@
  ==============================================================================
       Created by Vinicius Wilian Dias Cruzeiro and Herbert de Castro Georg     
  
-| ManBo has started at 22:33: 1 of July 29, 2018     
+| ManBo has started at 14:39:26 of August 16, 2018   
  
 
 Quantum Chemistry Program (QCP) to be used: g09
@@ -26,7 +26,10 @@ Use an Embedding Cutoff Radius: Yes
 Embedding Cutoff Radius to be used: 10.000000000000000 A
 Apply Berendsen thermostat: No
 
-|*** Running the Serial version of ManBo ***
+|*** Running the Hybrid MPI-OpenMP version of ManBo ***
+|  Number of MPI threads available:       1
+|  Number of OpenMP processors available: 8
+|  Number of OpenMP threads available:    8
 |  Number of processors to be used by the QM program on each calculation: 1
 
 Input orientation values entered for the atoms (Coordinates are given in Angstroms and charges in A.U.):
@@ -508,18 +511,18 @@ Initial velocities of Atoms, obtained from the input file (given in Angstroms/pi
 
   Grouped each 2 closer molecules into single monomers.
 
-   600 atom(s) of  100 molecule(s) were successfully replicated.
+   582 atom(s) of   97 molecule(s) were successfully replicated.
 
   Number of monomers, dimers and trimers used in the calculation of forces:
          32 monomer(s)
         114 dimer(s)
           0 trimer(s)
 
-|  This step ended at 22:35:49 of July 29, 2018     
+|  This step ended at 14:39:48 of August 16, 2018   
 --------------------------------------------------------------------
 
  
-| The execution ended at 22:35:49 of July 29, 2018     
-| The execution lasted    0 days,  0 hours,  2 minutes, and 48.504 seconds.
+| The execution ended at 14:39:48 of August 16, 2018   
+| The execution lasted    0 days,  0 hours,  0 minutes, and 22.070 seconds.
 | ManBo was successfully executed.
  

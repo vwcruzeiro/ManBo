@@ -4,7 +4,7 @@
  ==============================================================================
       Created by Vinicius Wilian Dias Cruzeiro and Herbert de Castro Georg     
  
-| ManBo has started at 17:29: 3 of July 29, 2018     
+| ManBo has started at 12:24:35 of August 16, 2018   
  
 
 Quantum Chemistry Program (QCP) to be used: g09
@@ -508,18 +508,18 @@ Initial velocities of Atoms, obtained from the input file (given in Angstroms/pi
  Step        0 - Calculating the initial forces                     
 ====================================================================
 
-   423 atom(s) of  141 molecule(s) were successfully replicated.
+   414 atom(s) of  138 molecule(s) were successfully replicated.
 
   Number of monomers, dimers and trimers used in the calculation of forces:
          64 monomer(s)
         143 dimer(s)
           0 trimer(s)
 
-|  This step ended at 17:30: 2 of July 29, 2018     
+|  This step ended at 12:25:03 of August 16, 2018   
 --------------------------------------------------------------------
 
  
-| The execution ended at 17:30: 2 of July 29, 2018     
-| The execution lasted    0 days,  0 hours,  0 minutes, and 59.144 seconds.
+| The execution ended at 12:25:03 of August 16, 2018   
+| The execution lasted    0 days,  0 hours,  0 minutes, and 27.367 seconds.
 | ManBo was successfully executed.
  
