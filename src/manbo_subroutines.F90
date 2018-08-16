@@ -262,30 +262,30 @@ MODULE manbo_subroutines
     ly2 = box_dim(2)/2
     lz2 = box_dim(3)/2
 
-      DO i=1,n_mols
-        IF(ABS(mc(i)%r(1)) > lx2) THEN
+      DO i=1,n_mols_orig
+        IF(ABS(mc_orig(i)%r(1)) > lx2) THEN
           DO j=1,n_atoms
-            IF(data_manbo(j)%mol==i) THEN
+            IF(data_manbo(j)%mol_orig==i) THEN
               data_manbo(j)%r(1) = data_manbo(j)%r(1) - box_dim(1)*sig(data_manbo(j)%r(1))
             END IF
           END DO
-          mc(i)%r(1) = mc(i)%r(1) - box_dim(1)*sig(mc(i)%r(1))
+          mc_orig(i)%r(1) = mc_orig(i)%r(1) - box_dim(1)*sig(mc_orig(i)%r(1))
         END IF
-        IF(ABS(mc(i)%r(2)) > ly2) THEN
+        IF(ABS(mc_orig(i)%r(2)) > ly2) THEN
           DO j=1,n_atoms
-            IF(data_manbo(j)%mol==i) THEN
+            IF(data_manbo(j)%mol_orig==i) THEN
               data_manbo(j)%r(2) = data_manbo(j)%r(2) - box_dim(2)*sig(data_manbo(j)%r(2))
             END IF
           END DO
-          mc(i)%r(2) = mc(i)%r(2) - box_dim(2)*sig(mc(i)%r(2))
+          mc_orig(i)%r(2) = mc_orig(i)%r(2) - box_dim(2)*sig(mc_orig(i)%r(2))
         END IF
-        IF(ABS(mc(i)%r(3)) > lz2) THEN
+        IF(ABS(mc_orig(i)%r(3)) > lz2) THEN
           DO j=1,n_atoms
-            IF(data_manbo(j)%mol==i) THEN
+            IF(data_manbo(j)%mol_orig==i) THEN
               data_manbo(j)%r(3) = data_manbo(j)%r(3) - box_dim(3)*sig(data_manbo(j)%r(3))
             END IF
           END DO
-          mc(i)%r(3) = mc(i)%r(3) - box_dim(3)*sig(mc(i)%r(3))
+          mc_orig(i)%r(3) = mc_orig(i)%r(3) - box_dim(3)*sig(mc_orig(i)%r(3))
         END IF
       END DO
   END SUBROUTINE apply_boundary_conditions
