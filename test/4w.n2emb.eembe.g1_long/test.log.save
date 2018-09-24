@@ -4,7 +4,7 @@
  ==============================================================================
       Created by Vinicius Wilian Dias Cruzeiro and Herbert de Castro Georg     
  
-| ManBo has started at 15:47:26 of July 25, 2018     
+| ManBo has started at 17:12:33 of September 24, 2018
  
 
 Quantum Chemistry Program (QCP) to be used: g09
@@ -119,9 +119,9 @@ Initial velocities of Atoms, generated randomly (given in Angstroms/picosecond):
           6 dimer(s)
           0 trimer(s)
 
-|  This step ended at 15:47:43 of July 25, 2018     
-|  Average time per step:    0 days,  0 hours,  0 minutes, and 16.721 seconds.
-|  The execution is estimated to end in:    0 days,  0 hours,  2 minutes, and 47.210 seconds.
+|  This step ended at 17:12:35 of September 24, 2018
+|  Average time per step:    0 days,  0 hours,  0 minutes, and  2.321 seconds.
+|  The execution is estimated to end in:    0 days,  0 hours,  0 minutes, and 23.210 seconds.
 --------------------------------------------------------------------
 
 ====================================================================
@@ -138,9 +138,9 @@ Initial velocities of Atoms, generated randomly (given in Angstroms/picosecond):
   System's Temperature: 302.6890 K
   Temperature/Target Temperature: 1.0157
 
-|  This step ended at 15:48: 1 of July 25, 2018     
-|  Average time per step:    0 days,  0 hours,  0 minutes, and 17.128 seconds.
-|  The execution is estimated to end in     0 days,  0 hours,  2 minutes, and 34.152 seconds.
+|  This step ended at 17:12:37 of September 24, 2018
+|  Average time per step:    0 days,  0 hours,  0 minutes, and  2.253 seconds.
+|  The execution is estimated to end in     0 days,  0 hours,  0 minutes, and 20.277 seconds.
 --------------------------------------------------------------------
 
 ====================================================================
@@ -157,9 +157,9 @@ Initial velocities of Atoms, generated randomly (given in Angstroms/picosecond):
   System's Temperature: 307.1448 K
   Temperature/Target Temperature: 1.0307
 
-|  This step ended at 15:48:18 of July 25, 2018     
-|  Average time per step:    0 days,  0 hours,  0 minutes, and 17.123 seconds.
-|  The execution is estimated to end in     0 days,  0 hours,  2 minutes, and 16.984 seconds.
+|  This step ended at 17:12:40 of September 24, 2018
+|  Average time per step:    0 days,  0 hours,  0 minutes, and  2.207 seconds.
+|  The execution is estimated to end in     0 days,  0 hours,  0 minutes, and 17.656 seconds.
 --------------------------------------------------------------------
 
 ====================================================================
@@ -173,12 +173,12 @@ Initial velocities of Atoms, generated randomly (given in Angstroms/picosecond):
           6 dimer(s)
           0 trimer(s)
 
-  System's Temperature: 311.4240 K
+  System's Temperature: 311.4239 K
   Temperature/Target Temperature: 1.0450
 
-|  This step ended at 15:48:35 of July 25, 2018     
-|  Average time per step:    0 days,  0 hours,  0 minutes, and 17.151 seconds.
-|  The execution is estimated to end in     0 days,  0 hours,  2 minutes, and  0.057 seconds.
+|  This step ended at 17:12:42 of September 24, 2018
+|  Average time per step:    0 days,  0 hours,  0 minutes, and  2.202 seconds.
+|  The execution is estimated to end in     0 days,  0 hours,  0 minutes, and 15.414 seconds.
 --------------------------------------------------------------------
 
 ====================================================================
@@ -195,9 +195,9 @@ Initial velocities of Atoms, generated randomly (given in Angstroms/picosecond):
   System's Temperature: 315.5912 K
   Temperature/Target Temperature: 1.0590
 
-|  This step ended at 15:48:52 of July 25, 2018     
-|  Average time per step:    0 days,  0 hours,  0 minutes, and 17.095 seconds.
-|  The execution is estimated to end in     0 days,  0 hours,  1 minutes, and 42.570 seconds.
+|  This step ended at 17:12:44 of September 24, 2018
+|  Average time per step:    0 days,  0 hours,  0 minutes, and  2.209 seconds.
+|  The execution is estimated to end in     0 days,  0 hours,  0 minutes, and 13.254 seconds.
 --------------------------------------------------------------------
 
 ====================================================================
@@ -214,9 +214,9 @@ Initial velocities of Atoms, generated randomly (given in Angstroms/picosecond):
   System's Temperature: 319.7179 K
   Temperature/Target Temperature: 1.0729
 
-|  This step ended at 15:49: 9 of July 25, 2018     
-|  Average time per step:    0 days,  0 hours,  0 minutes, and 17.042 seconds.
-|  The execution is estimated to end in     0 days,  0 hours,  1 minutes, and 25.210 seconds.
+|  This step ended at 17:12:46 of September 24, 2018
+|  Average time per step:    0 days,  0 hours,  0 minutes, and  2.205 seconds.
+|  The execution is estimated to end in     0 days,  0 hours,  0 minutes, and 11.025 seconds.
 --------------------------------------------------------------------
 
 ====================================================================
@@ -233,9 +233,9 @@ Initial velocities of Atoms, generated randomly (given in Angstroms/picosecond):
   System's Temperature: 323.8801 K
   Temperature/Target Temperature: 1.0868
 
-|  This step ended at 15:49:26 of July 25, 2018     
-|  Average time per step:    0 days,  0 hours,  0 minutes, and 17.042 seconds.
-|  The execution is estimated to end in     0 days,  0 hours,  1 minutes, and  8.168 seconds.
+|  This step ended at 17:12:48 of September 24, 2018
+|  Average time per step:    0 days,  0 hours,  0 minutes, and  2.193 seconds.
+|  The execution is estimated to end in     0 days,  0 hours,  0 minutes, and  8.772 seconds.
 --------------------------------------------------------------------
 
 ====================================================================
@@ -252,9 +252,9 @@ Initial velocities of Atoms, generated randomly (given in Angstroms/picosecond):
   System's Temperature: 328.1567 K
   Temperature/Target Temperature: 1.1012
 
-|  This step ended at 15:49:43 of July 25, 2018     
-|  Average time per step:    0 days,  0 hours,  0 minutes, and 17.080 seconds.
-|  The execution is estimated to end in     0 days,  0 hours,  0 minutes, and 51.240 seconds.
+|  This step ended at 17:12:50 of September 24, 2018
+|  Average time per step:    0 days,  0 hours,  0 minutes, and  2.180 seconds.
+|  The execution is estimated to end in     0 days,  0 hours,  0 minutes, and  6.540 seconds.
 --------------------------------------------------------------------
 
 ====================================================================
@@ -271,9 +271,9 @@ Initial velocities of Atoms, generated randomly (given in Angstroms/picosecond):
   System's Temperature: 332.6273 K
   Temperature/Target Temperature: 1.1162
 
-|  This step ended at 15:50: 0 of July 25, 2018     
-|  Average time per step:    0 days,  0 hours,  0 minutes, and 17.057 seconds.
-|  The execution is estimated to end in     0 days,  0 hours,  0 minutes, and 34.114 seconds.
+|  This step ended at 17:12:53 of September 24, 2018
+|  Average time per step:    0 days,  0 hours,  0 minutes, and  2.182 seconds.
+|  The execution is estimated to end in     0 days,  0 hours,  0 minutes, and  4.364 seconds.
 --------------------------------------------------------------------
 
 ====================================================================
@@ -290,9 +290,9 @@ Initial velocities of Atoms, generated randomly (given in Angstroms/picosecond):
   System's Temperature: 337.3703 K
   Temperature/Target Temperature: 1.1321
 
-|  This step ended at 15:50:16 of July 25, 2018     
-|  Average time per step:    0 days,  0 hours,  0 minutes, and 17.008 seconds.
-|  The execution is estimated to end in     0 days,  0 hours,  0 minutes, and 17.008 seconds.
+|  This step ended at 17:12:55 of September 24, 2018
+|  Average time per step:    0 days,  0 hours,  0 minutes, and  2.176 seconds.
+|  The execution is estimated to end in     0 days,  0 hours,  0 minutes, and  2.176 seconds.
 --------------------------------------------------------------------
 
 ====================================================================
@@ -309,11 +309,11 @@ Initial velocities of Atoms, generated randomly (given in Angstroms/picosecond):
   System's Temperature: 342.4603 K
   Temperature/Target Temperature: 1.1492
 
-|  This step ended at 15:50:33 of July 25, 2018     
+|  This step ended at 17:12:57 of September 24, 2018
 --------------------------------------------------------------------
 
  
-| The execution ended at 15:50:33 of July 25, 2018     
-| The execution lasted    0 days,  0 hours,  3 minutes, and  6.460 seconds.
+| The execution ended at 17:12:57 of September 24, 2018
+| The execution lasted    0 days,  0 hours,  0 minutes, and 23.903 seconds.
 | ManBo was successfully executed.
  
