@@ -425,7 +425,7 @@ MODULE manbo_subroutines
       OPEN(UNIT=17, FILE=arq, POSITION="append")
     END IF
     WRITE(15,*) n_atoms
-    WRITE(15,'("Positions of atoms inside and outside of the box - Step ",i8)') md_step
+    WRITE(15,'("Positions of atoms inside of the box - Step ",i8)') md_step
     WRITE(18,*) n_atoms
     WRITE(18,'("Velocities of atoms inside the box - Step ",i8)') md_step
     WRITE(17,*) n_atoms
