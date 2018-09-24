@@ -1,5 +1,5 @@
           12
-Positions of atoms inside and outside of the box - Step        0
+Positions of atoms inside of the box - Step        0
   O      -1.2560734003      1.4066813870      1.0399007187
   H      -2.2228442489      1.1860139798      1.1692164698
   H      -0.6930270788      0.6712814361      1.4170239572
@@ -13,7 +13,7 @@ Positions of atoms inside and outside of the box - Step        0
   H       2.1034307947     -0.2380346175      0.3376032820
   H       1.4509979495     -1.6777170714     -0.0726882565
           12
-Positions of atoms inside and outside of the box - Step        1
+Positions of atoms inside of the box - Step        1
   O      -1.2559809181      1.4066795070      1.0401629092
   H      -2.2246381043      1.1878243302      1.1679990855
   H      -0.6955807700      0.6732240883      1.4155155515
@@ -27,7 +27,7 @@ Positions of atoms inside and outside of the box - Step        1
   H       2.1011208289     -0.2363769755      0.3361400531
   H       1.4487791346     -1.6758344160     -0.0738949472
           12
-Positions of atoms inside and outside of the box - Step        2
+Positions of atoms inside of the box - Step        2
   O      -1.2558872207      1.4066822821      1.0404220351
   H      -2.2263027151      1.1895601458      1.1668230813
   H      -0.6982837613      0.6751586259      1.4140247966
@@ -41,7 +41,7 @@ Positions of atoms inside and outside of the box - Step        2
   H       2.0987074228     -0.2348524065      0.3345911004
   H       1.4466073854     -1.6738011278     -0.0750909934
           12
-Positions of atoms inside and outside of the box - Step        3
+Positions of atoms inside of the box - Step        3
   O      -1.2557934859      1.4066906776      1.0406775712
   H      -2.2278303485      1.1912221195      1.1656879945
   H      -0.7011245384      0.6770685693      1.4125601718
@@ -55,7 +55,7 @@ Positions of atoms inside and outside of the box - Step        3
   H       2.0961924188     -0.2334705971      0.3329623270
   H       1.4444866247     -1.6716180629     -0.0762707672
           12
-Positions of atoms inside and outside of the box - Step        4
+Positions of atoms inside of the box - Step        4
   O      -1.2557008820      1.4067056836      1.0409289830
   H      -2.2292139705      1.1928109935      1.1645933456
   H      -0.7040910586      0.6789370320      1.4111303205
@@ -69,7 +69,7 @@ Positions of atoms inside and outside of the box - Step        4
   H       2.0935779119     -0.2322404397      0.3312596509
   H       1.4424204706     -1.6692865800     -0.0774289258
           12
-Positions of atoms inside and outside of the box - Step        5
+Positions of atoms inside of the box - Step        5
   O      -1.2556105598      1.4067283093      1.0411757292
   H      -2.2304472860      1.1943275470      1.1635386445
   H      -0.7071708281      0.6807468124      1.4097440042
@@ -83,7 +83,7 @@ Positions of atoms inside and outside of the box - Step        5
   H       2.0908662500     -0.2311700030      0.3294889926
   H       1.4404122304     -1.6668085423     -0.0785604232
           12
-Positions of atoms inside and outside of the box - Step        6
+Positions of atoms inside of the box - Step        6
   O      -1.2555236447      1.4067595771      1.0414172642
   H      -2.2315247761      1.1957725860      1.1625233977
   H      -0.7103509877      0.6824804961      1.4084100512
@@ -97,7 +97,7 @@ Positions of atoms inside and outside of the box - Step        6
   H       2.0880600331     -0.2302665076      0.3276562637
   H       1.4384648953     -1.6641863185     -0.0796605199
           12
-Positions of atoms inside and outside of the box - Step        7
+Positions of atoms inside of the box - Step        7
   O      -1.2554412279      1.4068005149      1.0416530410
   H      -2.2324417338      1.1971469343      1.1615471130
   H      -0.7136184054      0.6841205712      1.4071373002
@@ -111,7 +111,7 @@ Positions of atoms inside and outside of the box - Step        7
   H       2.0851621125     -0.2295363030      0.3257673573
   H       1.4365811354     -1.6614227844     -0.0807247918
           12
-Positions of atoms inside and outside of the box - Step        8
+Positions of atoms inside of the box - Step        8
   O      -1.2553643581      1.4068521486      1.0418825149
   H      -2.2331942965      1.1984514249      1.1606093050
   H      -0.7169597769      0.6856495537      1.4059345376
@@ -125,7 +125,7 @@ Positions of atoms inside and outside of the box - Step        8
   H       2.0821755899     -0.2289848479      0.3238281386
   H       1.4347632955     -1.6585213232     -0.0817491385
           12
-Positions of atoms inside and outside of the box - Step        9
+Positions of atoms inside of the box - Step        9
   O      -1.2552940321      1.4069154930      1.0421051473
   H      -2.2337794769      1.1996868932      1.1597094982
   H      -0.7203617334      0.6870501266      1.4048104290
@@ -139,7 +139,7 @@ Positions of atoms inside and outside of the box - Step        9
   H       2.0791038154     -0.2286166923      0.3218444358
   H       1.4330133906     -1.6554858247     -0.0827297908
           12
-Positions of atoms inside and outside of the box - Step       10
+Positions of atoms inside of the box - Step       10
   O      -1.2552311856      1.4069915425      1.0423204095
   H      -2.2341951918      1.2008541709      1.1588472314
   H      -0.7238109565      0.6883052889      1.4037734464
