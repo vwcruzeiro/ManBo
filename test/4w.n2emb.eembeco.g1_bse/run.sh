@@ -17,6 +17,4 @@ $DO_PARALLEL $TESTmanbo test.in < /dev/null || error
 ../dacdif -r 1.0e-07 test_properties.dat.save test_properties.dat
 ../dacdif -r 1.0e-07 test_velocities.dat.save test_velocities.dat
 
-rm inp*.chk
-
 exit 0

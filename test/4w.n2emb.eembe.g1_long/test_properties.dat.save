@@ -61,7 +61,7 @@
  -------------------------------------------------------------------------------------
  Step        3 of       10
  -------------------------------------------------------------------------------------
- System Temperature:     311.4239 K
+ System Temperature:     311.4240 K
  Temperature/Target Temperature:     1.045047
   
  System's total linear momentum:      0.001369     -0.002999      0.002211   a.u. ("reduced Plank constant"/bohr)
@@ -87,8 +87,8 @@
  System's total linear momentum:      0.001830     -0.004030      0.002972   a.u. ("reduced Plank constant"/bohr)
  System's total linear momentum modulus:      0.005331   a.u. ("reduced Plank constant"/bohr)
   
- System's total angular momentum:      4.240390    -10.525065     -1.520585   a.u. ("reduced Plank constant"/bohr)
- System's total angular momentum modulus:     11.448585   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum:      4.240390    -10.525065     -1.520586   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum modulus:     11.448584   a.u. ("reduced Plank constant"/bohr)
   
  One-Body Term Energy (E1):     -299.88698528   hartrees
  Two-Body Term Energy (E2):        0.02660654   hartrees
@@ -107,14 +107,14 @@
  System's total linear momentum:      0.002292     -0.005075      0.003744   a.u. ("reduced Plank constant"/bohr)
  System's total linear momentum modulus:      0.006710   a.u. ("reduced Plank constant"/bohr)
   
- System's total angular momentum:      4.237868    -10.520487     -1.522778   a.u. ("reduced Plank constant"/bohr)
- System's total angular momentum modulus:     11.443733   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum:      4.237868    -10.520486     -1.522778   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum modulus:     11.443732   a.u. ("reduced Plank constant"/bohr)
   
  One-Body Term Energy (E1):     -299.88738498   hartrees
  Two-Body Term Energy (E2):        0.02674929   hartrees
  Tree-Body Term Energy (E3):       0.00000000   hartrees
  Total energy:    -299.86063568   hartrees
- Nuclei kinetic energy (E_kin):       0.01822477   hartrees
+ Nuclei kinetic energy (E_kin):       0.01822478   hartrees
  Total + kinetic energy (E1 + E2 + E3 + E_kin):    -299.84241091   hartrees
  Total energy per molecule:    -47037.357290   kcal/mol
  E2 + E3 per molecule:         4.196258   kcal/mol
@@ -124,11 +124,11 @@
  System Temperature:     323.8801 K
  Temperature/Target Temperature:     1.086846
   
- System's total linear momentum:      0.002756     -0.006136      0.004528   a.u. ("reduced Plank constant"/bohr)
+ System's total linear momentum:      0.002756     -0.006136      0.004529   a.u. ("reduced Plank constant"/bohr)
  System's total linear momentum modulus:      0.008109   a.u. ("reduced Plank constant"/bohr)
   
- System's total angular momentum:      4.234822    -10.514640     -1.524778   a.u. ("reduced Plank constant"/bohr)
- System's total angular momentum modulus:     11.437496   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum:      4.234822    -10.514639     -1.524779   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum modulus:     11.437495   a.u. ("reduced Plank constant"/bohr)
   
  One-Body Term Energy (E1):     -299.88779019   hartrees
  Two-Body Term Energy (E2):        0.02689079   hartrees
@@ -147,13 +147,13 @@
  System's total linear momentum:      0.003220     -0.007212      0.005324   a.u. ("reduced Plank constant"/bohr)
  System's total linear momentum modulus:      0.009525   a.u. ("reduced Plank constant"/bohr)
   
- System's total angular momentum:      4.231264    -10.507549     -1.526588   a.u. ("reduced Plank constant"/bohr)
- System's total angular momentum modulus:     11.429901   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum:      4.231264    -10.507548     -1.526588   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum modulus:     11.429900   a.u. ("reduced Plank constant"/bohr)
   
  One-Body Term Energy (E1):     -299.88820521   hartrees
  Two-Body Term Energy (E2):        0.02703077   hartrees
  Tree-Body Term Energy (E3):       0.00000000   hartrees
- Total energy:    -299.86117445   hartrees
+ Total energy:    -299.86117444   hartrees
  Nuclei kinetic energy (E_kin):       0.01870581   hartrees
  Total + kinetic energy (E1 + E2 + E3 + E_kin):    -299.84246864   hartrees
  Total energy per molecule:    -47037.366346   kcal/mol
@@ -167,8 +167,8 @@
  System's total linear momentum:      0.003686     -0.008304      0.006131   a.u. ("reduced Plank constant"/bohr)
  System's total linear momentum modulus:      0.010960   a.u. ("reduced Plank constant"/bohr)
   
- System's total angular momentum:      4.227194    -10.499215     -1.528204   a.u. ("reduced Plank constant"/bohr)
- System's total angular momentum modulus:     11.420950   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum:      4.227194    -10.499214     -1.528205   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum modulus:     11.420949   a.u. ("reduced Plank constant"/bohr)
   
  One-Body Term Energy (E1):     -299.88863449   hartrees
  Two-Body Term Energy (E2):        0.02716900   hartrees
@@ -187,8 +187,8 @@
  System's total linear momentum:      0.004151     -0.009410      0.006949   a.u. ("reduced Plank constant"/bohr)
  System's total linear momentum modulus:      0.012413   a.u. ("reduced Plank constant"/bohr)
   
- System's total angular momentum:      4.222604    -10.489619     -1.529623   a.u. ("reduced Plank constant"/bohr)
- System's total angular momentum modulus:     11.410619   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum:      4.222604    -10.489618     -1.529624   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum modulus:     11.410618   a.u. ("reduced Plank constant"/bohr)
   
  One-Body Term Energy (E1):     -299.88908253   hartrees
  Two-Body Term Energy (E2):        0.02730529   hartrees
@@ -207,8 +207,8 @@
  System's total linear momentum:      0.004616     -0.010532      0.007778   a.u. ("reduced Plank constant"/bohr)
  System's total linear momentum modulus:      0.013883   a.u. ("reduced Plank constant"/bohr)
   
- System's total angular momentum:      4.217480    -10.478723     -1.530837   a.u. ("reduced Plank constant"/bohr)
- System's total angular momentum modulus:     11.398870   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum:      4.217480    -10.478722     -1.530838   a.u. ("reduced Plank constant"/bohr)
+ System's total angular momentum modulus:     11.398869   a.u. ("reduced Plank constant"/bohr)
   
  One-Body Term Energy (E1):     -299.88955375   hartrees
  Two-Body Term Energy (E2):        0.02743948   hartrees

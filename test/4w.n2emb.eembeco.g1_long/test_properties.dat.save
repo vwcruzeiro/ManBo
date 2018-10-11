@@ -36,8 +36,8 @@
  Total energy:    -300.01549032   hartrees
  Nuclei kinetic energy (E_kin):       0.01766229   hartrees
  Total + kinetic energy (E1 + E2 + E3 + E_kin):    -299.99782803   hartrees
- Total energy per molecule:    -47061.738132   kcal/mol
- E2 + E3 per molecule:        -0.600499   kcal/mol
+ Total energy per molecule:    -47061.738133   kcal/mol
+ E2 + E3 per molecule:        -0.600500   kcal/mol
  -------------------------------------------------------------------------------------
  Step        2 of        5
  -------------------------------------------------------------------------------------
@@ -97,7 +97,7 @@
  Nuclei kinetic energy (E_kin):       0.01952419   hartrees
  Total + kinetic energy (E1 + E2 + E3 + E_kin):    -299.99790775   hartrees
  Total energy per molecule:    -47061.750639   kcal/mol
- E2 + E3 per molecule:        -0.613189   kcal/mol
+ E2 + E3 per molecule:        -0.613190   kcal/mol
  -------------------------------------------------------------------------------------
  Step        5 of        5
  -------------------------------------------------------------------------------------

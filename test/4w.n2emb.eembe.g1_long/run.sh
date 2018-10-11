@@ -18,6 +18,4 @@ $DO_PARALLEL $TESTmanbo test.in < /dev/null || error
 ../dacdif -r 1.0e-07 test.rst.in.save test.rst.in
 ../dacdif -r 1.0e-07 test_velocities.dat.save test_velocities.dat
 
-rm inp*.chk
-
 exit 0
