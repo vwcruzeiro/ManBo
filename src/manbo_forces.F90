@@ -747,7 +747,7 @@ MODULE manbo_forces
     
     IF(.NOT. bs_extrapolation) THEN
       IF(.NOT. mbe_corr_only) THEN
-        CALL forces_eval(mpi_id,0,1)
+        CALL forces_eval(mpi_id,0)
       ELSE
         IF (mpi_id == 0) THEN
           data_temp%f_mbe2(1) = 0.0
@@ -758,7 +758,7 @@ MODULE manbo_forces
           data_temp%f_hfmbe2(3) = 0.0
         END IF
         
-        CALL forces_eval(mpi_id,0,1)
+        CALL forces_eval(mpi_id,0)
         IF (mpi_id == 0) THEN
           WRITE(line,'(3x,"Full EE-MBE Energy done with",a12,":                  ",f16.8," Hartrees")')&
                 TRIM(ADJUSTL(qm_prog_method)), (E1+E2+E3)
@@ -773,7 +773,7 @@ MODULE manbo_forces
           method_old = qm_prog_method
           qm_prog_method = "HF"
         END IF
-        CALL forces_eval(mpi_id,1,2)
+        CALL forces_eval(mpi_id,1)
         IF (mpi_id == 0) THEN
           WRITE(line,'(3x,"Full EE-MBE Energy done with HF:                           ",f16.8," Hartrees")') (E1+E2+E3)
           CALL log_write(TRIM(line))
@@ -843,7 +843,7 @@ MODULE manbo_forces
           qm_prog_method = "MP2"
           qm_prog_basis = "cc-pVTZ"
         END IF
-        CALL forces_eval(mpi_id,0,1)
+        CALL forces_eval(mpi_id,0)
         IF (mpi_id == 0) THEN
           WRITE(line,'(3x,"Full EE-MBE Energy computed at MP2/cc-pVTZ:                ",f16.8," Hartrees")') (E1+E2+E3)
           CALL log_write(TRIM(line))
@@ -857,7 +857,7 @@ MODULE manbo_forces
           qm_prog_method = "MP2"
           qm_prog_basis = "cc-pVDZ"
         END IF
-        CALL forces_eval(mpi_id,1,2)
+        CALL forces_eval(mpi_id,1)
         IF (mpi_id == 0) THEN
           WRITE(line,'(3x,"Full EE-MBE Energy computed at MP2/cc-pVDZ:                ",f16.8," Hartrees")') (E1+E2+E3)
           CALL log_write(TRIM(line))
@@ -871,7 +871,7 @@ MODULE manbo_forces
           qm_prog_method = "HF"
           qm_prog_basis = "cc-pVTZ"
         END IF
-        CALL forces_eval(mpi_id,1,3)
+        CALL forces_eval(mpi_id,1)
         IF (mpi_id == 0) THEN
           WRITE(line,'(3x,"Full EE-MBE Energy computed at HF/cc-pVTZ:                 ",f16.8," Hartrees")') (E1+E2+E3)
           CALL log_write(TRIM(line))
@@ -885,7 +885,7 @@ MODULE manbo_forces
           qm_prog_method = "HF"
           qm_prog_basis = "cc-pVDZ"
         END IF
-        CALL forces_eval(mpi_id,1,4)
+        CALL forces_eval(mpi_id,1)
         IF (mpi_id == 0) THEN
           WRITE(line,'(3x,"Full EE-MBE Energy computed at HF/cc-pVDZ:                 ",f16.8," Hartrees")') (E1+E2+E3)
           CALL log_write(TRIM(line))
@@ -940,7 +940,7 @@ MODULE manbo_forces
           qm_prog_method = "MP2"
           qm_prog_basis = "cc-pVTZ"
         END IF
-        CALL forces_eval(mpi_id,0,1)
+        CALL forces_eval(mpi_id,0)
         IF (mpi_id == 0) THEN
           WRITE(line,'(3x,"Full EE-MBE Energy computed at MP2/cc-pVTZ:                  ",f16.8," Hartrees")') (E1+E2+E3)
           CALL log_write(TRIM(line))
@@ -954,7 +954,7 @@ MODULE manbo_forces
           qm_prog_method = "MP2"
           qm_prog_basis = "cc-pVDZ"
         END IF
-        CALL forces_eval(mpi_id,1,2)
+        CALL forces_eval(mpi_id,1)
         IF (mpi_id == 0) THEN
           WRITE(line,'(3x,"Full EE-MBE Energy computed at MP2/cc-pVDZ:                  ",f16.8," Hartrees")') (E1+E2+E3)
           CALL log_write(TRIM(line))
@@ -968,7 +968,7 @@ MODULE manbo_forces
           qm_prog_method = "HF"
           qm_prog_basis = "cc-pVTZ"
         END IF
-        CALL forces_eval(mpi_id,1,3)
+        CALL forces_eval(mpi_id,1)
         IF (mpi_id == 0) THEN
           WRITE(line,'(3x,"Full EE-MBE Energy computed at HF/cc-pVTZ:                   ",f16.8," Hartrees")') (E1+E2+E3)
           CALL log_write(TRIM(line))
@@ -982,7 +982,7 @@ MODULE manbo_forces
           qm_prog_method = "HF"
           qm_prog_basis = "cc-pVDZ"
         END IF
-        CALL forces_eval(mpi_id,1,4)
+        CALL forces_eval(mpi_id,1)
         IF (mpi_id == 0) THEN
           WRITE(line,'(3x,"Full EE-MBE Energy computed at HF/cc-pVDZ:                   ",f16.8," Hartrees")') (E1+E2+E3)
           CALL log_write(TRIM(line))
@@ -1130,10 +1130,10 @@ MODULE manbo_forces
 #endif
   END SUBROUTINE calculate_forces
   
-  SUBROUTINE forces_eval(mpi_id,p,z)
+  SUBROUTINE forces_eval(mpi_id,p)
   ! This subroutine evaluates the forces and energies
     IMPLICIT NONE
-    INTEGER, INTENT(in) :: mpi_id, p, z
+    INTEGER, INTENT(in) :: mpi_id, p
     INTEGER :: allocate_status
     INTEGER :: t1, t2, mpi_size, cnt
     INTEGER :: i, j, k, num, vp_dim, tnpairs, npairs, ntrimers, local
@@ -1343,18 +1343,18 @@ MODULE manbo_forces
       ! Computing monomers
       IF (local .le. n_mols) THEN
         list(1) = local
-        CALL call_qm_prog(forcep,Up,n_mols+npairs+ntrimers,1+npairs+ntrimers,local,list,1,z)
+        CALL call_qm_prog(forcep,Up,n_mols+npairs+ntrimers,1+npairs+ntrimers,local,list,1)
       ! Computing dimers
       ELSE IF (local .gt. n_mols .AND. local .le. (n_mols+npairs)) THEN
         list(1) = pairs_list(local-n_mols,1)
         list(2) = pairs_list(local-n_mols,2)
-        CALL call_qm_prog(forcep,Up,n_mols+npairs+ntrimers,1+npairs+ntrimers,local,list,2,z)
+        CALL call_qm_prog(forcep,Up,n_mols+npairs+ntrimers,1+npairs+ntrimers,local,list,2)
       ! Computing trimers
       ELSE IF (local .gt. (n_mols+npairs) .AND. local .le. (n_mols+npairs+ntrimers)) THEN
         list(1) = trimers_list(local-n_mols-npairs,1)
         list(2) = trimers_list(local-n_mols-npairs,2)
         list(3) = trimers_list(local-n_mols-npairs,3)
-        CALL call_qm_prog(forcep,Up,n_mols+npairs+ntrimers,1+npairs+ntrimers,local,list,3,z)
+        CALL call_qm_prog(forcep,Up,n_mols+npairs+ntrimers,1+npairs+ntrimers,local,list,3)
       END IF
     END DO
     !$omp end parallel
@@ -1510,9 +1510,9 @@ MODULE manbo_forces
     
     list(1) = 1
     IF (num == 0) THEN
-      CALL call_qm_prog(force,U,1,1,1,list,4,1)
+      CALL call_qm_prog(force,U,1,1,1,list,4)
     ELSE
-      CALL call_qm_prog(force,U,1,1,2,list,5,1)
+      CALL call_qm_prog(force,U,1,1,2,list,5)
     END IF
   
     ! Computing forces
@@ -1526,17 +1526,17 @@ MODULE manbo_forces
     E3 = 0.0
   END SUBROUTINE forces_eval_full
 
-  SUBROUTINE call_qm_prog(force,U,val,val2,local,list,y,z)
+  SUBROUTINE call_qm_prog(force,U,val,val2,local,list,y)
   ! This subroutine calls a quantum chemistry program for calculations
     IMPLICIT NONE
     INTEGER, DIMENSION(3), INTENT(in) :: list
     INTEGER, INTENT(in) :: val, val2
     DOUBLE PRECISION, DIMENSION(val), INTENT(out) :: U
     TYPE(forces), DIMENSION(n_atoms,val2), INTENT(out) :: force
-    INTEGER, INTENT(in) :: local, y, z
+    INTEGER, INTENT(in) :: local, y
 
     IF(qm_prog=="g03" .OR. qm_prog=="g09") THEN
-      CALL qm_prog_gaussian(force,U,val,val2,local,list,y,z)
+      CALL qm_prog_gaussian(force,U,val,val2,local,list,y)
     ELSE
       PRINT *, "Parameter qm_prog invalid. ManBo cannot run."
       CALL log_write("ERROR: Parameter qm_prog invalid. ManBo cannot run.")
@@ -1545,11 +1545,11 @@ MODULE manbo_forces
     END IF
   END SUBROUTINE call_qm_prog
 
-  SUBROUTINE qm_prog_gaussian(force,U,val,val2,local,list,y,z)
+  SUBROUTINE qm_prog_gaussian(force,U,val,val2,local,list,y)
   ! This subroutine uses the quantum chemistry program Gaussian for calculations
     IMPLICIT NONE
     INTEGER, DIMENSION(3), INTENT(in) :: list
-    INTEGER, INTENT(in) :: local, y, z, val, val2
+    INTEGER, INTENT(in) :: local, y, val, val2
     DOUBLE PRECISION, DIMENSION(val), INTENT(out) :: U
     TYPE(forces), DIMENSION(n_atoms,val2), INTENT(out) :: force
     INTEGER :: j, w, num, j1, j2, j3
@@ -1573,69 +1573,36 @@ MODULE manbo_forces
     END IF
     
     !Creating the GJF file(s) as the Gaussian input
-    WRITE(arq,*) z
-    cmd = "inp" // TRIM(ADJUSTL(arq)) // "_" // TRIM(ADJUSTL(name_out))
     IF (y==1) THEN
       WRITE(arq,*) list(1)
-      cmd = TRIM(ADJUSTL(cmd)) // "_m" // TRIM(ADJUSTL(arq)) // ".gjf"
+      cmd = "inp_" // TRIM(ADJUSTL(name_out)) // "_m" // TRIM(ADJUSTL(arq)) // ".gjf"
     ELSE IF (y==2) THEN
       WRITE(arq,*) list(1)
-      cmd = TRIM(ADJUSTL(cmd)) // "_d" // TRIM(ADJUSTL(arq))
+      cmd = "inp_" // TRIM(ADJUSTL(name_out)) // "_d" // TRIM(ADJUSTL(arq))
       WRITE(arq,*) list(2)
       cmd = TRIM(ADJUSTL(cmd)) // "-" // TRIM(ADJUSTL(arq)) // ".gjf"
     ELSE IF (y==3) THEN
       WRITE(arq,*) list(1)
-      cmd = TRIM(ADJUSTL(cmd)) // "_t" // TRIM(ADJUSTL(arq))
+      cmd = "inp_" // TRIM(ADJUSTL(name_out)) // "_t" // TRIM(ADJUSTL(arq))
       WRITE(arq,*) list(2)
       cmd = TRIM(ADJUSTL(cmd)) // "-" // TRIM(ADJUSTL(arq))
       WRITE(arq,*) list(3)
       cmd = TRIM(ADJUSTL(cmd)) // "-" // TRIM(ADJUSTL(arq)) // ".gjf"
     ELSE IF (y==4) THEN
-      cmd = TRIM(ADJUSTL(cmd)) // "_full.gjf"
+      cmd = "inp_" // TRIM(ADJUSTL(name_out)) // "_full.gjf"
     ELSE IF (y==5) THEN
-      cmd = TRIM(ADJUSTL(cmd)) // "_full2.gjf"
+      cmd = "inp_" // TRIM(ADJUSTL(name_out)) // "_full2.gjf"
     END IF
 
     OPEN(UNIT=110+local, FILE=cmd)
         IF(qm_prog_memory > 0) THEN
           WRITE(110+local,'("%Mem=",i8,"MB")') qm_prog_memory
         END IF
-      WRITE(arq,*) z
-      cmd = "%Chk=inp" // TRIM(ADJUSTL(arq)) // "_" // TRIM(ADJUSTL(name_out))
-      IF (y==1) THEN
-        WRITE(arq,*) list(1)
-        cmd = TRIM(ADJUSTL(cmd)) // "_m" // TRIM(ADJUSTL(arq)) // ".chk"
-      ELSE IF (y==2) THEN
-        WRITE(arq,*) list(1)
-        cmd = TRIM(ADJUSTL(cmd)) // "_d" // TRIM(ADJUSTL(arq))
-        WRITE(arq,*) list(2)
-        cmd = TRIM(ADJUSTL(cmd)) // "-" // TRIM(ADJUSTL(arq)) // ".chk"
-      ELSE IF (y==3) THEN
-        WRITE(arq,*) list(1)
-        cmd = TRIM(ADJUSTL(cmd)) // "_t" // TRIM(ADJUSTL(arq))
-        WRITE(arq,*) list(2)
-        cmd = TRIM(ADJUSTL(cmd)) // "-" // TRIM(ADJUSTL(arq))
-        WRITE(arq,*) list(3)
-        cmd = TRIM(ADJUSTL(cmd)) // "-" // TRIM(ADJUSTL(arq)) // ".chk"
-      ELSE IF (y==4) THEN
-        cmd = TRIM(ADJUSTL(cmd)) // "_full.chk"
-      ELSE IF (y==5) THEN
-        cmd = TRIM(ADJUSTL(cmd)) // "_full2.chk"
-      END IF
-      WRITE(110+local,'(a)') cmd
       WRITE(110+local,'("%nprocshared=",i4)') n_qm_procs
-        IF (md_step==0) THEN
-          IF (use_embedding) THEN
-            WRITE(110+local,*) "#", TRIM(ADJUSTL(qm_prog_method)), "/", TRIM(ADJUSTL(qm_prog_basis)), " NoSymm Force Charge"
-          ELSE
-            WRITE(110+local,*) "#", TRIM(ADJUSTL(qm_prog_method)), "/", TRIM(ADJUSTL(qm_prog_basis)), " NoSymm Force"
-          END IF
+        IF (use_embedding) THEN
+          WRITE(110+local,*) "#", TRIM(ADJUSTL(qm_prog_method)), "/", TRIM(ADJUSTL(qm_prog_basis)), " NoSymm Force Charge"
         ELSE
-          IF (use_embedding) THEN
-    WRITE(110+local,*) "#", TRIM(ADJUSTL(qm_prog_method)), "/", TRIM(ADJUSTL(qm_prog_basis)), " NoSymm Force Charge guess=read"
-          ELSE
-    WRITE(110+local,*) "#", TRIM(ADJUSTL(qm_prog_method)), "/", TRIM(ADJUSTL(qm_prog_basis)), " NoSymm Force guess=read"
-          END IF
+          WRITE(110+local,*) "#", TRIM(ADJUSTL(qm_prog_method)), "/", TRIM(ADJUSTL(qm_prog_basis)), " NoSymm Force"
         END IF
       WRITE(110+local,*) ""
         IF (y==1) THEN
@@ -1842,51 +1809,47 @@ MODULE manbo_forces
     !Executing Gaussian, reading forces and energies
     WRITE(arq,*) local
     cmd = "export GAUSS_SCRDIR=tempgaufiles_" // TRIM(ADJUSTL(name_out)) // "/job" // TRIM(ADJUSTL(arq)) // ";"
-    WRITE(arq,*) z
-    cmd = TRIM(ADJUSTL(cmd)) // " " // TRIM(ADJUSTL(qm_prog)) // " inp" // TRIM(ADJUSTL(arq))
-    cmd = TRIM(ADJUSTL(cmd)) // "_" // TRIM(ADJUSTL(name_out))
     IF (y==1) THEN
       WRITE(arq,*) list(1)
-      cmd = TRIM(ADJUSTL(cmd)) // "_m" // TRIM(ADJUSTL(arq)) // ".gjf"
+      cmd = TRIM(ADJUSTL(cmd)) // " " // TRIM(ADJUSTL(qm_prog)) // " inp_" // TRIM(ADJUSTL(name_out)) // "_m" //&
+            TRIM(ADJUSTL(arq)) // ".gjf"
     ELSE IF (y==2) THEN
       WRITE(arq,*) list(1)
-      cmd = TRIM(ADJUSTL(cmd)) // "_d" // TRIM(ADJUSTL(arq))
+      cmd = TRIM(ADJUSTL(cmd)) // TRIM(ADJUSTL(qm_prog)) // " inp_" // TRIM(ADJUSTL(name_out)) // "_d" // TRIM(ADJUSTL(arq))
       WRITE(arq,*) list(2)
       cmd = TRIM(ADJUSTL(cmd)) // "-" // TRIM(ADJUSTL(arq)) // ".gjf"
     ELSE IF (y==3) THEN
       WRITE(arq,*) list(1)
-      cmd = TRIM(ADJUSTL(cmd)) // "_t" // TRIM(ADJUSTL(arq))
+      cmd = TRIM(ADJUSTL(cmd)) // TRIM(ADJUSTL(qm_prog)) // " inp_" // TRIM(ADJUSTL(name_out)) // "_t" // TRIM(ADJUSTL(arq))
       WRITE(arq,*) list(2)
       cmd = TRIM(ADJUSTL(cmd)) // "-" // TRIM(ADJUSTL(arq))
       WRITE(arq,*) list(3)
       cmd = TRIM(ADJUSTL(cmd)) // "-" // TRIM(ADJUSTL(arq)) // ".gjf"
     ELSE IF (y==4) THEN
-      cmd = TRIM(ADJUSTL(cmd)) // "_full.gjf"
+      cmd = TRIM(ADJUSTL(cmd)) // TRIM(ADJUSTL(qm_prog)) // " inp_" // TRIM(ADJUSTL(name_out)) // "_full.gjf"
     ELSE IF (y==5) THEN
-      cmd = TRIM(ADJUSTL(cmd)) // "_full2.gjf"
+      cmd = TRIM(ADJUSTL(cmd)) // TRIM(ADJUSTL(qm_prog)) // " inp_" // TRIM(ADJUSTL(name_out)) // "_full2.gjf"
     END IF
     IF(system(cmd)==0) THEN
-      WRITE(arq,*) z
-      cmd = "inp" // TRIM(ADJUSTL(arq)) // "_" // TRIM(ADJUSTL(name_out))
       IF (y==1) THEN
         WRITE(arq,*) list(1)
-        arq = TRIM(ADJUSTL(cmd)) // "_m" // TRIM(ADJUSTL(arq))
+        arq = "inp_" // TRIM(ADJUSTL(name_out)) // "_m" // TRIM(ADJUSTL(arq))
       ELSE IF (y==2) THEN
         WRITE(arq,*) list(1)
-        cmd = TRIM(ADJUSTL(cmd)) // "_d" // TRIM(ADJUSTL(arq))
+        cmd = "inp_" // TRIM(ADJUSTL(name_out)) // "_d" // TRIM(ADJUSTL(arq))
         WRITE(arq,*) list(2)
         arq = TRIM(ADJUSTL(cmd)) // "-" // TRIM(ADJUSTL(arq))
       ELSE IF (y==3) THEN
         WRITE(arq,*) list(1)
-        cmd = TRIM(ADJUSTL(cmd)) // "_t" // TRIM(ADJUSTL(arq))
+        cmd = "inp_" // TRIM(ADJUSTL(name_out)) // "_t" // TRIM(ADJUSTL(arq))
         WRITE(arq,*) list(2)
         cmd = TRIM(ADJUSTL(cmd)) // "-" // TRIM(ADJUSTL(arq))
         WRITE(arq,*) list(3)
         arq = TRIM(ADJUSTL(cmd)) // "-" // TRIM(ADJUSTL(arq))
       ELSE IF (y==4) THEN
-        arq = TRIM(ADJUSTL(cmd)) // "_full"
+        arq = "inp_" // TRIM(ADJUSTL(name_out)) // "_full"
       ELSE IF (y==5) THEN
-        arq = TRIM(ADJUSTL(cmd)) // "_full2"
+        arq = "inp_" // TRIM(ADJUSTL(name_out)) // "_full2"
       END IF
 
       num = 0
@@ -1974,27 +1937,25 @@ MODULE manbo_forces
       CALL log_write(" ERROR: Error running Gaussian in shell, on the forces calculus.")
       CALL log_write("        The error happened on the execution of the following GJF file(s)")
       CALL log_write("        and we have as result the following LOG file(s):")
-      WRITE(arq,*) z
-      cmd = "inp" // TRIM(ADJUSTL(arq)) // "_" // TRIM(ADJUSTL(name_out))
         IF (y==1) THEN
           WRITE(arq,*) list(1)
-          cmd = TRIM(ADJUSTL(cmd)) // "_m" // TRIM(ADJUSTL(arq))
+          cmd = "inp_" // TRIM(ADJUSTL(name_out)) // "_m" // TRIM(ADJUSTL(arq))
         ELSE IF (y==2) THEN
           WRITE(arq,*) list(1)
-          cmd = TRIM(ADJUSTL(cmd)) // "_d" // TRIM(ADJUSTL(arq))
+          cmd = "inp_" // TRIM(ADJUSTL(name_out)) // "_d" // TRIM(ADJUSTL(arq))
           WRITE(arq,*) list(2)
           cmd = TRIM(ADJUSTL(cmd)) // "-" // TRIM(ADJUSTL(arq))
         ELSE IF (y==3) THEN
           WRITE(arq,*) list(1)
-          cmd = TRIM(ADJUSTL(cmd)) // "_t" // TRIM(ADJUSTL(arq))
+          cmd = "inp_" // TRIM(ADJUSTL(name_out)) // "_t" // TRIM(ADJUSTL(arq))
           WRITE(arq,*) list(2)
           cmd = TRIM(ADJUSTL(cmd)) // "-" // TRIM(ADJUSTL(arq))
           WRITE(arq,*) list(3)
           cmd = TRIM(ADJUSTL(cmd)) // "-" // TRIM(ADJUSTL(arq))
         ELSE IF (y==4) THEN
-          cmd = TRIM(ADJUSTL(cmd)) // "_full"
+          cmd = "inp_" // TRIM(ADJUSTL(name_out)) // "_full"
         ELSE IF (y==5) THEN
-          cmd = TRIM(ADJUSTL(cmd)) // "_full2"
+          cmd = "inp_" // TRIM(ADJUSTL(name_out)) // "_full2"
         END IF
         CALL log_write("          " // TRIM(ADJUSTL(cmd)) // ".gjf")
         INQUIRE(FILE=(TRIM(ADJUSTL(cmd)) // ".log"),EXIST=exists)
