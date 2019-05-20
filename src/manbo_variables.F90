@@ -99,7 +99,7 @@ MODULE manbo_variables
   ! group_monomers is the number of molecules to be grouped as a single monomer (it can be 1, 2 or 3)
   INTEGER, DIMENSION(:), ALLOCATABLE, SAVE :: orig_repli_mol
   ! orig_repli_mol contains the number of the original molecule associated to a replicated molecule
-  LOGICAL :: apply_pbc, apply_therm, use_embedding, use_emb_radius, use_rand_vel, mbe_corr_only, bs_extrapolation
+  LOGICAL :: apply_pbc, apply_therm, use_embedding, use_emb_radius, use_rand_vel, mbe_corr_only, bs_extrapolation, tight_scf
   ! apply_pbc determines if we are going to applicate Periodic Boundary Conditions
   ! apply_therm determines if we are going to applicate the Berendsen thermostat
   ! use_embedding determines if we are going to use eletrostatic embedding on the calculations
@@ -107,6 +107,7 @@ MODULE manbo_variables
   ! use_rand_vel determines if we are going to use random initial velocities
   ! mbe_corr_only determines if we are going to use the Many-Body Expansion on the correlation energy only
   ! bs_extrapolation determines if we are going to perform extrapolation to infinity basis set
+  ! tight_scf determines if we are going to use the SCF=Tight option in Gaussian
   CHARACTER(LEN=70) :: name_in, name_out, qm_prog, qm_prog_method, qm_prog_basis
   ! name_in is the name of the input file
   ! name_out is the name to be included in the begining of the output files

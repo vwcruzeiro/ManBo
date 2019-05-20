@@ -37,7 +37,7 @@ MODULE manbo_input_reading
     INTEGER :: i, j
     DOUBLE PRECISION :: L, kr, val
     INTEGER :: allocate_status
-    
+
     IF (mpi_id == 0) THEN
       delta_t = 1.0
       n_steps = 1
@@ -56,19 +56,20 @@ MODULE manbo_input_reading
       qm_prog = "g03"
       qm_prog_memory = 0
       apply_therm = .FALSE.
+      tight_scf = .FALSE.
       t_therm = 10*delta_t
       ! These are default values of ManBo
-      
+
       n_mols = 0
       box_dim = (/ 0.0, 0.0, 0.0 /)
       cutoff = 0.0
-      
+
       ! Getting the input file name
       CALL getarg(1,name_in)
       ! Defining name_out
       name_out = name_in
       CALL delsubstr(name_out,".in ")
-      
+
       OPEN(UNIT=13,FILE=name_in,STATUS='OLD')
         line = ""
         DO WHILE (line/="END_OF_INPUT_VARIABLES")
@@ -146,6 +147,9 @@ MODULE manbo_input_reading
           IF(line=="apply_therm=") THEN
             READ(text, *) line, apply_therm
           END IF
+          IF(line=="tight_scf=") THEN
+            READ(text, *) line, tight_scf
+          END IF
           IF(line=="target_therm_temp=") THEN
             READ(text, *) line, target_therm_temp
           END IF
@@ -157,19 +161,19 @@ MODULE manbo_input_reading
           END IF
         END DO
       ! Here we read the initial variables of the input file
-      
+
       n_mols_orig = n_mols
-      
+
       CALL log_start
       ! Here we create the log file of ManBo
-      
+
       IF(n_mols==0 .OR. ABS(cutoff)<1E-5 .OR. (apply_therm .AND. ABS(target_therm_temp)<1E-5)) THEN
         PRINT *, "Compulsory parameters are missing or are equal to zero in the input file. ManBo cannot run."
         CALL log_write("ERROR: Compulsory parameters are missing or are equal to zero in the input file.")
         CALL log_close(1)
         STOP
       END IF
-      
+
       CALL log_write("")
       CALL log_write("Quantum Chemistry Program (QCP) to be used: " // TRIM(ADJUSTL(qm_prog)))
         IF(qm_prog_memory > 0) THEN
@@ -198,7 +202,7 @@ MODULE manbo_input_reading
       CALL log_write("Cutoff Radius to be applied on the Many Body Expansion (MBE) calculations: " // TRIM(ADJUSTL(line)) // " A")
       WRITE(line,*) n_mols
       CALL log_write("Number of molecules of the system: " // TRIM(ADJUSTL(line)))
-      
+
       READ(13, *) line
       READ(13, *) n_atoms
       IF (vector_module(box_dim)<1E-5) THEN
@@ -209,7 +213,7 @@ MODULE manbo_input_reading
       kr = 2.0*(8*((cutoff/L)**3) + 12*((cutoff/L)**2) + 6*(cutoff/L)) + 1.0/n_mols
       ! This is an estimate for allocate data_manbo_out
     END IF
-    
+
 #ifdef USE_PARALLEL
     CALL MPI_BCAST(kr, 1, MPI_DOUBLE_PRECISION, 0, MPI_COMM_WORLD, ierr)
     CALL MPI_BCAST(apply_pbc, 1, MPI_LOGICAL, 0, MPI_COMM_WORLD, ierr)
@@ -218,7 +222,7 @@ MODULE manbo_input_reading
     CALL MPI_BCAST(n_steps, 1, MPI_INTEGER, 0, MPI_COMM_WORLD, ierr)
     CALL MPI_BCAST(name_out, 70, MPI_CHARACTER, 0, MPI_COMM_WORLD, ierr)
 #endif /* USE_PARALLEL */
-    
+
     IF(kr<0.1 .OR. .NOT. apply_pbc) THEN
       ALLOCATE(data_manbo(n_atoms), mc(n_mols), mc_orig(n_mols_orig), &
                char_mul(n_mols), char_mul_orig(n_mols_orig), stat=allocate_status)
@@ -235,7 +239,7 @@ MODULE manbo_input_reading
       CALL log_close(1)
       STOP
     END IF
-    
+
     IF (mpi_id == 0) THEN
         DO i=1,n_atoms
           READ(13,*) line, data_manbo(i)%r(1), data_manbo(i)%r(2), data_manbo(i)%r(3), data_manbo(i)%mol_orig
@@ -252,9 +256,9 @@ MODULE manbo_input_reading
         DO i=1,n_mols
           READ(13,*) j, char_mul_orig(j)%q_mol, char_mul_orig(j)%mul
         END DO
-      char_mul = char_mul_orig  
+      char_mul = char_mul_orig
     END IF
-    
+
     IF (mpi_id == 0) THEN
         IF(use_embedding) THEN
           READ(13,*) line
@@ -263,7 +267,7 @@ MODULE manbo_input_reading
           END DO
         END IF
       ! Here we read some variables of data_manbo
-      
+
       WRITE(line,*) n_atoms
       CALL log_write("Number of atoms of the system: " // TRIM(ADJUSTL(line)))
       WRITE(line,*) n_steps
@@ -359,7 +363,7 @@ MODULE manbo_input_reading
       WRITE(line,*) n_qm_procs
       CALL log_write("|  Number of processors to be used by the QM program on each calculation: " // TRIM(ADJUSTL(line)))
       CALL log_write("")
-      
+
       IF (.NOT. use_rand_vel) THEN
         READ(13, *) line
           DO i=1,n_atoms
@@ -369,7 +373,7 @@ MODULE manbo_input_reading
         CALL generate_rand_vel()
       END IF
       ! Here we set the velocities of data_manbo.
-      
+
       IF(use_embedding) THEN
         CALL log_write("Input orientation values entered for the atoms (Coordinates are given in Angstroms and charges in A.U.):")
         CALL log_write("===============================================================================================")

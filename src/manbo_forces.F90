@@ -20,7 +20,7 @@ MODULE manbo_forces
 
   SUBROUTINE box_replication
   ! This subroutine replicates the box
-  
+
     IMPLICIT NONE
 
     INTEGER :: i, j, k, k2, num, x, n1, n2, n3
@@ -37,14 +37,14 @@ MODULE manbo_forces
     CHARACTER(LEN=100) :: line
     LOGICAL, DIMENSION(3) :: conditions
     TYPE(atom_out), DIMENSION(:), ALLOCATABLE, SAVE :: data_manbo_temp
-    
+
     CALL calculate_center_of_mass(1)
     ! Here we calculate the mass center's of the inside box's molecules
-      
+
     lx2 = box_dim(1)/2
     ly2 = box_dim(2)/2
     lz2 = box_dim(3)/2
-  
+
     k = n_mols
     IF (group_monomers>1) k2 = n_mols_orig
     num = 0
@@ -60,7 +60,7 @@ MODULE manbo_forces
         CALL log_close(1)
         STOP
       END IF
-    
+
     ALLOCATE(data_manbo_out(x), stat=allocate_status)
       IF(allocate_status/=0) THEN
         PRINT *, "No memory enough to allocate. ManBo cannot run."
@@ -102,7 +102,7 @@ MODULE manbo_forces
         n1 = orig_mols(i)%m(1)
         n2 = orig_mols(i)%m(2)
         n3 = orig_mols(i)%m(3)
-        
+
         mcx = mc_orig(n1)%r(1)
         mcy = mc_orig(n1)%r(2)
         mcz = mc_orig(n1)%r(3)
@@ -113,7 +113,7 @@ MODULE manbo_forces
         dxz = SQRT(dx*dx + dz*dz)
         dyz = SQRT(dy*dy + dz*dz)
         dxyz = SQRT(dx*dx + dy*dy + dz*dz)
-        
+
         IF (n2 .ne. 0) THEN
           mcx2 = mc_orig(n2)%r(1)
           mcy2 = mc_orig(n2)%r(2)
@@ -126,7 +126,7 @@ MODULE manbo_forces
           dyz2 = SQRT(dy2*dy2 + dz2*dz2)
           dxyz2 = SQRT(dx2*dx2 + dy2*dy2 + dz2*dz2)
         END IF
-        
+
         IF (n3 .ne. 0) THEN
           mcx3 = mc_orig(n3)%r(1)
           mcy3 = mc_orig(n3)%r(2)
@@ -140,7 +140,7 @@ MODULE manbo_forces
           dxyz3 = SQRT(dx3*dx3 + dy3*dy3 + dz3*dz3)
         END IF
       END IF
-  
+
       IF (.not. group_monomers>1) THEN
         conditions(1) = dx < cutoff
         conditions(2) = .FALSE.
@@ -182,7 +182,7 @@ MODULE manbo_forces
                 ELSE IF (data_manbo(j)%mol_orig==n2) THEN
                   data_manbo_out(num)%mol_orig = k2 + 2
                 ELSE IF (data_manbo(j)%mol_orig==n3) THEN
-                  data_manbo_out(num)%mol_orig = k2 + 3              
+                  data_manbo_out(num)%mol_orig = k2 + 3
                 END IF
               END IF
               data_manbo_out(num)%atom = j
@@ -202,7 +202,7 @@ MODULE manbo_forces
           END IF
         END IF
       END IF
-  
+
       IF (.not. group_monomers>1) THEN
         conditions(1) = dy < cutoff
         conditions(2) = .FALSE.
@@ -244,7 +244,7 @@ MODULE manbo_forces
                 ELSE IF (data_manbo(j)%mol_orig==n2) THEN
                   data_manbo_out(num)%mol_orig  = k2 + 2
                 ELSE IF (data_manbo(j)%mol_orig==n3) THEN
-                  data_manbo_out(num)%mol_orig  = k2 + 3              
+                  data_manbo_out(num)%mol_orig  = k2 + 3
                 END IF
               END IF
               data_manbo_out(num)%atom = j
@@ -264,7 +264,7 @@ MODULE manbo_forces
           END IF
         END IF
       END IF
-  
+
       IF (.not. group_monomers>1) THEN
         conditions(1) = dz < cutoff
         conditions(2) = .FALSE.
@@ -306,7 +306,7 @@ MODULE manbo_forces
                 ELSE IF (data_manbo(j)%mol_orig==n2) THEN
                   data_manbo_out(num)%mol_orig  = k2 + 2
                 ELSE IF (data_manbo(j)%mol_orig==n3) THEN
-                  data_manbo_out(num)%mol_orig  = k2 + 3              
+                  data_manbo_out(num)%mol_orig  = k2 + 3
                 END IF
               END IF
               data_manbo_out(num)%atom = j
@@ -326,7 +326,7 @@ MODULE manbo_forces
           END IF
         END IF
       END IF
-  
+
       IF (.not. group_monomers>1) THEN
         conditions(1) = dxy < cutoff
         conditions(2) = .FALSE.
@@ -360,7 +360,7 @@ MODULE manbo_forces
                 data_manbo_out(num)%r(1) = data_manbo(j)%r(1) - box_dim(1)*sig(mcx3)
                 data_manbo_out(num)%r(2) = data_manbo(j)%r(2) - box_dim(2)*sig(mcy3)
               END IF
-              data_manbo_out(num)%r(3) = data_manbo(j)%r(3) 
+              data_manbo_out(num)%r(3) = data_manbo(j)%r(3)
               data_manbo_out(num)%an   = data_manbo(j)%an
               data_manbo_out(num)%mass = data_manbo(j)%mass
               data_manbo_out(num)%mol  = k
@@ -370,7 +370,7 @@ MODULE manbo_forces
                 ELSE IF (data_manbo(j)%mol_orig==n2) THEN
                   data_manbo_out(num)%mol_orig  = k2 + 2
                 ELSE IF (data_manbo(j)%mol_orig==n3) THEN
-                  data_manbo_out(num)%mol_orig  = k2 + 3              
+                  data_manbo_out(num)%mol_orig  = k2 + 3
                 END IF
               END IF
               data_manbo_out(num)%atom = j
@@ -390,7 +390,7 @@ MODULE manbo_forces
           END IF
         END IF
       END IF
-  
+
       IF (.not. group_monomers>1) THEN
         conditions(1) = dxz < cutoff
         conditions(2) = .FALSE.
@@ -434,7 +434,7 @@ MODULE manbo_forces
                 ELSE IF (data_manbo(j)%mol_orig==n2) THEN
                   data_manbo_out(num)%mol_orig  = k2 + 2
                 ELSE IF (data_manbo(j)%mol_orig==n3) THEN
-                  data_manbo_out(num)%mol_orig  = k2 + 3              
+                  data_manbo_out(num)%mol_orig  = k2 + 3
                 END IF
               END IF
               data_manbo_out(num)%atom = j
@@ -454,7 +454,7 @@ MODULE manbo_forces
           END IF
         END IF
       END IF
-  
+
       IF (.not. group_monomers>1) THEN
         conditions(1) = dyz < cutoff
         conditions(2) = .FALSE.
@@ -498,7 +498,7 @@ MODULE manbo_forces
                 ELSE IF (data_manbo(j)%mol_orig==n2) THEN
                   data_manbo_out(num)%mol_orig  = k2 + 2
                 ELSE IF (data_manbo(j)%mol_orig==n3) THEN
-                  data_manbo_out(num)%mol_orig  = k2 + 3              
+                  data_manbo_out(num)%mol_orig  = k2 + 3
                 END IF
               END IF
               data_manbo_out(num)%atom = j
@@ -518,7 +518,7 @@ MODULE manbo_forces
           END IF
         END IF
       END IF
-  
+
       IF (.not. group_monomers>1) THEN
         conditions(1) = dxyz < cutoff
         conditions(2) = .FALSE.
@@ -564,7 +564,7 @@ MODULE manbo_forces
                 ELSE IF (data_manbo(j)%mol_orig==n2) THEN
                   data_manbo_out(num)%mol_orig  = k2 + 2
                 ELSE IF (data_manbo(j)%mol_orig==n3) THEN
-                  data_manbo_out(num)%mol_orig  = k2 + 3              
+                  data_manbo_out(num)%mol_orig  = k2 + 3
                 END IF
               END IF
               data_manbo_out(num)%atom = j
@@ -641,7 +641,7 @@ MODULE manbo_forces
         STOP
       END IF
     ! Here we reallocated data_manbo_out with the right size
-  
+
     n_mols_out = MAXVAL(data_manbo_out%mol)
     IF (group_monomers>1) n_mols_out_orig = MAXVAL(data_manbo_out%mol_orig)
     n_atoms_out = SIZE(data_manbo_out, DIM=1)
@@ -681,7 +681,7 @@ MODULE manbo_forces
             STOP
           END IF
     END IF
-    
+
     CALL calculate_center_of_mass(2)
     ! Here we calculate the mass center's of the outside box's molecules
     IF (group_monomers>1) CALL calculate_center_of_mass(4)
@@ -709,7 +709,7 @@ MODULE manbo_forces
     INTEGER, DIMENSION(MPI_STATUS_SIZE) :: status
     INTEGER :: ierr
 #endif
-    
+
     IF (mpi_id == 0) THEN
       IF(ALLOCATED(data_manbo_out)) THEN
         CALL box_replication
@@ -721,7 +721,7 @@ MODULE manbo_forces
         n_atoms_out = 0
       END IF
     END IF
-    
+
 #ifdef USE_PARALLEL
     IF (mpi_id == 0) THEN
       i = system("mkdir -p tempgaufiles_" // TRIM(ADJUSTL(name_out)))
@@ -736,15 +736,16 @@ MODULE manbo_forces
     END IF
     CALL MPI_BARRIER(MPI_COMM_WORLD, ierr)
 #endif
-  
+
 #ifdef USE_PARALLEL
     CALL MPI_BCAST(bs_extrapolation, 1, MPI_LOGICAL, 0, MPI_COMM_WORLD, ierr)
+    CALL MPI_BCAST(tight_scf, 1, MPI_LOGICAL, 0, MPI_COMM_WORLD, ierr)
     CALL MPI_BCAST(mbe_corr_only, 1, MPI_LOGICAL, 0, MPI_COMM_WORLD, ierr)
     CALL MPI_COMM_SIZE(MPI_COMM_WORLD, mpi_size, ierr)
 #else
     mpi_size = 1
 #endif /* USE_PARALLEL */
-    
+
     IF(.NOT. bs_extrapolation) THEN
       IF(.NOT. mbe_corr_only) THEN
         CALL forces_eval(mpi_id,0)
@@ -757,7 +758,7 @@ MODULE manbo_forces
           data_temp%f_hfmbe2(2) = 0.0
           data_temp%f_hfmbe2(3) = 0.0
         END IF
-        
+
         CALL forces_eval(mpi_id,0)
         IF (mpi_id == 0) THEN
           WRITE(line,'(3x,"Full EE-MBE Energy done with",a12,":                  ",f16.8," Hartrees")')&
@@ -769,7 +770,7 @@ MODULE manbo_forces
           data_temp%f_mbe2(1) = data_manbo%f(1)
           data_temp%f_mbe2(2) = data_manbo%f(2)
           data_temp%f_mbe2(3) = data_manbo%f(3)
-          
+
           method_old = qm_prog_method
           qm_prog_method = "HF"
         END IF
@@ -783,7 +784,7 @@ MODULE manbo_forces
           data_temp%f_hfmbe2(1) = data_manbo%f(1)
           data_temp%f_hfmbe2(2) = data_manbo%f(2)
           data_temp%f_hfmbe2(3) = data_manbo%f(3)
-          
+
           char_mul_old(1) = char_mul(1)%q_mol
           char_mul_old(2) = char_mul(1)%mul
           DO i=2,n_mols
@@ -804,7 +805,7 @@ MODULE manbo_forces
           CALL forces_eval_full(0)
           WRITE(line,'(3x,"Full HF Energy (no EE-MBE):                                ",f16.8," Hartrees")') E1
           CALL log_write(TRIM(line))
-          
+
           data_manbo%f(1) = data_manbo%f(1) + data_temp%f_mbe2(1) - data_temp%f_hfmbe2(1)
           data_manbo%f(2) = data_manbo%f(2) + data_temp%f_mbe2(2) - data_temp%f_hfmbe2(2)
           data_manbo%f(3) = data_manbo%f(3) + data_temp%f_mbe2(3) - data_temp%f_hfmbe2(3)
@@ -814,7 +815,7 @@ MODULE manbo_forces
           WRITE(line,'(3x,a," Energy with EE-MBE on the correlation only: ",f16.8," Hartrees")')&
                 TRIM(ADJUSTL(method_old)), (E1+E2+E3)
           CALL log_write(TRIM(line))
-          
+
           ! Restoring the original values for the next md_step
           qm_prog_method = method_old
           char_mul(1)%q_mol = char_mul_old(1)
@@ -839,7 +840,7 @@ MODULE manbo_forces
           data_temp%f_hfmbe3(1) = 0.0
           data_temp%f_hfmbe3(2) = 0.0
           data_temp%f_hfmbe3(3) = 0.0
-          
+
           qm_prog_method = "MP2"
           qm_prog_basis = "cc-pVTZ"
         END IF
@@ -853,7 +854,7 @@ MODULE manbo_forces
           data_temp%f_mbe3(1) = data_manbo%f(1)
           data_temp%f_mbe3(2) = data_manbo%f(2)
           data_temp%f_mbe3(3) = data_manbo%f(3)
-          
+
           qm_prog_method = "MP2"
           qm_prog_basis = "cc-pVDZ"
         END IF
@@ -867,7 +868,7 @@ MODULE manbo_forces
           data_temp%f_mbe2(1) = data_manbo%f(1)
           data_temp%f_mbe2(2) = data_manbo%f(2)
           data_temp%f_mbe2(3) = data_manbo%f(3)
-          
+
           qm_prog_method = "HF"
           qm_prog_basis = "cc-pVTZ"
         END IF
@@ -881,7 +882,7 @@ MODULE manbo_forces
           data_temp%f_hfmbe3(1) = data_manbo%f(1)
           data_temp%f_hfmbe3(2) = data_manbo%f(2)
           data_temp%f_hfmbe3(3) = data_manbo%f(3)
-          
+
           qm_prog_method = "HF"
           qm_prog_basis = "cc-pVDZ"
         END IF
@@ -895,7 +896,7 @@ MODULE manbo_forces
           data_temp%f_hfmbe2(1) = data_manbo%f(1)
           data_temp%f_hfmbe2(2) = data_manbo%f(2)
           data_temp%f_hfmbe2(3) = data_manbo%f(3)
-          
+
           A = 3.0**3.4/(3.0**3.4-2.0**3.4)
           B = 2.0**3.4/(3.0**3.4-2.0**3.4)
           C = 3.0**2.2/(3.0**2.2-2.0**2.2)
@@ -936,7 +937,7 @@ MODULE manbo_forces
           data_temp%f_hffull3(1) = 0.0
           data_temp%f_hffull3(2) = 0.0
           data_temp%f_hffull3(3) = 0.0
-          
+
           qm_prog_method = "MP2"
           qm_prog_basis = "cc-pVTZ"
         END IF
@@ -950,7 +951,7 @@ MODULE manbo_forces
           data_temp%f_mbe3(1) = data_manbo%f(1)
           data_temp%f_mbe3(2) = data_manbo%f(2)
           data_temp%f_mbe3(3) = data_manbo%f(3)
-          
+
           qm_prog_method = "MP2"
           qm_prog_basis = "cc-pVDZ"
         END IF
@@ -964,7 +965,7 @@ MODULE manbo_forces
           data_temp%f_mbe2(1) = data_manbo%f(1)
           data_temp%f_mbe2(2) = data_manbo%f(2)
           data_temp%f_mbe2(3) = data_manbo%f(3)
-          
+
           qm_prog_method = "HF"
           qm_prog_basis = "cc-pVTZ"
         END IF
@@ -978,7 +979,7 @@ MODULE manbo_forces
           data_temp%f_hfmbe3(1) = data_manbo%f(1)
           data_temp%f_hfmbe3(2) = data_manbo%f(2)
           data_temp%f_hfmbe3(3) = data_manbo%f(3)
-          
+
           qm_prog_method = "HF"
           qm_prog_basis = "cc-pVDZ"
         END IF
@@ -992,7 +993,7 @@ MODULE manbo_forces
           data_temp%f_hfmbe2(1) = data_manbo%f(1)
           data_temp%f_hfmbe2(2) = data_manbo%f(2)
           data_temp%f_hfmbe2(3) = data_manbo%f(3)
-          
+
           char_mul_old(1) = char_mul(1)%q_mol
           char_mul_old(2) = char_mul(1)%mul
           DO i=2,n_mols
@@ -1011,7 +1012,7 @@ MODULE manbo_forces
           use_embedding_old = use_embedding
           use_embedding = .FALSE.
         END IF
-        
+
         IF (mpi_size > 1) THEN
 #ifdef USE_PARALLEL
           CALL MPI_BCAST(n_mols,            1, MPI_INTEGER, 0, MPI_COMM_WORLD, ierr)
@@ -1026,7 +1027,7 @@ MODULE manbo_forces
           END DO
 #endif
         END IF
-        
+
         IF (mpi_id == 0) THEN
           qm_prog_method = "HF"
           qm_prog_basis = "cc-pVTZ"
@@ -1038,7 +1039,7 @@ MODULE manbo_forces
           data_temp%f_hffull3(2) = data_manbo%f(2)
           data_temp%f_hffull3(3) = data_manbo%f(3)
         END IF
-          
+
         IF (mpi_size == 1 .OR. mpi_id == 1) THEN
           use_embedding = .FALSE.
           qm_prog_method = "HF"
@@ -1069,7 +1070,7 @@ MODULE manbo_forces
           WRITE(line,'(3x,"Full Energy (no EE-MBE) computed at HF/cc-pVDZ:              ",f16.8," Hartrees")') E1_hffull2
           CALL log_write(TRIM(line))
         END IF
-          
+
         IF (mpi_id == 0) THEN
           A = 3.0**3.4/(3.0**3.4-2.0**3.4)
           B = 2.0**3.4/(3.0**3.4-2.0**3.4)
@@ -1093,7 +1094,7 @@ MODULE manbo_forces
           WRITE(line,'(3x,"MP2 extrapolated Energy with EE-MBE on the correlation only: ",f16.8," Hartrees")')&
           (E1+E2+E3)
           CALL log_write(TRIM(line))
-          
+
           ! Restoring the original values for the next md_step
           char_mul(1)%q_mol = char_mul_old(1)
           char_mul(1)%mul   = char_mul_old(2)
@@ -1103,7 +1104,7 @@ MODULE manbo_forces
         END IF
       END IF
     END IF
-    
+
 #ifdef USE_PARALLEL
     CALL MPI_BARRIER(MPI_COMM_WORLD, ierr)
     IF (mpi_id == 0) THEN
@@ -1129,7 +1130,7 @@ MODULE manbo_forces
     END IF
 #endif
   END SUBROUTINE calculate_forces
-  
+
   SUBROUTINE forces_eval(mpi_id,p)
   ! This subroutine evaluates the forces and energies
     IMPLICIT NONE
@@ -1148,7 +1149,7 @@ MODULE manbo_forces
 #ifdef USE_PARALLEL
     INTEGER :: ierr
 #endif
-    
+
     IF (mpi_id == 0) THEN
       IF (n_atoms_out > 0) THEN
         vp_dim = NINT(2.0*((1.0+2.0*cutoff/MINVAL(box_dim))**3)*n_mols*((2*cutoff/MINVAL(box_dim))**3))
@@ -1157,7 +1158,7 @@ MODULE manbo_forces
       END IF
       ! This is an estimate for allocate val_pairs
     END IF
-    
+
 #ifdef USE_PARALLEL
     CALL MPI_BCAST(vp_dim, 1, MPI_INTEGER, 0, MPI_COMM_WORLD, ierr)
     CALL MPI_BCAST(n_mols, 1, MPI_INTEGER, 0, MPI_COMM_WORLD, ierr)
@@ -1172,17 +1173,17 @@ MODULE manbo_forces
       CALL log_close(1)
       STOP
     END IF
-    
+
     pairs_list = 0
     trimers_list = 0
     ! Setting all values to zero
-    
+
     IF (mpi_id == 0) THEN
       IF (p==0) CALL log_write("  Number of monomers, dimers and trimers used in the calculation of forces:")
-      
+
       WRITE(line,'(3x,i8," monomer(s)")') n_mols
       IF (p==0) CALL log_write(TRIM(line))
-      
+
       ! Creating list of dimers to be computed
       IF (expan_order==2 .OR. expan_order==3) THEN
         list = 0
@@ -1216,9 +1217,9 @@ MODULE manbo_forces
       END IF
       WRITE(line,'(3x,i8," dimer(s)")') npairs
       IF (p==0) CALL log_write(TRIM(line))
-      
+
       ! Creating list of trimers to be computed
-      IF(expan_order==3) THEN        
+      IF(expan_order==3) THEN
         num = 0
         DO i=1,npairs-1
           DO j=i+1,npairs
@@ -1242,7 +1243,7 @@ MODULE manbo_forces
       WRITE(line,'(3x,i8," trimer(s)")') ntrimers
       IF (p==0) CALL log_write(TRIM(line))
     END IF
-    
+
 #ifdef USE_PARALLEL
     CALL MPI_BCAST(npairs, 1, MPI_INTEGER, 0, MPI_COMM_WORLD, ierr)
     CALL MPI_BCAST(ntrimers, 1, MPI_INTEGER, 0, MPI_COMM_WORLD, ierr)
@@ -1294,7 +1295,7 @@ MODULE manbo_forces
       CALL MPI_BCAST(mc(i)%r,    3, MPI_DOUBLE_PRECISION, 0, MPI_COMM_WORLD, ierr)
       CALL MPI_BCAST(mc(i)%mass, 1, MPI_DOUBLE_PRECISION, 0, MPI_COMM_WORLD, ierr)
     END DO
-    IF (n_mols_out>n_mols .AND. mpi_id>0) THEN    
+    IF (n_mols_out>n_mols .AND. mpi_id>0) THEN
       k = n_mols_out - n_mols
         IF(ALLOCATED(mc_out)) THEN
           DEALLOCATE(mc_out)
@@ -1311,7 +1312,7 @@ MODULE manbo_forces
 #else
     mpi_size = 1
 #endif /* USE_PARALLEL */
-    
+
     ALLOCATE(forcep(n_atoms,1+npairs+ntrimers),Up(n_mols+npairs+ntrimers),&
              stat=allocate_status)
     IF(allocate_status/=0) THEN
@@ -1326,10 +1327,10 @@ MODULE manbo_forces
     forcep%f(2) = 0.0
     forcep%f(3) = 0.0
     Up = 0.0
-    
+
     finish = .FALSE.
     cnt = 0
-    
+
     !$omp parallel shared( cnt,finish ) firstprivate ( list,local )
     DO WHILE(.NOT. finish)
       !$omp critical
@@ -1358,7 +1359,7 @@ MODULE manbo_forces
       END IF
     END DO
     !$omp end parallel
-    
+
 #ifdef USE_PARALLEL
     CALL MPI_BARRIER(MPI_COMM_WORLD, ierr)
 #endif
@@ -1378,7 +1379,7 @@ MODULE manbo_forces
       force%f(3) = 0.0
       U = 0.0
     END IF
-    
+
 #ifdef USE_PARALLEL
     CALL MPI_REDUCE(Up, U, n_mols+npairs+ntrimers, MPI_DOUBLE_PRECISION, MPI_SUM, 0, MPI_COMM_WORLD, ierr)
     DO k=1,n_atoms
@@ -1394,9 +1395,9 @@ MODULE manbo_forces
     force%f(3) = forcep%f(3)
     U = Up
 #endif /* USE_PARALLEL */
-      
+
     DEALLOCATE(forcep, Up)
-  
+
     IF (mpi_id == 0) THEN
       ! Computing forces
       data_manbo%f(1) = 0.0
@@ -1433,7 +1434,7 @@ MODULE manbo_forces
           END IF
         END DO
       END DO
-    
+
       ! Computing energy
       E1 = 0.0
       DO i=1,n_mols
@@ -1484,12 +1485,12 @@ MODULE manbo_forces
         END IF
         ! These terms come from the MBE
       END DO
-      
+
       DEALLOCATE(force, U)
     END IF
-      
+
     DEALLOCATE(pairs_list, trimers_list)
-    
+
 #ifdef USE_PARALLEL
     CALL MPI_BARRIER(MPI_COMM_WORLD, ierr)
 #endif
@@ -1507,19 +1508,19 @@ MODULE manbo_forces
     force%f(2) = 0.0
     force%f(3) = 0.0
     U = 0.0
-    
+
     list(1) = 1
     IF (num == 0) THEN
       CALL call_qm_prog(force,U,1,1,1,list,4)
     ELSE
       CALL call_qm_prog(force,U,1,1,2,list,5)
     END IF
-  
+
     ! Computing forces
     data_manbo%f(1) = force(:,1)%f(1)
     data_manbo%f(2) = force(:,1)%f(2)
     data_manbo%f(3) = force(:,1)%f(3)
-    
+
     ! Computing energy
     E1 = U(1)
     E2 = 0.0
@@ -1559,7 +1560,7 @@ MODULE manbo_forces
     CHARACTER(LEN=250) :: arq
     CHARACTER(LEN=250) :: cmd
     LOGICAL :: exists
-    
+
     ! Creating Gaussian scratch folder for this execution
     WRITE(arq,*) local
     num = system("mkdir -p tempgaufiles_" // TRIM(ADJUSTL(name_out)) // "/job" // TRIM(ADJUSTL(arq)))
@@ -1571,7 +1572,7 @@ MODULE manbo_forces
       CALL log_close(1)
       STOP
     END IF
-    
+
     !Creating the GJF file(s) as the Gaussian input
     IF (y==1) THEN
       WRITE(arq,*) list(1)
@@ -1599,8 +1600,12 @@ MODULE manbo_forces
           WRITE(110+local,'("%Mem=",i8,"MB")') qm_prog_memory
         END IF
       WRITE(110+local,'("%nprocshared=",i4)') n_qm_procs
-        IF (use_embedding) THEN
+        IF (use_embedding .AND. tight_scf) THEN
+          WRITE(110+local,*) "#", TRIM(ADJUSTL(qm_prog_method)), "/", TRIM(ADJUSTL(qm_prog_basis)), " SCF=Tight NoSymm Force Charge"
+        ELSE IF (use_embedding) THEN
           WRITE(110+local,*) "#", TRIM(ADJUSTL(qm_prog_method)), "/", TRIM(ADJUSTL(qm_prog_basis)), " NoSymm Force Charge"
+        ELSE IF (tight_scf) THEN
+          WRITE(110+local,*) "#", TRIM(ADJUSTL(qm_prog_method)), "/", TRIM(ADJUSTL(qm_prog_basis)), " SCF=Tight NoSymm Force"
         ELSE
           WRITE(110+local,*) "#", TRIM(ADJUSTL(qm_prog_method)), "/", TRIM(ADJUSTL(qm_prog_basis)), " NoSymm Force"
         END IF
@@ -1704,7 +1709,7 @@ MODULE manbo_forces
                   WRITE(110+local,'(1x,3(f14.10,3x),f10.6)') data_manbo_out(k)%r(1),data_manbo_out(k)%r(2),&
                               data_manbo_out(k)%r(3),data_manbo(data_manbo_out(k)%atom)%q
                 END IF
-              END DO              
+              END DO
             END IF
           ELSE IF(use_embedding .AND. use_emb_radius .AND. apply_pbc) THEN
             WRITE(110+local,*) ""
@@ -1789,7 +1794,7 @@ MODULE manbo_forces
                 END IF
               END DO
               END DO
-              END DO      
+              END DO
             END DO
           END IF
         ELSE IF (y==4 .OR. y==5) THEN
@@ -1873,7 +1878,7 @@ MODULE manbo_forces
       cmd = "grep -A" // TRIM(ADJUSTL(cmd)) // " 'Forces (Hartrees/Bohr)' " // TRIM(ADJUSTL(arq))
       cmd = TRIM(ADJUSTL(cmd)) // ".log | awk 'NR>3{print $3,$4,$5}' > " // TRIM(ADJUSTL(arq)) // ".tmp"
       num = system(cmd)
-      
+
       cmd = TRIM(ADJUSTL(arq)) // ".tmp"
       OPEN(UNIT=110+local, FILE=cmd, STATUS="old")
         IF (y <= 3) THEN
@@ -1893,20 +1898,20 @@ MODULE manbo_forces
         ELSE IF (y==4 .OR. y==5) THEN
           DO k=1,n_atoms
             READ(110+local,*) force(k,1)%f(1), force(k,1)%f(2), force(k,1)%f(3)
-          END DO        
+          END DO
         END IF
       CLOSE(110+local, status="delete")
 
         IF (TRIM(ADJUSTL(qm_prog_method))=="MP2") THEN
           cmd = "grep 'EUMP2 =' " // TRIM(ADJUSTL(arq))
           cmd = TRIM(ADJUSTL(cmd)) // ".log | awk '{print $6}' > " // TRIM(ADJUSTL(arq)) // "_2.tmp"
-          num = system(cmd) 
+          num = system(cmd)
         ELSE
           cmd = "grep 'SCF Done:' " // TRIM(ADJUSTL(arq))
           cmd = TRIM(ADJUSTL(cmd)) // ".log | awk '{print $5}' > " // TRIM(ADJUSTL(arq)) // "_2.tmp"
           num = system(cmd)
         END IF
-      
+
       cmd = TRIM(ADJUSTL(arq)) // "_2.tmp"
       OPEN(UNIT=110+local, FILE=cmd, STATUS="old")
         IF (use_embedding .AND. n_mols /= y .AND. y <= 3) THEN
